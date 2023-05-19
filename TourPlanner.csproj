@@ -10,10 +10,7 @@
   <ItemGroup>
     <Compile Remove="source\BL\placeholder.cs" />
     <Compile Remove="source\DAL\placeholder.cs" />
-    <Compile Remove="source\Model\placeholder.cs" />
     <Compile Remove="source\Test\placeholder.cs" />
-    <Compile Remove="source\UI\ViewModel\placeholder.cs" />
-    <Compile Remove="source\UI\View\placeholder.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,10 +24,7 @@
   <ItemGroup>
     <None Include="source\BL\placeholder.cs" />
     <None Include="source\DAL\placeholder.cs" />
-    <None Include="source\Model\placeholder.cs" />
     <None Include="source\Test\placeholder.cs" />
-    <None Include="source\UI\ViewModel\placeholder.cs" />
-    <None Include="source\UI\View\placeholder.cs" />
   </ItemGroup>
 
 </Project>
