@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TourPlanner.source.UI.View;
+using TourPlanner.source.UI.Windows;
 
 namespace TourPlanner
 {
@@ -30,6 +31,12 @@ namespace TourPlanner
         {
             AddTour addtour = new AddTour();
             addtour.ShowDialog();
+        }
+        
+        private void DelButton_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteTour deleteTour = new DeleteTour();
+            deleteTour.ShowDialog();
         }
     }
 }
