@@ -8,42 +8,36 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" MinHeight="49.96"/>
-            <RowDefinition Height="Auto" MinHeight="79" />
-            <RowDefinition />
-            <RowDefinition Height="28" />
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="90
-                              " />
-            <ColumnDefinition Width="95"/>
-            <ColumnDefinition Width="0"/>
-            <ColumnDefinition Width="162.873" />
+            <ColumnDefinition Width="2.5*"/>
+            <ColumnDefinition Width="7.5*"/>
         </Grid.ColumnDefinitions>
-        <Menu Grid.ColumnSpan="4" Margin="3,0,-432,32">
-            <MenuItem Header="_File" Width="30">
-            </MenuItem>
-            <MenuItem Header="_Edit">
-            </MenuItem>
-            <MenuItem Header="_Options">
-            </MenuItem>
-            <MenuItem Header="Help">
-            </MenuItem>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Menu Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" VerticalAlignment="Center" Padding="6">
+            <MenuItem Header="_File"/>
+            <MenuItem Header="_Edit"/>
+            <MenuItem Header="_Options"/>
+            <MenuItem Header="_Help"/>
         </Menu>
-        <TextBox Grid.ColumnSpan="4" Margin="0,21,-357,5"/>
-        <Button Grid.Column="3" Name="btnSearch" Background="LightBlue" 
-        BorderBrush="Black" 
-        ClickMode="Press" Margin="520,21,-432,5">
-            Search
-        </Button>
 
-        <Label Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,16,277" RenderTransformOrigin="0.723,0.517" Grid.Row="1" Grid.RowSpan="2">Tours</Label>
-        <Button Click ="AddButton_Click" Margin="14,49,14,53" Padding="4" Grid.Column="1" Grid.RowSpan="2">Add</Button>
-        <Button Click ="DelButton_Click" Grid.Row="1" Margin="14,26,14,26" Padding="4" RenderTransformOrigin="6.585,3.441" Grid.Column="1">Del</Button>
-        <Label Grid.ColumnSpan="2" Margin="3,58,14,0" Grid.Row="1" Background="#FFA1D053" Grid.RowSpan="2"></Label>
-        <TabControl Grid.Column="3" Margin="0,0,-427,0" Grid.RowSpan="2" Grid.Row="1" Background="#FFF5DFDF">
-            <TabItem Header="General"/>
+        <TextBox Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Padding="7"/>
+
+        <view:TourListView Grid.Column="0" Grid.Row="2"/>
+        
+        <TabControl Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" Background="#FFF5DFDF">
+            <TabItem>
+                <TabItem.Header>
+                    <Grid Height="26">
+                        <TextBlock Text="General" VerticalAlignment="Center"/>
+                    </Grid>
+                </TabItem.Header>
+            </TabItem>
             <TabItem Header="Route" />
             <TabItem Header="Logs">
                 <view:TourLogView/>

@@ -38,5 +38,10 @@ namespace TourPlanner
             DeleteTour deleteTour = new DeleteTour();
             deleteTour.ShowDialog();
         }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
