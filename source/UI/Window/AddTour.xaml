@@ -7,11 +7,12 @@
         mc:Ignorable="d"
         Title="AddTour" Height="450" Width="800">
     <Grid Margin="0,0,0,4">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="109*"/>
-                <RowDefinition Height="191*"/>
-            </Grid.RowDefinitions>
-            <Label Margin="80,29,480,55">Tour-Name:</Label>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="109*"/>
+            <RowDefinition Height="191*"/>
+        </Grid.RowDefinitions>
+
+        <Label Margin="80,29,480,55">Tour-Name:</Label>
             <TextBox Margin="200,29,125,54"></TextBox>
             <Label Margin="80,125,455,41" Grid.Row="1">Tour-Description:</Label>
             <TextBox Margin="200,74,125,10"/>
