@@ -27,23 +27,6 @@ namespace TourPlanner
             InitializeComponent();
         }
 
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-            AddTour addtour = new AddTour();
-            addtour.ShowDialog();
-        }
-        
-        private void DelButton_Click(object sender, RoutedEventArgs e)
-        {
-            DeleteTour deleteTour = new DeleteTour();
-            deleteTour.ShowDialog();
-        }
-        private void HelpButton_Click(object sender, RoutedEventArgs e)
-        {
-            AddTourLog addTourLog = new AddTourLog();
-            addTourLog.ShowDialog();
-        }
-
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 

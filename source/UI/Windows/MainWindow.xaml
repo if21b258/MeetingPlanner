@@ -23,7 +23,7 @@
             <MenuItem Header="_File"/>
             <MenuItem Header="_Edit"/>
             <MenuItem Header="_Options"/>
-            <MenuItem Header="_Help" Click="HelpButton_Click"/>
+            <MenuItem Header="_Help"/>
         </Menu>
 
         <TextBox Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Padding="7"/>

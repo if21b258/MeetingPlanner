@@ -22,8 +22,8 @@
 
         <Label Grid.Row="0" Grid.Column="0" Content="Tour Logs"/>
         <Button Grid.Row="0" Grid.Column="1" Content="+" Command="{Binding AddTourLogCommand}"/>
-        <Button Grid.Row="0" Grid.Column="2" Content="-" Command="{Binding EditTourLogCommand}"/>
-        <Button Grid.Row="0" Grid.Column="3" Content="..." Command="{Binding DeleteTourLogCommand}"/>
+        <Button Grid.Row="0" Grid.Column="2" Content="-" Command="{Binding DeleteTourLogCommand}"/>
+        <Button Grid.Row="0" Grid.Column="3" Content="..." Command="{Binding EditTourLogCommand}"/>
 
         <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" ItemsSource="{Binding TourLogs}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" IsReadOnly="True">
             
