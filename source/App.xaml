@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:TourPlanner"
              StartupUri="source/UI/Windows/MainWindow.xaml">
     <Application.Resources>
-         
+        
     </Application.Resources>
 </Application>

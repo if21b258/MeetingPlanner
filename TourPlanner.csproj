@@ -8,7 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="source\BL\placeholder.cs" />
     <Compile Remove="source\DAL\placeholder.cs" />
     <Compile Remove="source\Test\placeholder.cs" />
   </ItemGroup>
@@ -22,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="source\BL\placeholder.cs" />
     <None Include="source\DAL\placeholder.cs" />
     <None Include="source\Test\placeholder.cs" />
   </ItemGroup>
