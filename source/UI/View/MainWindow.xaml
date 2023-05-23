@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourPlannerUI.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2.5*"/>
@@ -25,9 +26,9 @@
             <MenuItem Header="_Help"/>
         </Menu>
 
-        <local:SearchBarView Grid.Column="0" Grid.Row="1"/>
+        <local:SearchBarView x:Name="SearchBar" Grid.Column="0" Grid.Row="1"/>
 
-        <local:TourListView Grid.Column="0" Grid.Row="2"/>
+        <local:TourListView x:Name="TourList" Grid.Column="0" Grid.Row="2"/>
         
         <TabControl Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" Background="#FFF5DFDF">
             <TabItem>
@@ -39,7 +40,7 @@
             </TabItem>
             <TabItem Header="Route" />
             <TabItem Header="Logs">
-                <local:TourLogView/>
+                <local:TourLogView x:Name="TourLog"/>
             </TabItem>
         </TabControl>
     </Grid>

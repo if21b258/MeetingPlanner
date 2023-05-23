@@ -24,7 +24,6 @@ namespace TourPlannerUI.View
         public TourListView()
         {
             InitializeComponent();
-            DataContext = new TourListViewModel();
         }
     }
 }

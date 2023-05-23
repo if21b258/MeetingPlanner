@@ -15,6 +15,8 @@ namespace TourPlanner.source.UI.ViewModel
 
         private ICommand _addTourLogCommand;
 
+        private TourLogViewModel _tourLogViewModel;
+
         private string _date;
 
         private string _time;
@@ -28,11 +30,10 @@ namespace TourPlanner.source.UI.ViewModel
         private int _rating;
 
         public ICommand AddTourLogCommand => _addTourLogCommand ??= new RelayCommand<object>(AddTourLog);
-
-        /*public AddTourLogViewModel(TourItem currentTour)
+        public AddTourLogViewModel(TourLogViewModel tourLogViewModel)
         {
-            _currentTour = currentTour;
-        }*/
+            _tourLogViewModel = tourLogViewModel;
+        }
 
         public string Date
         {

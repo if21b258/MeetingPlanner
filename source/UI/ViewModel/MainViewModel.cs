@@ -7,24 +7,15 @@ using TourPlanner.source.UI.ViewModel;
 
 namespace TourPlannerUI.ViewModel
 {
-    class MainViewModel : BaseViewModel
+    public class MainViewModel : BaseViewModel
     {
-        private TourListViewModel _tourListViewModel;
-        private AddTourViewModel _addTourViewModel;
-        private EditTourViewModel _editTourViewModel;
-        private TourLogViewModel _tourLogViewModel;
-        private AddTourLogViewModel _addTourLogViewModel;
-        private EditTourLogViewModel _editTourLogViewModel;
-        private SearchBarViewModel _searchBarViewModel;
-        MainViewModel()
+        private readonly TourListViewModel _tourListViewModel;
+        private readonly TourLogViewModel _tourLogViewModel;
+
+        public MainViewModel(TourListViewModel tourListViewModel, TourLogViewModel tourLogViewModel)
         {
-            _tourListViewModel = new TourListViewModel();
-            _addTourViewModel = new AddTourViewModel();
-            _editTourViewModel = new EditTourViewModel();
-            _tourLogViewModel = new TourLogViewModel();
-            _addTourLogViewModel = new AddTourLogViewModel();
-            _editTourLogViewModel = new EditTourLogViewModel();
-            _searchBarViewModel = new SearchBarViewModel();
+            _tourListViewModel = tourListViewModel;
+            _tourLogViewModel = tourLogViewModel;
         }
     }
 }

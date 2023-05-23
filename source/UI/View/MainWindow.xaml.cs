@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TourPlannerUI.ViewModel;
 
 namespace TourPlannerUI.View
 {
@@ -20,9 +21,15 @@ namespace TourPlannerUI.View
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly TourListViewModel _tourListViewModel = new TourListViewModel();
+        private readonly TourLogViewModel _tourLogViewModel = new TourLogViewModel();
+
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainViewModel(_tourListViewModel, _tourLogViewModel);
+            TourList.DataContext = _tourListViewModel;
+            TourLog.DataContext = _tourLogViewModel;
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
