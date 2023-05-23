@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TourPlanner.source.Model;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using TourPlanner.source.BL;
-using TourPlanner.source.UI.View;
-using TourPlanner.source.UI.Windows;
+using TourPlannerUI.View;
 
-namespace TourPlanner.source.UI.ViewModel
+namespace TourPlannerUI.ViewModel
 {
     class TourLogViewModel
     {
@@ -25,13 +22,13 @@ namespace TourPlanner.source.UI.ViewModel
 
         private void AddTourLog(object obj)
         {
-            AddTourLog addTourLog = new AddTourLog();
+            AddTourLogWindow addTourLog = new AddTourLogWindow();
             addTourLog.ShowDialog();
         }
 
         private void DeleteTourLog(object obj)
         {
-            DeleteTour deleteTour = new DeleteTour();
+            DeleteTourWindow deleteTour = new DeleteTourWindow();
             deleteTour.ShowDialog();
         }
     }

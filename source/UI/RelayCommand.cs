@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace TourPlanner.source.BL
+namespace TourPlannerUI
 {
     public class RelayCommand : ICommand
     {

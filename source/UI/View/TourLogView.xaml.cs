@@ -12,9 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TourPlanner.source.UI.ViewModel;
+using TourPlannerUI.ViewModel;
 
-namespace TourPlanner.source.UI.View
+namespace TourPlannerUI.View
 {
     /// <summary>
     /// Interaction logic for TourLogView.xaml

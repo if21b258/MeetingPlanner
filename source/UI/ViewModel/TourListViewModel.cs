@@ -5,11 +5,9 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using TourPlanner.source.BL;
-using TourPlanner.source.UI.View;
-using TourPlanner.source.UI.Windows;
+using TourPlannerUI.View;
 
-namespace source.UI.ViewModel
+namespace TourPlannerUI.ViewModel
 {
     public class TourListViewModel
     {
@@ -24,13 +22,13 @@ namespace source.UI.ViewModel
 
         private void AddTour(object obj)
         {
-            AddTour addtour = new AddTour();
+            AddTourWindow addtour = new AddTourWindow();
             addtour.ShowDialog();
         }
 
         private void DeleteTour(object obj)
         {
-            DeleteTour deleteTour = new DeleteTour();
+            DeleteTourWindow deleteTour = new DeleteTourWindow();
             deleteTour.ShowDialog();
         }
     }

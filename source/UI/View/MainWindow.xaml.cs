@@ -12,10 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TourPlanner.source.UI.View;
-using TourPlanner.source.UI.Windows;
 
-namespace TourPlanner
+namespace TourPlannerUI.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

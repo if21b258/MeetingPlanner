@@ -1,9 +1,9 @@
-﻿<Window x:Class="TourPlanner.source.UI.Windows.DeleteTour"
+﻿<Window x:Class="TourPlannerUI.View.DeleteTourWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TourPlanner.source.UI.Windows"
+        xmlns:local="clr-namespace:TourPlannerUI.View"
         mc:Ignorable="d"
         Title="DeleteTour" Height="210" Width="350">
     <Grid Margin="0,0,0,4" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment">

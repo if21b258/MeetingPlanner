@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 
-namespace TourPlanner.source.Model
+namespace TourPlannerUI.Model
 {
     public class TourLogModel
     {

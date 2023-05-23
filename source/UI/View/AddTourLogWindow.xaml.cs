@@ -12,20 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace TourPlanner.source.UI.Windows
+namespace TourPlannerUI.View
 {
     /// <summary>
-    /// Interaction logic for DeleteTour.xaml
+    /// Interaction logic for AddTourLog.xaml
     /// </summary>
-    public partial class DeleteTour : Window
+    public partial class AddTourLogWindow : Window
     {
-        public DeleteTour()
+        public AddTourLogWindow()
         {
             InitializeComponent();
-        }
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
     }
 }

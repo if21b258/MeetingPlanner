@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TourPlanner.source.Model
+namespace TourPlannerUI.Model
 {
     class Tour
     {
