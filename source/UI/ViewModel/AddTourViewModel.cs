@@ -24,10 +24,12 @@ namespace TourPlanner.source.UI.ViewModel
 
         private string _transportType;
 
+        private TourListViewModel _tourListViewModel;
+
 
         //public event EventHandler<TourAttribute> AddedTour;
 
-        //public ObservableCollection<TourAttribute> Tours { get; set; }
+            //public ObservableCollection<TourAttribute> Tours { get; set; }
 
 
         public ICommand AddTourCommand => _addTourCommand ??= new RelayCommand<object>(AddTour);

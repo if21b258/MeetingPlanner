@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TourPlannerUI.Model
 {
-    class Tour
+    public class TourModel
     {
         public int TourId { get; set; }
         public string Name { get; set; }

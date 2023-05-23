@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace TourPlannerUI.ViewModel
 {
-    public class EditTourLogViewModel
+    public class EditTourLogViewModel : BaseViewModel
     {
         //private TourAttribute _currentTour"Log?";
         private ICommand _editTourLogCommand;

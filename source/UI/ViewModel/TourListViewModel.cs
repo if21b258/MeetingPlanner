@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TourPlannerUI.View;
+using TourPlannerUI.Model;
 
 namespace TourPlannerUI.ViewModel
 {
-    public class TourListViewModel
+    public class TourListViewModel : BaseViewModel
     {
         public ICommand AddTourCommand { get; set; }
         public ICommand DeleteTourCommand { get; set; }
         public ICommand EditTourCommand { get; set; }
+
+        public ObservableCollection<TourModel> TourList;
 
         public TourListViewModel()
         {

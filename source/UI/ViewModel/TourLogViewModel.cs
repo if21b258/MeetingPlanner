@@ -9,7 +9,7 @@ using TourPlannerUI.View;
 
 namespace TourPlannerUI.ViewModel
 {
-    class TourLogViewModel
+    public class TourLogViewModel : BaseViewModel
     {
         public ICommand AddTourLogCommand { get; set; }
         public ICommand DeleteTourLogCommand { get; set; }
