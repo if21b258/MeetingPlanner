@@ -7,12 +7,12 @@ using System.Windows.Input;
 
 namespace TourPlannerUI
 {
-    public class RelayCommand : ICommand
+    public class RelayCommand<T> : ICommand
     {
-        private readonly Action<object> _execute;
-        private readonly Predicate<object> _canExecute;
+        private readonly Action<T> _execute;
+        private readonly Predicate<T>? _canExecute;
 
-        public RelayCommand(Action<object> execute, Predicate<object> canExecute)
+        public RelayCommand(Action<T> execute, Predicate<T>? canExecute)
         {
             if (execute == null)
             {
@@ -22,18 +22,18 @@ namespace TourPlannerUI
             _canExecute = canExecute;
         }
 
-        public RelayCommand(Action<object> execute) : this(execute, null)
+        public RelayCommand(Action<T> execute) : this(execute, null)
         {
         }
 
-        public bool CanExecute(object parameter)
+        public bool? CanExecute(object parameter)
         {
-            return _canExecute == null ? true : _canExecute(parameter);
+            return _canExecute == null ? true : _canExecute((T)parameter);
         }
 
         public void Execute(object parameter)
         {
-            _execute(parameter);
+            _execute((T)parameter);
         }
 
         public event EventHandler? CanExecuteChanged
