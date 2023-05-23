@@ -16,8 +16,8 @@ namespace TourPlannerUI.ViewModel
 
         public TourLogViewModel()
         {
-            AddTourLogCommand = new RelayCommand(AddTourLog);
-            DeleteTourLogCommand = new RelayCommand(DeleteTourLog);
+            AddTourLogCommand = new RelayCommand<object>(AddTourLog);
+            DeleteTourLogCommand = new RelayCommand<object>(DeleteTourLog);
         }
 
         private void AddTourLog(object obj)
