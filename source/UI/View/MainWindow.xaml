@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourPlannerUI.View"
-        xmlns:view="clr-namespace:TourPlannerUI.View"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
@@ -26,9 +25,9 @@
             <MenuItem Header="_Help"/>
         </Menu>
 
-        <TextBox Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Padding="7"/>
+        <local:SearchBarView Grid.Column="0" Grid.Row="1"/>
 
-        <view:TourListView Grid.Column="0" Grid.Row="2"/>
+        <local:TourListView Grid.Column="0" Grid.Row="2"/>
         
         <TabControl Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" Background="#FFF5DFDF">
             <TabItem>
@@ -40,7 +39,7 @@
             </TabItem>
             <TabItem Header="Route" />
             <TabItem Header="Logs">
-                <view:TourLogView/>
+                <local:TourLogView/>
             </TabItem>
         </TabControl>
     </Grid>
