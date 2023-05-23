@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using TourPlannerUI;
+using TourPlannerUI.ViewModel;
 
 namespace TourPlanner.source.UI.ViewModel
 {
-    public class AddTourLogViewModel // vlt noch von etwas erben
+    public class AddTourLogViewModel : BaseViewModel
     {
         //private TourItem _currentTour;
 
         private ICommand _addTourLogCommand;
-        private ICommand _addTourLogCommand;
-
-        public Action CancelAddTourLog { get; set; }
 
         private string _date;
 
@@ -27,8 +27,7 @@ namespace TourPlanner.source.UI.ViewModel
 
         private int _rating;
 
-        public ICommand AddTourLogCommand => _addTourLogCommand ??= new RelayCommand(AddTour);
-        public ICommand CancelTourLogCommand => _cancelAddTourLogCommand ??= new RelayCommand(CancelAddTourLog);
+        public ICommand AddTourLogCommand => _addTourLogCommand ??= new RelayCommand<object>(AddTourLog);
 
         /*public AddTourLogViewModel(TourItem currentTour)
         {
@@ -103,9 +102,9 @@ namespace TourPlanner.source.UI.ViewModel
             }
         }
 
-        /*private void AddTourLog(object commandParameter)
+        private void AddTourLog(object commandParameter)
         {
-            if (_tourLogDistance != 0 && _tourLogDuration != 0 && !String.IsNullOrEmpty(_tourLogReport)
+            /*if (_tourLogDistance != 0 && _tourLogDuration != 0 && !String.IsNullOrEmpty(_tourLogReport)
                 && !String.IsNullOrEmpty(_tourLogWeather) && _tourLogTemperature != 0)
             {
                 AddedTourLog?.Invoke(this, new TourLogItem(_currentTour.Name, DateTime.Now, _tourLogDistance, _tourLogDuration, _tourLogReport, _tourLogRating, _tourLogFuelUsed, _tourLogWeather, _tourLogTemperature, _tourLogEffort));
@@ -113,18 +112,7 @@ namespace TourPlanner.source.UI.ViewModel
             else
             {
                 throw new ArgumentException("Please fill in all fields");
-            }
-        }*/
-
-
-        private void CancelWindow(object commandParameter)
-        {
-            if (commandParameter != null)
-            {
-                (commandParameter as Window).Close();
-            }
+            }*/
         }
-
-
     }
 }

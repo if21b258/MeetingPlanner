@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Input;
+using TourPlannerUI;
+using TourPlannerUI.ViewModel;
 
 namespace TourPlanner.source.UI.ViewModel
 {
-    public class AddTourViewModel // vlt noch von etwas erben
+    public class AddTourViewModel : BaseViewModel
     {
 
         private ICommand _addTourCommand;
-        private ICommand _addTourCommand;
-
-        public Action CancelAddTour { get; set; }
 
         private string _name;
 
@@ -31,8 +30,7 @@ namespace TourPlanner.source.UI.ViewModel
         //public ObservableCollection<TourAttribute> Tours { get; set; }
 
 
-        public ICommand AddTourCommand => _addTourCommand ??= new RelayCommand(AddTour);
-        public ICommand CancelTourCommand => _cancelAddTourCommand ??= new RelayCommand(CancelAddTour);
+        public ICommand AddTourCommand => _addTourCommand ??= new RelayCommand<object>(AddTour);
 
         /*public AddTourLogViewModel(TourAttribute currentTour)
         {
@@ -102,9 +100,9 @@ namespace TourPlanner.source.UI.ViewModel
         }
 
 
-        /*private void AddTour(object commandParameter)
+        private void AddTour(object commandParameter)
         {
-            if (!String.IsNullOrEmpty(_tourName) && !String.IsNullOrEmpty(_tourDescription) && !String.IsNullOrEmpty(_tourFrom)
+            /*if (!String.IsNullOrEmpty(_tourName) && !String.IsNullOrEmpty(_tourDescription) && !String.IsNullOrEmpty(_tourFrom)
                 && !String.IsNullOrEmpty(_tourTo) && !String.IsNullOrEmpty(_tourTransportMode))
             {
                 AddedTour?.Invoke(this, new TourItem(_tourName, _tourDescription, _tourFrom, _tourTo, _tourTransportMode));
@@ -112,18 +110,7 @@ namespace TourPlanner.source.UI.ViewModel
             else
             {
                 throw new ArgumentException("Please fill in all fields");
-            }
-        }+/
-
-
-        private void CancelWindow(object commandParameter)
-        {
-            if (commandParameter != null)
-            {
-                (commandParameter as Window).Close();
-            }
+            }*/
         }
-
-
     }
 }

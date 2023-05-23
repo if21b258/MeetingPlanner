@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TourPlannerUI.ViewModel
 {
-    internal class SearchBarViewModel : BaseViewModel
+    internal class EditTourViewModel
     {
     }
 }

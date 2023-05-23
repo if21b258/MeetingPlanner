@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 
 namespace TourPlannerUI.ViewModel
 {
-    public abstract class ViewModelBase : INotifyPropertyChanged
+    public abstract class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
