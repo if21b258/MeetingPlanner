@@ -13,11 +13,13 @@ namespace TourPlannerUI.ViewModel
     {
         public ICommand AddTourCommand { get; set; }
         public ICommand DeleteTourCommand { get; set; }
+        public ICommand EditTourCommand { get; set; }
 
         public TourListViewModel()
         {
             AddTourCommand = new RelayCommand<object>(AddTour);
             DeleteTourCommand = new RelayCommand<object>(DeleteTour);
+            EditTourCommand = new RelayCommand<object>(EditTour);
         }
 
         private void AddTour(object obj)
@@ -30,6 +32,12 @@ namespace TourPlannerUI.ViewModel
         {
             DeleteTourWindow deleteTour = new DeleteTourWindow();
             deleteTour.ShowDialog();
+        }
+
+        private void EditTour(object obj)
+        {
+            EditTourWindow editTour = new EditTourWindow();
+            editTour.ShowDialog();
         }
     }
 }
