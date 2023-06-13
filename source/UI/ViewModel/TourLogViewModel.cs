@@ -6,14 +6,19 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using TourPlannerUI.View;
+using TourPlannerUI.Model;
 
 namespace TourPlannerUI.ViewModel
 {
     public class TourLogViewModel : BaseViewModel
     {
         public ICommand AddTourLogCommand { get; set; }
+        
         public ICommand DeleteTourLogCommand { get; set; }
+        
         public ICommand EditTourLogCommand { get; set; }
+
+        public ObservableCollection<TourLogModel> TourLogList { get; set; }
 
         public TourLogViewModel()
         {

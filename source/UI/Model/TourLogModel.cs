@@ -9,22 +9,24 @@ namespace TourPlannerUI.Model
 {
     public class TourLogModel
     {
-        public string LogId { get; set; }
-        public string TourId { get; set; }
+        public int LogId { get; set; }
+        public int TourId { get; set; }
         public string Date { get; set; }
+        public TimeModel Time { get; set; }
         public string Comment { get; set; }
-        public string Difficulty { get; set; }
-        public string Duration { get; set; }
-        public string Rating { get; set; }
+        public int Difficulty { get; set; }
+        public  DurationModel Duration { get; set; }
+        public int Rating { get; set; }
 
-        public TourLogModel(string logId, string tourId, string date, string comment, string difficulty, string duration, string rating)
+        public TourLogModel(string date, int hours, int minutes, string comment, int difficulty, int durationHours, int durationMinutes, int rating)
         {
-            LogId = logId;
-            TourId = tourId;
+            LogId = 0;
+            TourId = 0;
             Date = date;
+            Time = new TimeModel(hours, minutes);
             Comment = comment;
             Difficulty = difficulty;
-            Duration = duration;
+            Duration = new DurationModel(durationHours, durationMinutes);
             Rating = rating;
         }
     }

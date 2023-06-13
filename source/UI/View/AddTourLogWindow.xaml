@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourPlannerUI.View"
         mc:Ignorable="d"
-        Title="AddTourLog" Height="450" Width="800">
+        Title="AddTourLog" Height="450" Width="800"
+        DataContext="{Binding AddTourLogViewModel, Source={StaticResource IoCConfig2}}">
     <Grid  Background="LightBlue">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -21,7 +22,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Label Content="Time: Hours:" Margin="382,2,178,9" Width="84" d:LayoutOverrides="VerticalAlignment"/>
-        <ComboBox Grid.Row="0" Margin="471,6,0,14" Width="63" HorizontalAlignment="Left" Text="jr">
+        <ComboBox Grid.Row="0" Margin="471,6,0,14" Width="63" HorizontalAlignment="Left" Text="{Binding Hours}">
             <ComboBox.ItemsSource>
                 <x:Array Type="{x:Type ComboBoxItem}">
                     <ComboBoxItem>0</ComboBoxItem>
@@ -53,7 +54,7 @@
         </ComboBox>
 
         <Label Content="Min:" Height="27" Margin="577,-1,0,6" Width="67" d:LayoutOverrides="VerticalAlignment"/>
-        <ComboBox Margin="-19,6,118,13" Grid.Column="1">
+        <ComboBox Margin="-19,6,118,13" Grid.Column="1" Text="{Binding Minutes}">
             <ComboBox.ItemsSource>
                 <x:Array Type="{x:Type ComboBoxItem}">
                     <ComboBoxItem>0</ComboBoxItem>
@@ -120,32 +121,32 @@
             </ComboBox.ItemsSource>
         </ComboBox>
         <Label Grid.Column="0" Content="Date:" Height="30" Margin="0,2,510,5" Width="134" d:LayoutOverrides="VerticalAlignment"/>
-        <DatePicker Grid.Row="0" Margin="115,0,267,0"/>
+        <DatePicker Grid.Row="0" Margin="115,0,267,0" Text="{Binding Date}"/>
 
         <Label Grid.Row="1" Content="Comment:" Margin="0,0,451,32" Width="193"/>
-        <TextBox Grid.Row="1" Margin="115,10,-71,10" VerticalScrollBarVisibility="Auto"/>
+        <TextBox Grid.Row="1" Margin="115,10,-71,10" VerticalScrollBarVisibility="Auto" Text="{Binding Comment}"/>
 
         <Label Grid.Row="2" Grid.Column="0" Content="Difficulty:"/>
-        <TextBlock Text="{Binding Value, ElementName=slider}" Margin="319,5,294,26" Grid.Row="2" d:LayoutOverrides="TopMargin, BottomMargin" />
-        <Slider x:Name="slider" Minimum="1" Maximum="10" TickFrequency="1" IsSnapToTickEnabled="True" Margin="9,26,6,10" Grid.Row="2" d:LayoutOverrides="VerticalAlignment, TopMargin, BottomMargin" />
+        <TextBlock  Text="{Binding Value, ElementName=slider}" Margin="319,5,294,26" Grid.Row="2" d:LayoutOverrides="TopMargin, BottomMargin"/>
+        <Slider x:Name="slider" Minimum="1" Maximum="10" TickFrequency="1" IsSnapToTickEnabled="True" Margin="9,26,6,10" Grid.Row="2" d:LayoutOverrides="VerticalAlignment, TopMargin, BottomMargin" Value="{Binding Difficulty}" />
 
         <StackPanel Margin="0,5,6,30" Grid.Row="3" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
             <Label>Duration Hours:</Label>
-            <Slider x:Name="HourSlider" Minimum="0" Maximum="24" TickFrequency="1" IsSnapToTickEnabled="True" Value="{Binding SelectedDuration, Mode=TwoWay}" Width="620" />
+            <Slider x:Name="HourSlider" Minimum="0" Maximum="24" TickFrequency="1" IsSnapToTickEnabled="True" Value="{Binding DurationHours}" Width="620" />
             <TextBlock Text="{Binding ElementName=HourSlider, Path=Value}" HorizontalAlignment="Center" />
             <Label Height="25">Duration Minutes:</Label>
-            <Slider x:Name="MinuteSlider" Minimum="0" Maximum="60" TickFrequency="1" IsSnapToTickEnabled="True" Value="{Binding SelectedDuration, Mode=TwoWay}" Width="623" />
+            <Slider x:Name="MinuteSlider" Minimum="0" Maximum="60" TickFrequency="1" IsSnapToTickEnabled="True" Width="623" Value="{Binding DurationMinutes}"/>
             <TextBlock Text="{Binding ElementName=MinuteSlider, Path=Value}" HorizontalAlignment="Center" />
         </StackPanel>
         <Label Grid.Row="4" Grid.Column="0" Content="Rating:" Margin="0,0,544,46" Width="100" Height="26"/>
-        <ComboBox Margin="134,21,286,18" Grid.Row="4" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+        <ComboBox Margin="134,21,286,18" Grid.Row="4" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Text="{Binding Rating}">
             <ComboBoxItem Content="1" />
             <ComboBoxItem Content="2" />
             <ComboBoxItem Content="3" />
             <ComboBoxItem Content="4" />
             <ComboBoxItem Content="5" />
         </ComboBox>
-        <Button Background ="Green" Margin="528,0,0,28" Grid.Row="4" HorizontalAlignment="Left" Width="72">Add</Button>
+        <Button Background ="Green" Margin="528,0,0,28" Grid.Row="4" HorizontalAlignment="Left" Width="72" Command="{Binding AddTourLogCommand}">Add</Button>
         <Button Background ="Red" Margin="6,0,0,28" Grid.Row="4" HorizontalAlignment="Left" Width="72" Grid.Column="1" d:LayoutOverrides="HorizontalAlignment">Cancel</Button>
     </Grid>
 </Window>
