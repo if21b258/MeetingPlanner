@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:TourPlannerUI"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
-        
+        <ResourceDictionary>
+            <local:IoCContainerConfig x:Key="IoCConfig2" />
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

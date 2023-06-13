@@ -7,7 +7,7 @@ using System.Windows.Input;
 using TourPlannerUI;
 using TourPlannerUI.ViewModel;
 
-namespace TourPlanner.source.UI.ViewModel
+namespace TourPlannerUI.ViewModel
 {
     public class AddTourViewModel : BaseViewModel
     {
@@ -29,7 +29,7 @@ namespace TourPlanner.source.UI.ViewModel
 
         //public event EventHandler<TourAttribute> AddedTour;
 
-            //public ObservableCollection<TourAttribute> Tours { get; set; }
+        //public ObservableCollection<TourAttribute> Tours { get; set; }
 
 
         public ICommand AddTourCommand => _addTourCommand ??= new RelayCommand<object>(AddTour);

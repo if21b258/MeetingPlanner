@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TourPlanner.source.UI.ViewModel;
+using TourPlannerUI.ViewModel;
 
 namespace TourPlannerUI.ViewModel
 {

@@ -7,7 +7,7 @@ using System.Windows.Input;
 using TourPlannerUI;
 using TourPlannerUI.ViewModel;
 
-namespace TourPlanner.source.UI.ViewModel
+namespace TourPlannerUI.ViewModel
 {
     public class AddTourLogViewModel : BaseViewModel
     {
