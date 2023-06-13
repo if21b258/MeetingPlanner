@@ -5,25 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourPlannerUI.View"
         mc:Ignorable="d"
-        Title="Add Tour" Height="450" Width="800">
-    <Grid Background="LightBlue" Margin="0,0,0,-6">
+        Title="Add Tour" Height="450" Width="800"
+        DataContext="{Binding AddTourViewModel,Source={StaticResource IoCConfig2}}">
+  
+    <Grid Background="LightBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        
         <Grid.RowDefinitions>
-            <RowDefinition Height="0*"/>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="7*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
-        <Label Margin="80,29,620,91" Grid.RowSpan="2">Tour-Name:</Label>
-        <TextBox Margin="200,31,125,93" Height="36" Grid.RowSpan="2"></TextBox>
-        <Label Margin="80,98,605,137" Grid.Row="2">Tour-Description:</Label>
-        <TextBox Margin="0,80,125,46" HorizontalAlignment="Right" Width="460" Grid.RowSpan="2" TextChanged="TextBox_TextChanged"/>
-        <Label Margin="80,80,620,46" Grid.RowSpan="2">Origin:</Label>
-        <TextBox Margin="200,98,125,68" Grid.Row="2"></TextBox>
-        <Label Margin="80,35,605,201" Grid.Row="2">Transport-Type:</Label>
-        <TextBox Margin="200,35,125,209" Height="36" Grid.Row="2"></TextBox>
-        <Label Margin="80,136,620,-16" Grid.RowSpan="2">Destination:</Label>
-        <TextBox Margin="200,136,125,-12" Height="36" Grid.RowSpan="2"/>
-        <Button Margin="275,212,440,17" Grid.Row="2" Background="Green">Add</Button>
-        <Button Click="CancelButton_Click" Margin="485,212,230,17" Grid.Row="2" Background="Red">Cancel</Button>
+        <Label Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">Tour-Name:</Label>
+        <TextBox Grid.Column="1" Height="36" Grid.Row="1" Text="{Binding Name}"></TextBox>
+        <Label Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">Origin:</Label>
+        <TextBox Grid.Column="1" Height="36" Grid.Row="2" Text="{Binding Origin}"></TextBox>
+        <Label Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center">Destination:</Label>
+        <TextBox Grid.Column="1" Height="36" Grid.Row="3" Text="{Binding Destination}"></TextBox>
+        <Label Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center">Transport-Type:</Label>
+        <TextBox Grid.Column="1" Height="36" Grid.Row="4" Text="{Binding TransportType}"></TextBox>
+        <Label Grid.Column="0" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center">Tour-Description:</Label>
+        <TextBox Grid.Column="1" Height="90" Grid.Row="5" Grid.RowSpan="2" Text="{Binding Description}"></TextBox>
+
+        <Button Grid.Column="0" Grid.Row="8" Background="Green" Command="{Binding AddTourCommand}">Add</Button>
+        <Button Grid.Column="1" Grid.Row="8" Background="Red" Click="CancelButton_Click">Cancel</Button>
     </Grid>
 </Window>

@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:TourPlannerUI.View"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
+        DataContext="{Binding MainViewModel, Source={StaticResource IoCConfig2}}"
         >
     <Grid>
         <Grid.ColumnDefinitions>
@@ -38,7 +39,7 @@
                     </Grid>
                 </TabItem.Header>
             </TabItem>
-            <TabItem Header="Route" />
+            <TabItem Header="Route"/>
             <TabItem Header="Logs">
                 <local:TourLogView x:Name="TourLog"/>
             </TabItem>

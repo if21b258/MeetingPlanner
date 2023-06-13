@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using TourPlannerUI;
+using TourPlannerUI.Model;
 using TourPlannerUI.ViewModel;
 
 namespace TourPlannerUI.ViewModel
@@ -12,27 +14,34 @@ namespace TourPlannerUI.ViewModel
     public class AddTourViewModel : BaseViewModel
     {
 
+        private TourListViewModel _tourListViewModel;
+
         private ICommand _addTourCommand;
+
+        private ICommand _cancelAddTourCommand;
 
         private string _name;
 
-        private string _description;
-
         private string _origin;
 
-        private int _destination;
+        private string _destination;
 
         private string _transportType;
 
-        private TourListViewModel _tourListViewModel;
+        private string _description;
 
-
-        //public event EventHandler<TourAttribute> AddedTour;
+        //public event EventHandler<TourAttribute> TourAdded;
 
         //public ObservableCollection<TourAttribute> Tours { get; set; }
 
+        public AddTourViewModel(TourListViewModel tourListViewModel)
+        {
+            _tourListViewModel = tourListViewModel;
+        }
 
         public ICommand AddTourCommand => _addTourCommand ??= new RelayCommand<object>(AddTour);
+
+        public ICommand CancelAddTourCommand => _addTourCommand ??= new RelayCommand<object>(CancelAddTour);
 
         /*public AddTourLogViewModel(TourAttribute currentTour)
         {
@@ -79,7 +88,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
-        public int Destination
+        public string Destination
         {
             get { return _destination; }
             set
@@ -104,15 +113,20 @@ namespace TourPlannerUI.ViewModel
 
         private void AddTour(object commandParameter)
         {
-            /*if (!String.IsNullOrEmpty(_tourName) && !String.IsNullOrEmpty(_tourDescription) && !String.IsNullOrEmpty(_tourFrom)
-                && !String.IsNullOrEmpty(_tourTo) && !String.IsNullOrEmpty(_tourTransportMode))
-            {
-                AddedTour?.Invoke(this, new TourItem(_tourName, _tourDescription, _tourFrom, _tourTo, _tourTransportMode));
-            }
+            if (!String.IsNullOrEmpty(_name) && !String.IsNullOrEmpty(_origin) && !String.IsNullOrEmpty(_destination) 
+                && !String.IsNullOrEmpty(_transportType) && !String.IsNullOrEmpty(_description))
+                {
+                    _tourListViewModel.TourList.Add(new TourModel(_name, _origin, _destination, _transportType, _description));
+                }
             else
             {
                 throw new ArgumentException("Please fill in all fields");
-            }*/
+            }
+        }
+
+        private void CancelAddTour(object commandParameter)
+        {
+
         }
     }
 }

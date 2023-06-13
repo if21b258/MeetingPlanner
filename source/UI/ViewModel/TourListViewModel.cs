@@ -17,19 +17,21 @@ namespace TourPlannerUI.ViewModel
         public ICommand DeleteTourCommand { get; set; }
         public ICommand EditTourCommand { get; set; }
 
-        public ObservableCollection<TourModel> TourList;
+        public ObservableCollection<TourModel> TourList { get; set; }
 
         public TourListViewModel()
         {
             AddTourCommand = new RelayCommand<object>(AddTour);
             DeleteTourCommand = new RelayCommand<object>(DeleteTour);
             EditTourCommand = new RelayCommand<object>(EditTour);
+            TourList = new ObservableCollection<TourModel>();
         }
 
         private void AddTour(object obj)
         {
             AddTourWindow addtour = new AddTourWindow();
             addtour.ShowDialog();
+
         }
 
         private void DeleteTour(object obj)

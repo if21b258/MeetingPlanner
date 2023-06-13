@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TourPlannerUI.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             DataContext="{Binding TourListViewModel, Source={StaticResource IoCConfig2}}">
     <Grid>
         <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
@@ -19,12 +20,12 @@
                 <ColumnDefinition Width="32"/>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" Content="Tours"/>
+            <Label Grid.Row="0" Grid.Column="0" Content="{Binding Test}"/>
             <Button Grid.Row="0" Grid.Column="1" Content="+" Command="{Binding AddTourCommand}"/>
             <Button Grid.Row="0" Grid.Column="2" Content="-" Command="{Binding DeleteTourCommand}"/>
             <Button Grid.Row="0" Grid.Column="3" Content="..." Command="{Binding EditTourCommand}"/>
 
-        <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" ItemsSource="{Binding Tours}" SelectedItem="{Binding SelectedTour}">
+        <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" ItemsSource="{Binding TourList}" SelectedItem="{Binding SelectedTour}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
