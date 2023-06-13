@@ -121,7 +121,7 @@
             </ComboBox.ItemsSource>
         </ComboBox>
         <Label Grid.Column="0" Content="Date:" Height="30" Margin="0,2,510,5" Width="134" d:LayoutOverrides="VerticalAlignment"/>
-        <DatePicker Grid.Row="0" Margin="115,0,267,0" Text="{Binding Date}"/>
+        <DatePicker Grid.Row="0" Margin="115,0,267,0" SelectedDate="{Binding Date}"/>
 
         <Label Grid.Row="1" Content="Comment:" Margin="0,0,451,32" Width="193"/>
         <TextBox Grid.Row="1" Margin="115,10,-71,10" VerticalScrollBarVisibility="Auto" Text="{Binding Comment}"/>

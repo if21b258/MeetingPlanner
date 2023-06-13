@@ -35,7 +35,7 @@ namespace TourPlannerUI.ViewModel
 
         private int _rating;
 
-        private AddTourLogViewModel(TourLogViewModel tourLogViewModel)
+        public AddTourLogViewModel(TourLogViewModel tourLogViewModel)
         {
             _tourLogViewModel = tourLogViewModel;
         }
@@ -137,15 +137,15 @@ namespace TourPlannerUI.ViewModel
 
         private void AddTourLog(object commandParameter)
         {
-            if (!String.IsNullOrEmpty(_date) /*&& !String.IsNullOrEmpty(_time)*/ && !String.IsNullOrEmpty(_comment))
+            /*if (!String.IsNullOrEmpty(_date) /*&& !String.IsNullOrEmpty(_time) && !String.IsNullOrEmpty(_comment))
                 /*&& !String.IsNullOrEmpty(_difficulty) &&!String.IsNullOrEmpty(_totalTime)) && !String.IsNullOrEmpty(_rating)*/
-            {
-                    _tourLogViewModel.TourLogList.Add(new TourLogModel(_date, _hours, _minutes, _comment, _difficulty, _durationHours, _durationMinutes, _rating));
-            }
-            else
+           
+            _tourLogViewModel.TourLogList.Add(new TourLogModel(_date, _hours, _minutes, _comment, _difficulty, _durationHours, _durationMinutes, _rating));
+            
+            /*else
             {
                 throw new ArgumentException("Please fill in all fields");
-            }
+            }*/
         }
     }
 }
