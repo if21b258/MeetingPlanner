@@ -15,11 +15,11 @@ namespace TourPlannerUI
             //ViewModels
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<TourListViewModel>();
-            services.AddSingleton<AddTourViewModel>();
-            services.AddSingleton<EditTourViewModel>();
+            services.AddTransient<AddTourViewModel>();
+            services.AddTransient<EditTourViewModel>();
             services.AddSingleton<TourLogViewModel>();
-            services.AddSingleton<AddTourLogViewModel>();
-            services.AddSingleton<EditTourLogViewModel>();
+            services.AddTransient<AddTourLogViewModel>();
+            services.AddTransient<EditTourLogViewModel>();
             services.AddSingleton<SearchBarViewModel>();
 
             _serviceProvider = services.BuildServiceProvider();

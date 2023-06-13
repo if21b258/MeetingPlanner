@@ -12,32 +12,28 @@ namespace TourPlannerUI.ViewModel
 {
     public class EditTourViewModel : BaseViewModel
     {
-
         private TourListViewModel _tourListViewModel;
 
         public ICommand EditTourCommand { get; set; }
 
-        private string _name;
-
-        private string _origin;
-
-        private string _destination;
-
-        private string _transportType;
-
-        private string _description;
+        private string? _name;
+        private string? _origin;
+        private string? _destination;
+        private string? _transportType;
+        private string? _description;
 
         private TourModel _selectedTour;
 
         public EditTourViewModel(TourListViewModel tourListViewModel)
         {
             _tourListViewModel = tourListViewModel;
+            _selectedTour = _tourListViewModel.SelectedTour;
             EditTourCommand = new RelayCommand<object>(EditTour);
         }
 
         public string Name
         {
-            get { return _name; }
+            get { return _selectedTour.Name; }
             set
             {
                 _name = value;
@@ -48,7 +44,7 @@ namespace TourPlannerUI.ViewModel
 
         public string Origin
         {
-            get { return _origin; }
+            get { return _selectedTour.Origin; }
             set
             {
                 _origin = value;
@@ -59,7 +55,7 @@ namespace TourPlannerUI.ViewModel
 
         public string Destination
         {
-            get { return _destination; }
+            get { return _selectedTour.Destination; }
             set
             {
                 _destination = value;
@@ -70,7 +66,7 @@ namespace TourPlannerUI.ViewModel
 
         public string TransportType
         {
-            get { return _transportType; }
+            get { return _selectedTour.TransportType; }
             set
             {
                 _transportType = value;
@@ -81,7 +77,7 @@ namespace TourPlannerUI.ViewModel
 
         public string Description
         {
-            get { return _description; }
+            get { return _selectedTour.Description; }
             set
             {
                 _description = value;

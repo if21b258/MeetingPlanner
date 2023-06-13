@@ -18,6 +18,8 @@ namespace TourPlannerUI.ViewModel
         public ICommand DeleteTourCommand { get; set; }
         public ICommand EditTourCommand { get; set; }
 
+        public event Action<TourModel> SelectedTourChanged;
+
         public ObservableCollection<TourModel> TourList { get; set; }
 
         private TourModel _selectedTour;
@@ -38,7 +40,7 @@ namespace TourPlannerUI.ViewModel
                 if(_selectedTour != value)
                 {
                     _selectedTour = value;
-                    OnPropertyChanged(nameof(SelectedTour));
+                    OnSelectedTourChanged();
                 }
             }
         }
@@ -59,6 +61,11 @@ namespace TourPlannerUI.ViewModel
         {
             EditTourWindow editTour = new EditTourWindow();
             editTour.ShowDialog();
+        }
+
+        private void OnSelectedTourChanged()
+        {
+            SelectedTourChanged?.Invoke(SelectedTour);
         }
     }
 }
