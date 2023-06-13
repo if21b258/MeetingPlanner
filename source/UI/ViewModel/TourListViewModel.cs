@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using TourPlannerUI.View;
 using TourPlannerUI.Model;
+using System.ComponentModel;
 
 namespace TourPlannerUI.ViewModel
 {
@@ -19,6 +20,8 @@ namespace TourPlannerUI.ViewModel
 
         public ObservableCollection<TourModel> TourList { get; set; }
 
+        private TourModel _selectedTour;
+
         public TourListViewModel()
         {
             AddTourCommand = new RelayCommand<object>(AddTour);
@@ -27,11 +30,23 @@ namespace TourPlannerUI.ViewModel
             TourList = new ObservableCollection<TourModel>();
         }
 
+        public TourModel SelectedTour
+        {
+            get { return _selectedTour; }
+            set
+            {
+                if(_selectedTour != value)
+                {
+                    _selectedTour = value;
+                    OnPropertyChanged(nameof(SelectedTour));
+                }
+            }
+        }
+
         private void AddTour(object obj)
         {
             AddTourWindow addtour = new AddTourWindow();
             addtour.ShowDialog();
-
         }
 
         private void DeleteTour(object obj)

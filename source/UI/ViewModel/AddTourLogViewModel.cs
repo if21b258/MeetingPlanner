@@ -11,7 +11,7 @@ namespace TourPlannerUI.ViewModel
 {
     public class AddTourLogViewModel : BaseViewModel
     {
-        //private TourItem _currentTour;
+        private TourLogViewModel _tourLogViewModel;
 
         private ICommand _addTourLogCommand;
 
@@ -30,6 +30,7 @@ namespace TourPlannerUI.ViewModel
         public ICommand AddTourLogCommand => _addTourLogCommand ??= new RelayCommand<object>(AddTourLog);
         private AddTourLogViewModel(TourLogViewModel tourLogViewModel)
         {
+            _tourLogViewModel = tourLogViewModel;
         }
 
         public string Date
