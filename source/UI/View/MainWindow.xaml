@@ -23,7 +23,9 @@
         <Menu Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" VerticalAlignment="Center" Padding="6">
             <MenuItem Header="_File"/>
             <MenuItem Header="_Edit"/>
-            <MenuItem Header="_Options"/>
+            <MenuItem Header="_Options">
+                <MenuItem Header="_Reset Database" Command="{Binding ResetDatabaseCommand}" />
+            </MenuItem>
             <MenuItem Header="_Help"/>
         </Menu>
 
