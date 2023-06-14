@@ -91,15 +91,23 @@ namespace TourPlannerUI.ViewModel
 
         private void AddTour(object commandParameter)
         {
-            if (!String.IsNullOrEmpty(_name) && !String.IsNullOrEmpty(_origin) && !String.IsNullOrEmpty(_destination) 
+            try
+            {
+                if (!String.IsNullOrEmpty(_name) && !String.IsNullOrEmpty(_origin) && !String.IsNullOrEmpty(_destination)
                 && !String.IsNullOrEmpty(_transportType) && !String.IsNullOrEmpty(_description))
                 {
                     _tourListViewModel.TourList.Add(new TourModel(_name, _origin, _destination, _transportType, _description));
                 }
-            else
-            {
-                throw new ArgumentException("Please fill in all fields");
+                else
+                {
+                    throw new ArgumentException("Please fill in all fields");
+                }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Processing failed: {e.Message}");
+            }
+
         }
     }
 }

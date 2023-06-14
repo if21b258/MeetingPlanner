@@ -24,7 +24,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Label Content="Time: Hours:" Margin="382,2,178,9" Width="84" d:LayoutOverrides="VerticalAlignment"/>
-        <ComboBox Grid.Row="0" Margin="471,6,0,14" Width="63" HorizontalAlignment="Left" Text="{Binding Hours}">
+        <ComboBox Grid.Row="0" Margin="471,6,0,14" Width="63" HorizontalAlignment="Left" SelectedIndex="{Binding THours}">
             <ComboBox.ItemsSource>
                 <x:Array Type="{x:Type ComboBoxItem}">
                     <ComboBoxItem>0</ComboBoxItem>
@@ -56,7 +56,7 @@
         </ComboBox>
 
         <Label Content="Min:" Height="27" Margin="577,-1,0,6" Width="67" d:LayoutOverrides="VerticalAlignment"/>
-        <ComboBox Margin="-19,6,118,13" Grid.Column="1" Text="{Binding Minutes}">
+        <ComboBox Margin="-19,6,118,13" Grid.Column="1" SelectedIndex="{Binding TMinutes}">
             <ComboBox.ItemsSource>
                 <x:Array Type="{x:Type ComboBoxItem}">
                     <ComboBoxItem>00</ComboBoxItem>
@@ -134,14 +134,14 @@
 
         <StackPanel Margin="0,5,6,30" Grid.Row="3" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
             <Label>Duration Hours:</Label>
-            <Slider x:Name="HourSlider" Minimum="0" Maximum="24" TickFrequency="1" IsSnapToTickEnabled="True" Value="{Binding DurationHours}" Width="620" />
+            <Slider x:Name="HourSlider" Minimum="0" Maximum="24" TickFrequency="1" IsSnapToTickEnabled="True" Value="{Binding DHours}" Width="620" />
             <TextBlock Text="{Binding ElementName=HourSlider, Path=Value}" HorizontalAlignment="Center" />
             <Label Height="25">Duration Minutes:</Label>
-            <Slider x:Name="MinuteSlider" Minimum="0" Maximum="60" TickFrequency="1" IsSnapToTickEnabled="True" Width="623" Value="{Binding DurationMinutes}"/>
+            <Slider x:Name="MinuteSlider" Minimum="0" Maximum="60" TickFrequency="1" IsSnapToTickEnabled="True" Width="623" Value="{Binding DMinutes}"/>
             <TextBlock Text="{Binding ElementName=MinuteSlider, Path=Value}" HorizontalAlignment="Center" />
         </StackPanel>
         <Label Grid.Row="4" Grid.Column="0" Content="Rating:" Margin="0,0,544,46" Width="100" Height="26"/>
-        <ComboBox Margin="134,21,286,18" Grid.Row="4" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Text="{Binding Rating}">
+        <ComboBox Margin="134,21,286,18" Grid.Row="4" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" SelectedIndex="{Binding Rating}">
             <ComboBoxItem Content="1" />
             <ComboBoxItem Content="2" />
             <ComboBoxItem Content="3" />
@@ -149,6 +149,6 @@
             <ComboBoxItem Content="5" />
         </ComboBox>
         <Button Background ="Green" Margin="528,0,0,28" Grid.Row="4" HorizontalAlignment="Left" Width="72" Command="{Binding AddTourLogCommand}">Add</Button>
-        <Button Background ="Red" Margin="6,0,0,28" Grid.Row="4" HorizontalAlignment="Left" Width="72" Grid.Column="1" d:LayoutOverrides="HorizontalAlignment">Cancel</Button>
+        <Button Background ="Red" Margin="6,0,0,28" Grid.Row="4" HorizontalAlignment="Left" Width="72" Grid.Column="1" d:LayoutOverrides="HorizontalAlignment" Click="CancelButton_Click">Cancel</Button>
     </Grid>
 </Window>

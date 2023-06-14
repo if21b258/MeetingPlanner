@@ -56,6 +56,47 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        public int DMinutes
+        {
+            get { return _selectedTourLog.DMinutes; }
+            set
+            {
+                _selectedTourLog.DMinutes = value;
+
+            }
+
+       }
+        public int DHours
+        {
+            get { return _selectedTourLog.DHours; }
+            set
+            {
+                _selectedTourLog.DHours = value;
+
+            }
+
+        }
+        public int THours
+        {
+            get { return _selectedTourLog.THours; }
+            set
+            {
+                _selectedTourLog.THours = value;
+
+            }
+
+        }
+        public int TMinutes
+        {
+            get { return _selectedTourLog.TMinutes; }
+            set
+            {
+                _selectedTourLog.TMinutes = value;
+
+            }
+
+        }
+
         public int Difficulty
         {
             get { return _selectedTourLog.Difficulty; }

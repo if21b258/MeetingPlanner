@@ -33,7 +33,15 @@ namespace TourPlannerUI
 
         public void Execute(object parameter)
         {
-            _execute((T)parameter);
+            try
+            {
+                _execute((T)parameter);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Processing failed: {e.Message}");
+            }
+
         }
 
         public event EventHandler? CanExecuteChanged
