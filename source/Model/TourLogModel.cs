@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 
-namespace TourPlannerUI.Model
+namespace TourPlannerModel
 {
     public class TourLogModel
     {
@@ -17,7 +17,7 @@ namespace TourPlannerUI.Model
         public int TMinutes { get; set; }
         public string Comment { get; set; }
         public int Difficulty { get; set; }
-        public  string Duration { get; set; }
+        public string Duration { get; set; }
         public int DHours { get; set; }
         public int DMinutes { get; set; }
         public int Rating { get; set; }

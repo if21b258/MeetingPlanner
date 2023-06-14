@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TourPlannerUI.View;
-using TourPlannerUI.Model;
+using TourPlannerModel;
 using System.ComponentModel;
 
 namespace TourPlannerUI.ViewModel
