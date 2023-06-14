@@ -4,51 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using TourPlannerUI.Model;
 
 namespace TourPlannerUI.ViewModel
 {
     public class EditTourLogViewModel : BaseViewModel
     {
-        //private TourAttribute _currentTour"Log?";
-        private ICommand _editTourLogCommand;
+        private TourLogViewModel _tourLogViewModel;
+        private TourLogModel _selectedTourLog;
+        public ICommand EditTourLogCommand { get; set; }
 
-        private string _date;
-
-        private string _time;
-
-        private string _comment;
-
-        private int _difficulty;
-
-        private string _totalTime;
-
-        private int _rating;
-
-
-        //public event EventHandler<TourLogItem> EditedTourLog;
-
-
-        public ICommand EditTourLogCommand => _editTourLogCommand ??= new RelayCommand<object>(EditTourLog);
-
-        /*public EditTourLogViewModel(TourItem currentTour, TourLogItem currentTourLog)
+        public EditTourLogViewModel(TourLogViewModel tourLogViewModel)
         {
-            _currentTour = currentTour;
-            _date = currentTourLog.date;
-            _time = currentTourLog.Time;
-            _comment = currentTourLog.Comment;
-            _difficulty = currentTourLog.difficulty;
-            _totalTime = currentTourLog.TotalTime;
-            _rating = currentTourLog.Rating;
-        }*/
+            _tourLogViewModel = tourLogViewModel;
+            _selectedTourLog = _tourLogViewModel.SelectedTourLog;
+            EditTourLogCommand = new RelayCommand<object>(EditTourLog);
+        }
 
         public string Date
         {
-            get { return _date; }
+            get { return _selectedTourLog.Date; }
 
             set
             {
-                _date = value;
-                //RaisePropertyChangedEvent(nameof(Date));
+                _selectedTourLog.Date = value;
 
                 //Errorhandling fehlt noch 
             }
@@ -57,11 +36,10 @@ namespace TourPlannerUI.ViewModel
 
         public string Time
         {
-            get { return _time; }
+            get { return _selectedTourLog.Time; }
             set
             {
-                _time = value;
-                //RaisePropertyChangedEvent(nameof(Time));
+                _selectedTourLog.Time = value;
 
                 //Errorhandling fehlt noch 
             }
@@ -69,11 +47,10 @@ namespace TourPlannerUI.ViewModel
 
         public string Comment
         {
-            get { return _comment; }
+            get { return _selectedTourLog.Comment; }
             set
             {
-                _comment = value;
-                //RaisePropertyChangedEvent(nameof(Comment));
+                _selectedTourLog.Comment = value;
 
                 //Errorhandling fehlt noch 
             }
@@ -81,23 +58,21 @@ namespace TourPlannerUI.ViewModel
 
         public int Difficulty
         {
-            get { return _difficulty; }
+            get { return _selectedTourLog.Difficulty; }
             set
             {
-                _difficulty = value;
-                //RaisePropertyChangedEvent(nameof(Difficulty));
+                _selectedTourLog.Difficulty = value;
 
                 //Errorhandling fehlt noch 
             }
         }
 
-        public string TotalTime
+        public string Duration
         {
-            get { return _totalTime; }
+            get { return _selectedTourLog.Duration; }
             set
             {
-                _totalTime = value;
-                //RaisePropertyChangedEvent(nameof(TotalTime));
+                _selectedTourLog.Duration = value;
 
                 //Errorhandling fehlt noch 
             }
@@ -105,11 +80,10 @@ namespace TourPlannerUI.ViewModel
 
         public int Rating
         {
-            get { return _rating; }
+            get { return _selectedTourLog.Rating; }
             set
             {
-                _rating = value;
-                //RaisePropertyChangedEvent(nameof(Rating));
+                _selectedTourLog.Rating = value;
 
                 //Errorhandling fehlt noch 
             }
