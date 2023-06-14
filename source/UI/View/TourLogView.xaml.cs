@@ -24,7 +24,6 @@ namespace TourPlannerUI.View
         public TourLogView()
         {
             InitializeComponent();
-            DataContext = new TourLogViewModel();
         }
     }
 }

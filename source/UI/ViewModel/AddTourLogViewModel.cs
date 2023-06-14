@@ -137,15 +137,14 @@ namespace TourPlannerUI.ViewModel
 
         private void AddTourLog(object commandParameter)
         {
-            /*if (!String.IsNullOrEmpty(_date) /*&& !String.IsNullOrEmpty(_time) && !String.IsNullOrEmpty(_comment))
-                /*&& !String.IsNullOrEmpty(_difficulty) &&!String.IsNullOrEmpty(_totalTime)) && !String.IsNullOrEmpty(_rating)*/
-           
-            _tourLogViewModel.TourLogList.Add(new TourLogModel(_date, _hours, _minutes, _comment, _difficulty, _durationHours, _durationMinutes, _rating));
-            
-            /*else
+            if (!String.IsNullOrEmpty(_date) && !String.IsNullOrEmpty(_comment))
+            {
+                _tourLogViewModel.TourLogList.Add(new TourLogModel(_date, _hours, _minutes, _comment, _difficulty, _durationHours, _durationMinutes, _rating));
+            }
+            else
             {
                 throw new ArgumentException("Please fill in all fields");
-            }*/
+            }
         }
     }
 }

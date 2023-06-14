@@ -31,6 +31,7 @@
             
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Date" Binding="{Binding Date}" />
+                <DataGridTextColumn Header="Time" Binding="{Binding Time}" />
                 <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" />
                 <DataGridTextColumn Header="Difficulty" Binding="{Binding Difficulty}" />
                 <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" />
