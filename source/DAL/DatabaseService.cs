@@ -10,6 +10,7 @@ namespace TourPlannerDAL
 {
     internal class DatabaseService
     {
+        //TODO: outsource to config file
         private static string _host = "localhost";
         private static string _username = "postgres";
         private static string _password = "admin";
@@ -54,7 +55,6 @@ namespace TourPlannerDAL
 	                                                    DESCRIPTION VARCHAR(80) DEFAULT '' NOT NULL,
 	                                                    DISTANCE VARCHAR(80) DEFAULT '' NOT NULL,
 	                                                    ESTIMATEDTIME VARCHAR(80) DEFAULT '' NOT NULL,
-	                                                    ROUTEINFORMATION VARCHAR(80) DEFAULT '' NOT NULL,
                                                         );", conn);
             command.ExecuteNonQuery();
             conn.Close();
