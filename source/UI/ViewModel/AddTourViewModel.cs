@@ -16,9 +16,7 @@ namespace TourPlannerUI.ViewModel
 
         private TourListViewModel _tourListViewModel;
 
-        private ICommand _addTourCommand;
-
-        private ICommand _cancelAddTourCommand;
+        public ICommand AddTourCommand { get; set; }
 
         private string _name;
 
@@ -30,48 +28,18 @@ namespace TourPlannerUI.ViewModel
 
         private string _description;
 
-        //public event EventHandler<TourAttribute> TourAdded;
-
-        //public ObservableCollection<TourAttribute> Tours { get; set; }
-
         public AddTourViewModel(TourListViewModel tourListViewModel)
         {
             _tourListViewModel = tourListViewModel;
+            AddTourCommand = new RelayCommand<object>(AddTour);
         }
-
-        public ICommand AddTourCommand => _addTourCommand ??= new RelayCommand<object>(AddTour);
-
-        public ICommand CancelAddTourCommand => _addTourCommand ??= new RelayCommand<object>(CancelAddTour);
-
-        /*public AddTourLogViewModel(TourAttribute currentTour)
-        {
-            _currentTour = currentTour;
-        }*/
-
-        /*public AddTourViewModel(ObservableCollection<TourAttribute> tours)
-        {
-            this.Tours = tours;
-        }*/
 
         public string Name
         {
             get { return _name; }
-
             set
             {
                 _name = value;
-
-                //Errorhandling fehlt noch 
-            }
-
-        }
-
-        public string Description
-        {
-            get { return _description; }
-            set
-            {
-                _description = value;
 
                 //Errorhandling fehlt noch 
             }
@@ -110,6 +78,16 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        public string Description
+        {
+            get { return _description; }
+            set
+            {
+                _description = value;
+
+                //Errorhandling fehlt noch 
+            }
+        }
 
         private void AddTour(object commandParameter)
         {
@@ -122,11 +100,6 @@ namespace TourPlannerUI.ViewModel
             {
                 throw new ArgumentException("Please fill in all fields");
             }
-        }
-
-        private void CancelAddTour(object commandParameter)
-        {
-
         }
     }
 }

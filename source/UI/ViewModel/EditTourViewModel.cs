@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Input;
 using TourPlannerUI.Model;
 
@@ -11,62 +12,24 @@ namespace TourPlannerUI.ViewModel
 {
     public class EditTourViewModel : BaseViewModel
     {
-        private ICommand _editTourCommand;
-
-        private string _name;
-
-        private string _description;
-
-        private string _origin;
-
-        private int _destination;
-
-        private string _transportType;
+        private TourListViewModel _tourListViewModel;
+        private TourModel _selectedTour;
+        public ICommand EditTourCommand { get; set; }
 
 
-        //public event EventHandler<TourAttribute> AddedTour;
-
-        //public ObservableCollection<TourAttribute> Tours { get; set; }
-
-
-        public ICommand EditTourCommand => _editTourCommand ??= new RelayCommand<object>(EditTour);
-
-
-
-        /*public ObservableCollection<TourAttribute> Tours { get; set; }*/
-
-        /*public EditTourViewModel(TourAttribute currentTour, ObservableCollection<TourAttribute> tours)
+        public EditTourViewModel(TourListViewModel tourListViewModel)
         {
-            Tours = tours;
-            _name = currentTour.Name;
-            _description = currentTour.Description;
-            _origin = currentTour.Origin;
-            _destination = currentTour.Destination;
-            _transportType = currentTour.TransportType;
-        }*/
-
+            _tourListViewModel = tourListViewModel;
+            _selectedTour = _tourListViewModel.SelectedTour;
+            EditTourCommand = new RelayCommand<object>(EditTour);
+        }
 
         public string Name
         {
-            get { return _name; }
-
+            get { return _selectedTour.Name; }
             set
             {
-                _name = value;
-                RaisePropertyChangedEvent(nameof(Name));
-
-                //Errorhandling fehlt noch 
-            }
-
-        }
-
-        public string Description
-        {
-            get { return _description; }
-            set
-            {
-                _description = value;
-                //RaisePropertyChangedEvent(nameof(Description));
+                _selectedTour.Name = value;
 
                 //Errorhandling fehlt noch 
             }
@@ -74,25 +37,21 @@ namespace TourPlannerUI.ViewModel
 
         public string Origin
         {
-            get { return _origin; }
+            get { return _selectedTour.Origin; }
             set
             {
-                _origin = value;
-                //RaisePropertyChangedEvent(nameof(Origin));
-                //oder
-                //RaisePropertyChangedEvent<object>(nameof(Origin));
+                _selectedTour.Origin = value;
 
                 //Errorhandling fehlt noch 
             }
         }
 
-        public int Destination
+        public string Destination
         {
-            get { return _destination; }
+            get { return _selectedTour.Destination; }
             set
             {
-                _destination = value;
-                //RaisePropertyChangedEvent(nameof(Destination));
+                _selectedTour.Destination = value;
 
                 //Errorhandling fehlt noch 
             }
@@ -100,23 +59,32 @@ namespace TourPlannerUI.ViewModel
 
         public string TransportType
         {
-            get { return _transportType; }
+            get { return _selectedTour.TransportType; }
             set
             {
-                _transportType = value;
-                //RaisePropertyChangedEvent(nameof(TransportType));
+                _selectedTour.TransportType = value;
 
                 //Errorhandling fehlt noch 
             }
         }
 
+        public string Description
+        {
+            get { return _selectedTour.Description; }
+            set
+            {
+                _selectedTour.Description = value;
+
+                //Errorhandling fehlt noch 
+            }
+        }
 
         private void EditTour(object commandParameter)
         {
-            /*if (!String.IsNullOrEmpty(_tourName) && !String.IsNullOrEmpty(_tourDescription) && !String.IsNullOrEmpty(_tourFrom)
-                && !String.IsNullOrEmpty(_tourTo) && !String.IsNullOrEmpty(_tourTransportMode))
+/*            if (!String.IsNullOrEmpty(_name) && !String.IsNullOrEmpty(_origin) && !String.IsNullOrEmpty(_destination)
+                && !String.IsNullOrEmpty(_transportType) && !String.IsNullOrEmpty(_description))
             {
-                EditededTour?.Invoke(this, new TourItem(_tourName, _tourDescription, _tourFrom, _tourTo, _tourTransportMode));
+                _tourListViewModel.TourList.Add(new TourModel(_name, _origin, _destination, _transportType, _description));
             }
             else
             {

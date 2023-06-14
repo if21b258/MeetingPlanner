@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using TourPlannerUI.View;
 using TourPlannerUI.Model;
+using System.ComponentModel;
 
 namespace TourPlannerUI.ViewModel
 {
@@ -17,7 +18,11 @@ namespace TourPlannerUI.ViewModel
         public ICommand DeleteTourCommand { get; set; }
         public ICommand EditTourCommand { get; set; }
 
+        public event Action<TourModel> SelectedTourChanged;
+
         public ObservableCollection<TourModel> TourList { get; set; }
+
+        private TourModel _selectedTour;
 
         public TourListViewModel()
         {
@@ -27,11 +32,23 @@ namespace TourPlannerUI.ViewModel
             TourList = new ObservableCollection<TourModel>();
         }
 
+        public TourModel SelectedTour
+        {
+            get { return _selectedTour; }
+            set
+            {
+                if(_selectedTour != value)
+                {
+                    _selectedTour = value;
+                    OnSelectedTourChanged();
+                }
+            }
+        }
+
         private void AddTour(object obj)
         {
             AddTourWindow addtour = new AddTourWindow();
             addtour.ShowDialog();
-
         }
 
         private void DeleteTour(object obj)
@@ -44,6 +61,11 @@ namespace TourPlannerUI.ViewModel
         {
             EditTourWindow editTour = new EditTourWindow();
             editTour.ShowDialog();
+        }
+
+        private void OnSelectedTourChanged()
+        {
+            SelectedTourChanged?.Invoke(SelectedTour);
         }
     }
 }
