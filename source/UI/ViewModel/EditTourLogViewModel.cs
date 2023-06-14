@@ -65,7 +65,7 @@ namespace TourPlannerUI.ViewModel
 
             }
 
-       }
+        }
         public int DHours
         {
             get { return _selectedTourLog.DHours; }
