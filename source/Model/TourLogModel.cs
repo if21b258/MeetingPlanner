@@ -9,8 +9,8 @@ namespace TourPlannerModel
 {
     public class TourLogModel
     {
-        public int LogId { get; set; }
-        public int TourId { get; set; }
+        public int Id { get; set; }
+        public TourModel Tour { get; set; }
         public string Date { get; set; }
         public string Time { get; set; }
         public int THours { get; set; }
@@ -22,10 +22,11 @@ namespace TourPlannerModel
         public int DMinutes { get; set; }
         public int Rating { get; set; }
 
+
         public TourLogModel(string date, int hours, int minutes, string comment, int difficulty, int durationHours, int durationMinutes, int rating)
         {
             LogId = 0;
-            TourId = 0;
+            Tour = null;
             Date = date;
             Time = hours + ":" + minutes;
             THours = hours;

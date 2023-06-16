@@ -21,7 +21,6 @@ namespace TourPlannerUI.ViewModel
 
         private void ResetDatabase(object obj)
         {
-            DatabaseService.BuildDatabase();
         }
     }
 }
