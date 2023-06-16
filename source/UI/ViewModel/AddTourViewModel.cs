@@ -28,6 +28,9 @@ namespace TourPlannerUI.ViewModel
 
         private string _description;
 
+
+
+
         public AddTourViewModel(TourListViewModel tourListViewModel)
         {
             _tourListViewModel = tourListViewModel;
@@ -97,6 +100,7 @@ namespace TourPlannerUI.ViewModel
                 && !String.IsNullOrEmpty(_transportType) && !String.IsNullOrEmpty(_description))
                 {
                     _tourListViewModel.TourList.Add(new TourModel(_name, _origin, _destination, _transportType, _description));
+                    
                 }
                 else
                 {
