@@ -9,6 +9,7 @@ using System.Windows.Input;
 using TourPlannerUI.View;
 using TourPlannerModel;
 using System.ComponentModel;
+using TourPlannerBL;
 
 namespace TourPlannerUI.ViewModel
 {
@@ -20,12 +21,19 @@ namespace TourPlannerUI.ViewModel
 
         public event Action<TourModel> SelectedTourChanged;
 
+        //public event EventHandler<TourModel> GetMapByRequest;
         public ObservableCollection<TourModel> TourList { get; set; }
 
         private TourModel _selectedTour;
 
-        public TourListViewModel()
+        //private TourService _tourServiceOfficer; vielleicht brauchen wir die beiden 
+
+        //private MapQuest _mapQuest;
+
+        public TourListViewModel(/*ITourManager tourManager, IMapQuest mapquest*/)
         {
+            /*this.tourManager = tourManager;
+            this.mapquest = mapquest;*/
             AddTourCommand = new RelayCommand<object>(AddTour);
             DeleteTourCommand = new RelayCommand<object>(DeleteTour);
             EditTourCommand = new RelayCommand<object>(EditTour);

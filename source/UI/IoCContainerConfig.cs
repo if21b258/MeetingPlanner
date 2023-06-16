@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using TourPlannerUI.ViewModel;
 using TourPlannerDAL;
+using TourPlannerBL;
 
 namespace TourPlannerUI
 {
@@ -25,6 +26,7 @@ namespace TourPlannerUI
             services.AddTransient<AddTourLogViewModel>();
             services.AddTransient<EditTourLogViewModel>();
             services.AddSingleton<SearchBarViewModel>();
+            services.AddSingleton<TourService>();
 
             _serviceProvider = services.BuildServiceProvider();
         }
