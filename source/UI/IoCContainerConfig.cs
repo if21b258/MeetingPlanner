@@ -17,6 +17,9 @@ namespace TourPlannerUI
             //Database
             services.AddSingleton<TourPlannerDbContext>();
 
+            //BuisnessLayer
+            services.AddSingleton<TourService>();
+
             //ViewModels
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<TourListViewModel>();
@@ -26,7 +29,6 @@ namespace TourPlannerUI
             services.AddTransient<AddTourLogViewModel>();
             services.AddTransient<EditTourLogViewModel>();
             services.AddSingleton<SearchBarViewModel>();
-            services.AddSingleton<TourService>();
 
             _serviceProvider = services.BuildServiceProvider();
         }
