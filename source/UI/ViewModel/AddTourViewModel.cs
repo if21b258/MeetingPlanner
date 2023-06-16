@@ -29,13 +29,20 @@ namespace TourPlannerUI.ViewModel
 
         private string _description;
 
-        private MapQuest mapquest;
+        //public event EventHandler<TourModel> GetMapByRequest;
+
+        //private TourService _tourServiceOfficer; vielleicht brauchen wir die beiden 
+
+        //private MapQuest _mapQuest;
+
+        private TourService _tourServiceOfficer;
 
 
-        public AddTourViewModel(TourListViewModel tourListViewModel)
+        public AddTourViewModel(TourListViewModel tourListViewModel, TourService TourServiceOff)
         {
             _tourListViewModel = tourListViewModel;
             AddTourCommand = new RelayCommand<object>(AddTour);
+            _tourServiceOfficer = TourServiceOff;
         }
 
         public string Name
@@ -101,7 +108,11 @@ namespace TourPlannerUI.ViewModel
                 && !String.IsNullOrEmpty(_transportType) && !String.IsNullOrEmpty(_description))
                 {
                     _tourListViewModel.TourList.Add(new TourModel(_name, _origin, _destination, _transportType, _description));
-                    
+                    TourModel touri = _tourListViewModel.TourList.Last();
+                    var tour = _tourServiceOfficer.GetMap(touri);
+
+                    //GetMapByRequest?.Invoke(this, touri); //Mapcall  
+
                 }
                 else
                 {
