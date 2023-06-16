@@ -13,6 +13,9 @@ namespace TourPlannerUI
         {
             var services = new ServiceCollection();
 
+            //Database
+            services.AddSingleton<TourPlannerDbContext>();
+
             //ViewModels
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<TourListViewModel>();

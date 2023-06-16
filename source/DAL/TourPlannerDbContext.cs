@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace TourPlannerDAL
 {
-    internal class TourPlannerDbContext : DbContext
+    public class TourPlannerDbContext : DbContext
     {
         public DbSet<TourModel> Tours { get;  set; }
         public DbSet<TourLogModel> TourLogs { get;  set; }

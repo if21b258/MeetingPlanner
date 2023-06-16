@@ -21,6 +21,9 @@ namespace TourPlannerUI.ViewModel
 
         private void ResetDatabase(object obj)
         {
+            TourPlannerDbContext dbContext = new TourPlannerDbContext();
+            dbContext.Database.EnsureDeleted();
+            dbContext.Database.EnsureCreated();
         }
     }
 }
