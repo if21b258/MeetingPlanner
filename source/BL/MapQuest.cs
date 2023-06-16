@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -22,12 +23,18 @@ namespace TourPlannerBL
 
         public MapQuest(TourModel Tour)
         {
-            Key = "yN4eflLMNbDl3WCx0xTc9fX93CdrKUrV";
+            Key = ConfigurationManager.AppSettings["MapQuestKey"];
             Origin = Tour.Origin;
             Destination = Tour.Destination;
             TransportType = Tour.TransportType;
             Url = $"https://www.mapquestapi.com/staticmap/v5/map?start={Uri.EscapeDataString(Origin)}&end={Uri.EscapeDataString(Destination)}&size=600,400&key={Key}";
         }
+
+        public async Task<TourModel> GetWay(TourModel tourModel)
+        {
+
+        }
+
 
         public async Task<byte[]> GetMap(TourModel tourModel)
         {

@@ -15,10 +15,11 @@ namespace TourPlannerBL
         
         }
 
-        public async Task GetMap(TourModel Tour)
+        public async Task<byte[]> GetMap(TourModel Tour)
         {
             MapQuest mapQuest = new(Tour);
-            var tour = await mapQuest.GetMap(Tour);
+            return await mapQuest.GetMap(Tour);
+            
 
 
         }
