@@ -11,12 +11,14 @@ namespace TourPlannerDAL
     public class DatabaseService
     {
         //TODO: outsource to config file
-        private static string _host = "localhost";
-        private static string _username = "postgres";
-        private static string _password = "admin";
-        private static string _database = "tourplanner";
+        private string _host = "localhost";
+        private string _username = "postgres";
+        private string _password = "admin";
+        private string _database = "tourplanner";
 
-        public static NpgsqlConnection Connect()
+        public DatabaseService()
+
+        public NpgsqlConnection Connect()
         {
             string cs = "Host=" + _host + ";Username=" + _username + ";Password=" + _password + ";Database=" + _database;
             NpgsqlConnection conn = new NpgsqlConnection(cs);
@@ -24,14 +26,14 @@ namespace TourPlannerDAL
             return conn;
         }
 
-        public static void BuildDatabase()
+        public void BuildDatabase()
         {
             CreateDatabase();
             CreateTableTour();
             CreateTableTourLog();
         }
 
-        private static void CreateDatabase()
+        private void CreateDatabase()
         {
             string cs = "Host=" + _host + ";Username=" + _username + ";Password=" + _password;
             NpgsqlConnection conn = new NpgsqlConnection(cs);
@@ -43,9 +45,9 @@ namespace TourPlannerDAL
             conn.Close();
         }
 
-        private static void CreateTableTour()
+        private void CreateTableTour()
         {
-            NpgsqlConnection conn = DatabaseService.Connect();
+            NpgsqlConnection conn = Connect();
             NpgsqlCommand command = new NpgsqlCommand(@"CREATE TABLE IF NOT EXISTS TOUR (
 	                                                    TOURID SERIAL PRIMARY KEY,
 	                                                    NAME VARCHAR(80) DEFAULT '' NOT NULL,
@@ -59,9 +61,9 @@ namespace TourPlannerDAL
             command.ExecuteNonQuery();
             conn.Close();
         }
-        private static void CreateTableTourLog()
+        private void CreateTableTourLog()
         {
-            NpgsqlConnection conn = DatabaseService.Connect();
+            NpgsqlConnection conn = Connect();
             NpgsqlCommand command = new NpgsqlCommand(@"CREATE TABLE IF NOT EXISTS TOURLOG (
                                                         LOGID SERIAL PRIMARY KEY,
                                                         TOURID INT REFERENCES TOUR (TOURID),
