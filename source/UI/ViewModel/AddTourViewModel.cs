@@ -8,6 +8,7 @@ using System.Windows.Input;
 using TourPlannerUI;
 using TourPlannerModel;
 using TourPlannerUI.ViewModel;
+using TourPlannerBL;
 
 namespace TourPlannerUI.ViewModel
 {
@@ -28,7 +29,7 @@ namespace TourPlannerUI.ViewModel
 
         private string _description;
 
-
+        private MapQuest mapquest;
 
 
         public AddTourViewModel(TourListViewModel tourListViewModel)
