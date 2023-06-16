@@ -22,6 +22,7 @@ namespace TourPlannerModel
         public int DMinutes { get; set; }
         public int Rating { get; set; }
 
+        public TourLogModel() { }
 
         public TourLogModel(string date, int hours, int minutes, string comment, int difficulty, int durationHours, int durationMinutes, int rating)
         {

@@ -14,7 +14,6 @@ namespace TourPlannerUI.ViewModel
 {
     public class AddTourViewModel : BaseViewModel
     {
-
         private TourListViewModel _tourListViewModel;
 
         public ICommand AddTourCommand { get; set; }
@@ -30,8 +29,6 @@ namespace TourPlannerUI.ViewModel
         private string _description;
 
         //public event EventHandler<TourModel> GetMapByRequest;
-
-        //private TourService _tourServiceOfficer; vielleicht brauchen wir die beiden 
 
         //private MapQuest _mapQuest;
 
@@ -109,6 +106,7 @@ namespace TourPlannerUI.ViewModel
                 {
                     _tourListViewModel.TourList.Add(new TourModel(_name, _origin, _destination, _transportType, _description));
                     TourModel touri = _tourListViewModel.TourList.Last();
+                    _tourServiceOfficer.AddTour(touri);
                     var tour = _tourServiceOfficer.GetMap(touri);
 
                     //GetMapByRequest?.Invoke(this, touri); //Mapcall  

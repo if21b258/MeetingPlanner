@@ -8,7 +8,7 @@ using TourPlannerModel;
 
 namespace TourPlannerDAL.DAO
 {
-    internal class TourLogDAO
+    public class TourLogDAO
     {
         private TourPlannerDbContext _dbContext;
 

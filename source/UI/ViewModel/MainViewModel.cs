@@ -13,18 +13,18 @@ namespace TourPlannerUI.ViewModel
     public class MainViewModel : BaseViewModel
     {
         public ICommand ResetDatabaseCommand { get; set; }
+        private TourPlannerDbContext _dbContext;
 
-        public MainViewModel()
+        public MainViewModel(TourPlannerDbContext dbContext)
         {
-
+            _dbContext = dbContext;
             ResetDatabaseCommand = new RelayCommand<object>(ResetDatabase);
         }
 
         private void ResetDatabase(object obj)
         {
-            TourPlannerDbContext dbContext = new TourPlannerDbContext();
-            dbContext.Database.EnsureDeleted();
-            dbContext.Database.EnsureCreated();
+            _dbContext.Database.EnsureDeleted();
+            _dbContext.Database.EnsureCreated();
         }
 
         /*private TourService _tourServiceOfficer { get; set; }
