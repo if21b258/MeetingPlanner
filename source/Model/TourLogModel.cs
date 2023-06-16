@@ -25,7 +25,7 @@ namespace TourPlannerModel
 
         public TourLogModel(string date, int hours, int minutes, string comment, int difficulty, int durationHours, int durationMinutes, int rating)
         {
-            LogId = 0;
+            Id = 0;
             Tour = null;
             Date = date;
             Time = hours + ":" + minutes;
