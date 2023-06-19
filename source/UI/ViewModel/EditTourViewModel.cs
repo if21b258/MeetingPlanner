@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Input;
+using TourPlannerBL;
 using TourPlannerModel;
 
 namespace TourPlannerUI.ViewModel
@@ -14,13 +15,14 @@ namespace TourPlannerUI.ViewModel
     {
         private TourListViewModel _tourListViewModel;
         private TourModel _selectedTour;
+        private TourService _tourService;
         public ICommand EditTourCommand { get; set; }
 
-
-        public EditTourViewModel(TourListViewModel tourListViewModel)
+        public EditTourViewModel(TourListViewModel tourListViewModel, TourService tourService)
         {
             _tourListViewModel = tourListViewModel;
             _selectedTour = _tourListViewModel.SelectedTour;
+            _tourService = tourService;
             EditTourCommand = new RelayCommand<object>(EditTour);
         }
 
@@ -81,15 +83,16 @@ namespace TourPlannerUI.ViewModel
 
         private void EditTour(object commandParameter)
         {
-/*            if (!String.IsNullOrEmpty(_name) && !String.IsNullOrEmpty(_origin) && !String.IsNullOrEmpty(_destination)
-                && !String.IsNullOrEmpty(_transportType) && !String.IsNullOrEmpty(_description))
+            if (!String.IsNullOrEmpty(_selectedTour.Name) && !String.IsNullOrEmpty(_selectedTour.Origin) && !String.IsNullOrEmpty(_selectedTour.Destination)
+                && !String.IsNullOrEmpty(_selectedTour.TransportType) && !String.IsNullOrEmpty(_selectedTour.Description))
             {
-                _tourListViewModel.TourList.Add(new TourModel(_name, _origin, _destination, _transportType, _description));
+                _tourService.EditTour(_selectedTour);
+                _tourListViewModel.TourList = new ObservableCollection<TourModel>(_tourService.GetTours());
             }
             else
             {
                 throw new ArgumentException("Please fill in all fields");
-            }*/
+            }
         }
     }
 }

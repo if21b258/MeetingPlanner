@@ -15,18 +15,12 @@ namespace TourPlannerUI.ViewModel
     public class AddTourViewModel : BaseViewModel
     {
         private TourListViewModel _tourListViewModel;
-
         public ICommand AddTourCommand { get; set; }
-
-        private string _name;
-
-        private string _origin;
-
-        private string _destination;
-
-        private string _transportType;
-
-        private string _description;
+        private string _name = "";
+        private string _origin = "";
+        private string _destination = "";
+        private string _transportType = "";
+        private string _description = "";
 
         //public event EventHandler<TourModel> GetMapByRequest;
 
@@ -34,12 +28,13 @@ namespace TourPlannerUI.ViewModel
 
         private TourService _tourServiceOfficer;
 
-
         public AddTourViewModel(TourListViewModel tourListViewModel, TourService TourServiceOff)
         {
             _tourListViewModel = tourListViewModel;
             AddTourCommand = new RelayCommand<object>(AddTour);
             _tourServiceOfficer = TourServiceOff;
+
+
         }
 
         public string Name
@@ -104,13 +99,10 @@ namespace TourPlannerUI.ViewModel
                 if (!String.IsNullOrEmpty(_name) && !String.IsNullOrEmpty(_origin) && !String.IsNullOrEmpty(_destination)
                 && !String.IsNullOrEmpty(_transportType) && !String.IsNullOrEmpty(_description))
                 {
-                    _tourListViewModel.TourList.Add(new TourModel(_name, _origin, _destination, _transportType, _description));
-                    TourModel touri = _tourListViewModel.TourList.Last();
-                    _tourServiceOfficer.AddTour(touri);
-                    var tour = _tourServiceOfficer.GetMap(touri);
-
-                    //GetMapByRequest?.Invoke(this, touri); //Mapcall  
-
+                    TourModel tour = new TourModel(_name, _origin, _destination, _transportType, _description);
+                    //mapquest call and tour calculations
+                    _tourServiceOfficer.AddTour(tour);
+                    _tourListViewModel.TourList.Add(tour);
                 }
                 else
                 {

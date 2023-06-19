@@ -7,6 +7,7 @@ using TourPlannerModel;
 using TourPlannerDAL;
 using TourPlannerDAL.DAO;
 using System.Configuration;
+using System.Collections.ObjectModel;
 
 namespace TourPlannerBL
 {
@@ -24,12 +25,32 @@ namespace TourPlannerBL
 
         public void AddTour(TourModel tour)
         {
-            //Calculate Tour Data
+            //TODO Calculate Tour Data
             tour.Distance = "0";
             tour.EstimatedTime = "0";
             tour.RouteInformation = "0";
 
             _tourDAO.AddTour(tour);
+        }
+
+        public void DeleteTour(TourModel tour)
+        {
+            _tourDAO.DeleteTour(tour);
+        }
+
+        public void EditTour(TourModel tour)
+        {
+            //TODO Calculate  Tour Data
+            tour.Distance = "0";
+            tour.EstimatedTime = "0";
+            tour.RouteInformation = "0";
+
+            _tourDAO.UpdateTour(tour);
+        }
+
+        public ObservableCollection<TourModel> GetTours()
+        {
+            return _tourDAO.GetTours();
         }
 
         public async Task GetMap(TourModel Tour)

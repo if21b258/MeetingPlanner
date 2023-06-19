@@ -10,6 +10,7 @@ using TourPlannerUI.View;
 using TourPlannerModel;
 using System.ComponentModel;
 using TourPlannerBL;
+using System.Windows;
 
 namespace TourPlannerUI.ViewModel
 {
@@ -20,17 +21,17 @@ namespace TourPlannerUI.ViewModel
         public ICommand EditTourCommand { get; set; }
 
         public event Action<TourModel> SelectedTourChanged;
+        private TourService _tourService;
+        private ObservableCollection<TourModel> _tourList;
+        private TourModel _selectedTour;
 
         //public event EventHandler<TourModel> GetMapByRequest;
-        public ObservableCollection<TourModel> TourList { get; set; }
-
-        private TourModel _selectedTour;
 
         //private TourService _tourServiceOfficer; vielleicht brauchen wir die beiden 
 
         //private MapQuest _mapQuest;
 
-        public TourListViewModel(/*ITourManager tourManager, IMapQuest mapquest*/)
+        public TourListViewModel(/*ITourManager tourManager, IMapQuest mapquest*/TourService tourService)
         {
             /*this.tourManager = tourManager;
             this.mapquest = mapquest;*/
@@ -38,6 +39,20 @@ namespace TourPlannerUI.ViewModel
             DeleteTourCommand = new RelayCommand<object>(DeleteTour);
             EditTourCommand = new RelayCommand<object>(EditTour);
             TourList = new ObservableCollection<TourModel>();
+            _tourService = tourService;
+        }
+
+        public ObservableCollection<TourModel> TourList
+        {
+            get { return _tourList; }
+            set
+            {
+                if (_tourList != value)
+                {
+                    _tourList = value;
+                    RaisePropertyChangedEvent(nameof(TourList));
+                }
+            }
         }
 
         public TourModel SelectedTour
@@ -61,8 +76,15 @@ namespace TourPlannerUI.ViewModel
 
         private void DeleteTour(object obj)
         {
-            DeleteTourWindow deleteTour = new DeleteTourWindow();
-            deleteTour.ShowDialog();
+            if (MessageBox.Show("Do you want to delete this Tour?",
+                "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                _tourService.DeleteTour(_selectedTour);
+                _tourList.Remove(_selectedTour);
+            }
+
+            //DeleteTourWindow deleteTour = new DeleteTourWindow();
+            //deleteTour.ShowDialog();
         }
 
         private void EditTour(object obj)

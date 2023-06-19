@@ -8,10 +8,11 @@
         Title="Edit Tour" Height="450" Width="800"
         DataContext="{Binding EditTourViewModel,Source={StaticResource IoCConfig2}}"
         >
-    
+
     <Grid Background="LightBlue">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
 
@@ -24,20 +25,21 @@
             <RowDefinition Height="2*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
         <Label Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">Tour-Name:</Label>
-        <TextBox Grid.Column="1" Height="36" Grid.Row="1" Text="{Binding Name}"></TextBox>
+        <TextBox Grid.Column="1" Grid.ColumnSpan="2"  Height="36" Grid.Row="1" Text="{Binding Name}"></TextBox>
         <Label Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">Origin:</Label>
-        <TextBox Grid.Column="1" Height="36" Grid.Row="2" Text="{Binding Origin}"></TextBox>
+        <TextBox Grid.Column="1" Grid.ColumnSpan="2" Height="36" Grid.Row="2" Text="{Binding Origin}"></TextBox>
         <Label Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center">Destination:</Label>
-        <TextBox Grid.Column="1" Height="36" Grid.Row="3" Text="{Binding Destination}"></TextBox>
+        <TextBox Grid.Column="1" Grid.ColumnSpan="2" Height="36" Grid.Row="3" Text="{Binding Destination}"></TextBox>
         <Label Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center">Transport-Type:</Label>
-        <TextBox Grid.Column="1" Height="36" Grid.Row="4" Text="{Binding TransportType}"></TextBox>
+        <TextBox Grid.Column="1" Grid.ColumnSpan="2" Height="36" Grid.Row="4" Text="{Binding TransportType}"></TextBox>
         <Label Grid.Column="0" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center">Tour-Description:</Label>
-        <TextBox Grid.Column="1" Height="90" Grid.Row="5" Grid.RowSpan="2" Text="{Binding Description}"></TextBox>
+        <TextBox Grid.Column="1" Grid.ColumnSpan="2" Height="90" Grid.Row="5" Grid.RowSpan="2" Text="{Binding Description}"></TextBox>
 
-        <Button Grid.Column="0" Grid.Row="8" Background="Green" Command="{Binding EditTourCommand}">Add</Button>
-        <Button Grid.Column="1" Grid.Row="8" Background="Red" Click="CancelButton_Click">Cancel</Button>
+        <Button Grid.Column="1" Grid.Row="7" Background="Green" Command="{Binding EditTourCommand}">Edit</Button>
+        <Button Grid.Column="2" Grid.Row="7" Background="Red" Click="CancelButton_Click">Cancel</Button>
     </Grid>
 </Window>

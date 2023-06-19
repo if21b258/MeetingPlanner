@@ -13,12 +13,20 @@ namespace TourPlannerUI.ViewModel
     public class MainViewModel : BaseViewModel
     {
         public ICommand ResetDatabaseCommand { get; set; }
+        public ICommand GetDataCommand { get; set; }
         private TourPlannerDbContext _dbContext;
+        private TourService _tourService;
+        private TourListViewModel _tourListViewModel;
+        private TourLogViewModel _tourLogViewModel;
 
-        public MainViewModel(TourPlannerDbContext dbContext)
+        public MainViewModel(TourPlannerDbContext dbContext, TourService tourService, TourListViewModel tourListViewModel, TourLogViewModel tourLogViewModel)
         {
             _dbContext = dbContext;
+            _tourService = tourService;
+            _tourListViewModel = tourListViewModel;
+            _tourLogViewModel = tourLogViewModel;
             ResetDatabaseCommand = new RelayCommand<object>(ResetDatabase);
+            GetDataCommand = new RelayCommand<object>(GetData);
         }
 
         private void ResetDatabase(object obj)
@@ -26,6 +34,12 @@ namespace TourPlannerUI.ViewModel
             _dbContext.Database.EnsureDeleted();
             _dbContext.Database.EnsureCreated();
         }
+
+        private void GetData(object obj)
+        {
+            _tourListViewModel.TourList = _tourService.GetTours();
+        }
+
 
         /*private TourService _tourServiceOfficer { get; set; }
 
