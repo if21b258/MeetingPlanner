@@ -15,12 +15,13 @@ namespace TourPlannerModel
         public string Destination { get; set; }
         public string TransportType { get; set; }
         public string Description { get; set; }
-        public string Distance { get; set; }
-        public string EstimatedTime { get; set; }
+        public float Distance { get; set; } //auf float geändert
+        public byte[] Map { get; set; } 
+        public float EstimatedTime { get; set; }
         public string RouteInformation { get; set; }
 
 
-        public TourModel(string name, string origin, string destination, string transportType, string description, string distance, string estimatedTime, string routeInformation)
+        public TourModel(string name, string origin, string destination, string transportType, string description, float distance, float estimatedTime, string routeInformation)
         {
             Id = 0;
             Name = name;
@@ -41,8 +42,8 @@ namespace TourPlannerModel
             Destination = destination;
             TransportType = transportType;
             Description = description;
-            Distance = null;
-            EstimatedTime = null;
+            Distance = 0;
+            EstimatedTime = 0;
             RouteInformation = null;
         }
     }
