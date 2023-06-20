@@ -21,8 +21,8 @@ namespace TourPlannerUI.ViewModel
         public event Action<TourLogModel>? SelectedTourLogChanged;
         private TourService _tourService;
         private TourListViewModel _tourListViewModel;
-        private ObservableCollection<TourLogModel> _tourLogList;
         private TourModel? _selectedTour;
+        private ObservableCollection<TourLogModel> _tourLogList;
         private TourLogModel? _selectedTourLog;
 
         public TourLogViewModel(TourListViewModel tourListViewModel, TourService tourService)
@@ -31,10 +31,14 @@ namespace TourPlannerUI.ViewModel
             DeleteTourLogCommand = new RelayCommand<object>(DeleteTourLog);
             EditTourLogCommand = new RelayCommand<object>(EditTourLog);
             _tourListViewModel = tourListViewModel;
+            _tourListViewModel.SelectedTourChanged += HandleSelectedTourChanged;
             _tourService = tourService;
             _tourLogList = new ObservableCollection<TourLogModel>();
+        }
 
-            tourListViewModel.SelectedTourChanged += HandleSelectedTourChanged;
+        public TourModel SelectedTour
+        {
+            get { return _selectedTour; }
         }
 
         public ObservableCollection<TourLogModel> TourLogList
@@ -109,14 +113,8 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
-        private void OnSelectedTourLogChanged()
+        public void LoadTourLogs()
         {
-            SelectedTourLogChanged?.Invoke(SelectedTourLog);
-        }
-
-        private void HandleSelectedTourChanged(TourModel selectedTour)
-        {
-            _selectedTour = selectedTour;
             if (_selectedTour != null)
             {
                 TourLogList = _tourService.GetTourLogs(_selectedTour);
@@ -125,7 +123,17 @@ namespace TourPlannerUI.ViewModel
             {
                 TourLogList.Clear();
             }
+        }
 
+        private void OnSelectedTourLogChanged()
+        {
+            SelectedTourLogChanged?.Invoke(SelectedTourLog);
+        }
+
+        private void HandleSelectedTourChanged(TourModel selectedTour)
+        {
+            _selectedTour = selectedTour;
+            LoadTourLogs();
         }
     }
 }

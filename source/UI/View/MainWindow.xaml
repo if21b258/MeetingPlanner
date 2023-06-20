@@ -25,7 +25,6 @@
             <MenuItem Header="_Edit"/>
             <MenuItem Header="_Options">
                 <MenuItem Header="_Reset Database" Command="{Binding ResetDatabaseCommand}" />
-                <MenuItem Header="_Get Data" Command="{Binding GetDataCommand}" />
             </MenuItem>
             <MenuItem Header="_Help"/>
         </Menu>

@@ -104,6 +104,11 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        public void LoadTours()
+        {
+            TourList = _tourService.GetTours();
+        }
+
         private void OnSelectedTourChanged()
         {
             SelectedTourChanged?.Invoke(SelectedTour);

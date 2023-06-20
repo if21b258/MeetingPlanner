@@ -101,7 +101,7 @@ namespace TourPlannerUI.ViewModel
                     TourModel tour = new TourModel(_name, _origin, _destination, _transportType, _description);
                     //mapquest call and tour calculations
                     _tourServiceOfficer.AddTour(tour);
-                    _tourListViewModel.TourList.Add(tour);
+                    _tourListViewModel.LoadTours();
                 }
                 else
                 {

@@ -1,21 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Xml.Linq;
+using TourPlannerBL;
 using TourPlannerModel;
 
 namespace TourPlannerUI.ViewModel
 {
     public class EditTourLogViewModel : BaseViewModel
     {
+        private TourService _tourService;
         private TourLogViewModel _tourLogViewModel;
         private TourLogModel _selectedTourLog;
         public ICommand EditTourLogCommand { get; set; }
 
-        public EditTourLogViewModel(TourLogViewModel tourLogViewModel)
+        public EditTourLogViewModel(TourLogViewModel tourLogViewModel, TourService tourService)
         {
+            _tourService = tourService;
             _tourLogViewModel = tourLogViewModel;
             _selectedTourLog = _tourLogViewModel.SelectedTourLog;
             EditTourLogCommand = new RelayCommand<object>(EditTourLog);
@@ -132,15 +138,23 @@ namespace TourPlannerUI.ViewModel
 
         private void EditTourLog(object commandParameter)
         {
-            /*if (_tourLogDistance != 0 && _tourLogDuration != 0 && !String.IsNullOrEmpty(_tourLogReport)
-                && !String.IsNullOrEmpty(_tourLogWeather) && _tourLogTemperature != 0)
+            try
             {
-                AddedTourLog?.Invoke(this, new TourLogItem(_currentTour.Name, DateTime.Now, _tourLogDistance, _tourLogDuration, _tourLogReport, _tourLogRating, _tourLogFuelUsed, _tourLogWeather, _tourLogTemperature, _tourLogEffort));
+                if (!String.IsNullOrEmpty(_selectedTourLog.Date) && !String.IsNullOrEmpty(_selectedTourLog.Comment))
+                {
+                    _tourService.EditTourLog(_selectedTourLog);
+                    _tourLogViewModel.LoadTourLogs();
+                }
+                else
+                {
+                    throw new ArgumentException("Please fill in all fields");
+                }
             }
-            else
+            catch (Exception e)
             {
-                throw new ArgumentException("Please fill in all fields");
-            }*/
+                Console.WriteLine($"Processing failed: {e.Message}");
+            }
+
         }
     }
 }

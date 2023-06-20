@@ -148,7 +148,7 @@
             <ComboBoxItem Content="4" />
             <ComboBoxItem Content="5" />
         </ComboBox>
-        <Button Background ="Green" Margin="528,0,0,28" Grid.Row="4" HorizontalAlignment="Left" Width="72" Command="{Binding AddTourLogCommand}">Add</Button>
+        <Button Background ="Green" Margin="528,0,0,28" Grid.Row="4" HorizontalAlignment="Left" Width="72" Command="{Binding EditTourLogCommand}">Edit</Button>
         <Button Background ="Red" Margin="6,0,0,28" Grid.Row="4" HorizontalAlignment="Left" Width="72" Grid.Column="1" d:LayoutOverrides="HorizontalAlignment" Click="CancelButton_Click">Cancel</Button>
     </Grid>
 </Window>
