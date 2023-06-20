@@ -22,9 +22,7 @@ namespace TourPlannerUI.ViewModel
         private TourInfoViewModel _tourInfoViewModel;
 
         private TourRouteViewModel _tourRouteViewModel;
-
-        public MainViewModel(TourPlannerDbContext dbContext, TourService tourService, TourListViewModel tourListViewModel, TourLogViewModel tourLogViewModel, TourRouteViewModel tourRouteViewModel)
-        public MainViewModel(TourPlannerDbContext dbContext, TourService tourService, TourListViewModel tourListViewModel, TourLogViewModel tourLogViewModel, TourInfoViewModel tourInfoViewModel)
+        public MainViewModel(TourPlannerDbContext dbContext, TourService tourService, TourListViewModel tourListViewModel, TourLogViewModel tourLogViewModel, TourInfoViewModel tourInfoViewModel, TourRouteViewModel tourRouteViewModel)
         {
             _dbContext = dbContext;
             _tourService = tourService;
