@@ -20,12 +20,15 @@ namespace TourPlannerUI.ViewModel
         private TourListViewModel _tourListViewModel;
         private TourLogViewModel _tourLogViewModel;
 
-        public MainViewModel(TourPlannerDbContext dbContext, TourService tourService, TourListViewModel tourListViewModel, TourLogViewModel tourLogViewModel)
+        private TourRouteViewModel _tourRouteViewModel;
+
+        public MainViewModel(TourPlannerDbContext dbContext, TourService tourService, TourListViewModel tourListViewModel, TourLogViewModel tourLogViewModel, TourRouteViewModel tourRouteViewModel)
         {
             _dbContext = dbContext;
             _tourService = tourService;
             _tourListViewModel = tourListViewModel;
             _tourLogViewModel = tourLogViewModel;
+            _tourRouteViewModel = tourRouteViewModel;
             ResetDatabaseCommand = new RelayCommand<object>(ResetDatabase);
             Startup();
         }

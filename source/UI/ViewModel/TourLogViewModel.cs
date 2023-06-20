@@ -9,6 +9,8 @@ using TourPlannerUI.View;
 using TourPlannerModel;
 using TourPlannerBL;
 using System.Windows;
+using System.IO;
+using System.Windows.Media.Imaging;
 
 namespace TourPlannerUI.ViewModel
 {

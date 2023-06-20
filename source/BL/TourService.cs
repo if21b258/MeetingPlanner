@@ -83,17 +83,17 @@ namespace TourPlannerBL
         public async Task GetMap(TourModel Tour)
         {
             MapQuest mapQuest = new(Tour);
-            TourModel touri; 
-            touri = await mapQuest.GetWay(Tour);
-            SaveImageToFile(touri);
+            TourModel tour; 
+            tour = await mapQuest.GetWay(Tour);
+            SaveImageToFile(tour);
             
 
 
         }
         public void SaveImageToFile(TourModel Tour)
         {
-            string basePath = AppDomain.CurrentDomain.BaseDirectory;
-            string filePath = basePath + ConfigurationManager.AppSettings["MapImagePath"];
+
+            string filePath = GetFilePath();
             try
             {
                 if (!Directory.Exists(filePath))
@@ -114,6 +114,14 @@ namespace TourPlannerBL
             {
                 Console.WriteLine("Fehler beim Speichern des Bildes: " + ex.Message);
             }
+        }
+
+        public string GetFilePath()
+        {
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+            string filePath = basePath + ConfigurationManager.AppSettings["MapImagePath"];
+            return filePath;
+
         }
     }
 }
