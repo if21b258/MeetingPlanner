@@ -24,6 +24,7 @@ namespace TourPlannerUI.ViewModel
         private TourService _tourService;
         private ObservableCollection<TourModel> _tourList;
         private TourModel? _selectedTour;
+        //private TourRouteViewModel _tourRouteViewModel;
 
         //public event EventHandler<TourModel> GetMapByRequest;
 

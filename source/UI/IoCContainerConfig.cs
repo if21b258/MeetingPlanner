@@ -29,6 +29,7 @@ namespace TourPlannerUI
             services.AddTransient<AddTourLogViewModel>();
             services.AddTransient<EditTourLogViewModel>();
             services.AddSingleton<SearchBarViewModel>();
+            services.AddSingleton<TourRouteViewModel>();
             services.AddSingleton<TourInfoViewModel>();
 
             _serviceProvider = services.BuildServiceProvider();
@@ -57,6 +58,9 @@ namespace TourPlannerUI
 
         public SearchBarViewModel SearchBarViewModel
             => _serviceProvider.GetRequiredService<SearchBarViewModel>();
+
+        public TourRouteViewModel TourRouteViewModel
+            => _serviceProvider.GetRequiredService<TourRouteViewModel>();
 
         public TourInfoViewModel TourInfoViewModel
             => _serviceProvider.GetRequiredService<TourInfoViewModel>();
