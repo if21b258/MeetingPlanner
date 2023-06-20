@@ -7,6 +7,8 @@ using System.Windows.Input;
 using TourPlannerDAL;
 using TourPlannerUI.ViewModel;
 using TourPlannerBL;
+using System.IO;
+using System.Configuration;
 
 namespace TourPlannerUI.ViewModel
 {
@@ -25,14 +27,20 @@ namespace TourPlannerUI.ViewModel
             _tourListViewModel = tourListViewModel;
             _tourLogViewModel = tourLogViewModel;
             ResetDatabaseCommand = new RelayCommand<object>(ResetDatabase);
-            _tourListViewModel.LoadTours();
-            _tourLogViewModel.LoadTourLogs();
+            Startup();
         }
 
         private void ResetDatabase(object obj)
         {
             _dbContext.Database.EnsureDeleted();
             _dbContext.Database.EnsureCreated();
+        }
+
+        private void Startup()
+        {
+            _dbContext.Database.EnsureCreated();
+            _tourListViewModel.LoadTours();
+            _tourLogViewModel.LoadTourLogs();
         }
 
         /*private TourService _tourServiceOfficer { get; set; }

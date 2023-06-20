@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TourPlannerModel
 {
@@ -15,10 +17,12 @@ namespace TourPlannerModel
         public string Destination { get; set; }
         public string TransportType { get; set; }
         public string Description { get; set; }
-        public float Distance { get; set; } //auf float geändert
-        public byte[] Map { get; set; } 
+        public float Distance { get; set; }
         public float EstimatedTime { get; set; }
         public string RouteInformation { get; set; }
+
+        [NotMapped]
+        public byte[] Map { get; set; }
 
         public TourModel() { }
 

@@ -28,8 +28,8 @@ namespace TourPlannerBL
         public void AddTour(TourModel tour)
         {
             //TODO Calculate Tour Data
-            tour.Distance = "0";
-            tour.EstimatedTime = "0";
+            tour.Distance = 0;
+            tour.EstimatedTime = 0;
             tour.RouteInformation = "0";
 
             _tourDAO.AddTour(tour);
@@ -43,8 +43,8 @@ namespace TourPlannerBL
         public void EditTour(TourModel tour)
         {
             //TODO Calculate  Tour Data
-            tour.Distance = "0";
-            tour.EstimatedTime = "0";
+            tour.Distance = 0;
+            tour.EstimatedTime = 0;
             tour.RouteInformation = "0";
 
             _tourDAO.UpdateTour(tour);
@@ -92,13 +92,18 @@ namespace TourPlannerBL
         }
         public void SaveImageToFile(TourModel Tour)
         {
-            string filePath;
-            filePath= "C:\\Users\\rif1wi\\Desktop\\FHTW\\TourPlanner\\source\\Ressources\\";
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+            string filePath = basePath + ConfigurationManager.AppSettings["MapImagePath"];
             try
             {
+                if (!Directory.Exists(filePath))
+                {
+                    Directory.CreateDirectory(filePath);
+                }
+
                 using (MemoryStream fileStream = new MemoryStream(Tour.Map))
                 {
-                    
+
                     var image = Image.FromStream(fileStream);
                     image.Save(filePath + Tour.Name + Tour.Id + ".png");
 

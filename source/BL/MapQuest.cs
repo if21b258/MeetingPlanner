@@ -17,7 +17,6 @@ namespace TourPlannerBL
 {
     public class MapQuest
     {
-        //public string Key = "yN4eflLMNbDl3WCx0xTc9fX93CdrKUrV";
         public string Key;
         public string Origin;
         public string Destination;

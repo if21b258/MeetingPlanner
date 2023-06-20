@@ -98,17 +98,11 @@ namespace TourPlannerUI.ViewModel
                 if (!String.IsNullOrEmpty(_name) && !String.IsNullOrEmpty(_origin) && !String.IsNullOrEmpty(_destination)
                 && !String.IsNullOrEmpty(_transportType) && !String.IsNullOrEmpty(_description))
                 {
-                    _tourListViewModel.TourList.Add(new TourModel(_name, _origin, _destination, _transportType, _description));
-                    _tourServiceOfficer.GetMap(_tourListViewModel.TourList.Last());
                     TourModel tour = new TourModel(_name, _origin, _destination, _transportType, _description);
-                    //mapquest call and tour calculations
+                    _tourServiceOfficer.GetMap(tour);
                     _tourServiceOfficer.AddTour(tour);
                     _tourListViewModel.LoadTours();
-                    //GetMapByRequest?.Invoke(this, touri); //Mapcall  
 
-                    //GetMapByRequest?.Invoke(this, touri); //Mapcall  
-
-                    //GetMapByRequest?.Invoke(this, touri); //Mapcall  
 
                 }
                 else
