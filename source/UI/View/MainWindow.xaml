@@ -42,6 +42,7 @@
                 </TabItem.Header>
             </TabItem>
             <TabItem Header="Route"/>
+            <Image Grid.Column="1"  Grid.Row="2" Source="{Binding }"></Image>
             <TabItem Header="Logs">
                 <local:TourLogView x:Name="TourLog"/>
             </TabItem>
