@@ -15,6 +15,7 @@ namespace TourPlannerUI.ViewModel
     public class AddTourViewModel : BaseViewModel
     {
         private TourListViewModel _tourListViewModel;
+        private TourService _tourServiceOfficer;
         public ICommand AddTourCommand { get; set; }
         private string _name = "";
         private string _origin = "";
@@ -26,15 +27,13 @@ namespace TourPlannerUI.ViewModel
 
         //private MapQuest _mapQuest;
 
-        private TourService _tourServiceOfficer;
+
 
         public AddTourViewModel(TourListViewModel tourListViewModel, TourService TourServiceOff)
         {
-            _tourListViewModel = tourListViewModel;
             AddTourCommand = new RelayCommand<object>(AddTour);
+            _tourListViewModel = tourListViewModel;
             _tourServiceOfficer = TourServiceOff;
-
-
         }
 
         public string Name

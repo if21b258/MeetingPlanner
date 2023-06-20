@@ -20,10 +20,10 @@ namespace TourPlannerUI.ViewModel
         public ICommand DeleteTourCommand { get; set; }
         public ICommand EditTourCommand { get; set; }
 
-        public event Action<TourModel> SelectedTourChanged;
+        public event Action<TourModel>? SelectedTourChanged;
         private TourService _tourService;
         private ObservableCollection<TourModel> _tourList;
-        private TourModel _selectedTour;
+        private TourModel? _selectedTour;
 
         //public event EventHandler<TourModel> GetMapByRequest;
 
@@ -38,7 +38,7 @@ namespace TourPlannerUI.ViewModel
             AddTourCommand = new RelayCommand<object>(AddTour);
             DeleteTourCommand = new RelayCommand<object>(DeleteTour);
             EditTourCommand = new RelayCommand<object>(EditTour);
-            TourList = new ObservableCollection<TourModel>();
+            _tourList = new ObservableCollection<TourModel>();
             _tourService = tourService;
         }
 
@@ -76,21 +76,32 @@ namespace TourPlannerUI.ViewModel
 
         private void DeleteTour(object obj)
         {
-            if (MessageBox.Show("Do you want to delete this Tour?",
-                "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if(_selectedTour != null)
             {
-                _tourService.DeleteTour(_selectedTour);
-                _tourList.Remove(_selectedTour);
+                if (MessageBox.Show("Do you want to delete this Tour?",
+                    "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    _tourService.DeleteTour(_selectedTour);
+                    _tourList.Remove(_selectedTour);
+                }
             }
-
-            //DeleteTourWindow deleteTour = new DeleteTourWindow();
-            //deleteTour.ShowDialog();
+            else
+            {
+                MessageBox.Show("Please select a Tour to delete");
+            }
         }
 
         private void EditTour(object obj)
         {
-            EditTourWindow editTour = new EditTourWindow();
-            editTour.ShowDialog();
+            if(_selectedTour != null)
+            {
+                EditTourWindow editTour = new EditTourWindow();
+                editTour.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Please select a Tour to edit");
+            }
         }
 
         private void OnSelectedTourChanged()

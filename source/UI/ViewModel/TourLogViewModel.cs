@@ -7,6 +7,8 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using TourPlannerUI.View;
 using TourPlannerModel;
+using TourPlannerBL;
+using System.Windows;
 
 namespace TourPlannerUI.ViewModel
 {
@@ -16,18 +18,36 @@ namespace TourPlannerUI.ViewModel
         public ICommand DeleteTourLogCommand { get; set; }       
         public ICommand EditTourLogCommand { get; set; }
 
-        public event Action<TourLogModel> SelectedTourLogChanged;
+        public event Action<TourLogModel>? SelectedTourLogChanged;
+        private TourService _tourService;
+        private TourListViewModel _tourListViewModel;
+        private ObservableCollection<TourLogModel> _tourLogList;
+        private TourModel? _selectedTour;
+        private TourLogModel? _selectedTourLog;
 
-        public ObservableCollection<TourLogModel> TourLogList { get; set; }
-
-        private TourLogModel _selectedTourLog;
-
-        public TourLogViewModel()
+        public TourLogViewModel(TourListViewModel tourListViewModel, TourService tourService)
         {
             AddTourLogCommand = new RelayCommand<object>(AddTourLog);
             DeleteTourLogCommand = new RelayCommand<object>(DeleteTourLog);
             EditTourLogCommand = new RelayCommand<object>(EditTourLog);
-            TourLogList = new ObservableCollection<TourLogModel>();
+            _tourListViewModel = tourListViewModel;
+            _tourService = tourService;
+            _tourLogList = new ObservableCollection<TourLogModel>();
+
+            tourListViewModel.SelectedTourChanged += HandleSelectedTourChanged;
+        }
+
+        public ObservableCollection<TourLogModel> TourLogList
+        {
+            get { return _tourLogList; }
+            set
+            {
+                if (_tourLogList != value)
+                {
+                    _tourLogList = value;
+                    RaisePropertyChangedEvent(nameof(TourLogList));
+                }
+            }
         }
 
         public TourLogModel SelectedTourLog
@@ -45,25 +65,67 @@ namespace TourPlannerUI.ViewModel
 
         private void AddTourLog(object obj)
         {
-            AddTourLogWindow addTourLog = new AddTourLogWindow();
-            addTourLog.ShowDialog();
+            if(_selectedTour != null)
+            {
+                AddTourLogWindow addTourLog = new AddTourLogWindow();
+                addTourLog.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Please select a Tour to add a Log");
+            }
         }
 
         private void DeleteTourLog(object obj)
         {
-            DeleteTourWindow deleteTour = new DeleteTourWindow();
-            deleteTour.ShowDialog();
+            if(_selectedTourLog != null)
+            {
+                if (MessageBox.Show("Do you want to delete this Log?",
+                    "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    _tourService.DeleteTourLog(_selectedTourLog);
+                    _tourLogList.Remove(_selectedTourLog);
+                    _selectedTourLog = null;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a Log to delete");
+            }
+
+
         }
 
         private void EditTourLog(object obj)
         {
-            EditTourLogWindow editTourLog = new EditTourLogWindow();
-            editTourLog.ShowDialog();
+            if(_selectedTourLog != null)
+            {
+                EditTourLogWindow editTourLog = new EditTourLogWindow();
+                editTourLog.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Please select a Log to edit");
+            }
         }
 
         private void OnSelectedTourLogChanged()
         {
             SelectedTourLogChanged?.Invoke(SelectedTourLog);
+        }
+
+        private void HandleSelectedTourChanged(TourModel selectedTour)
+        {
+            _selectedTour = selectedTour;
+            if (_selectedTour != null)
+            {
+                TourLogList = _tourService.GetTourLogs(_selectedTour);
+            }
+            else
+            {
+                TourLogList.Clear();
+            }
+
         }
     }
 }

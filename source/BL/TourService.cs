@@ -53,6 +53,31 @@ namespace TourPlannerBL
             return _tourDAO.GetTours();
         }
 
+        public void AddTourLog(TourLogModel tourLog)
+        {
+            //TODO Calculate TourLog Data
+
+            _tourLogDAO.AddTourLog(tourLog);
+        }
+
+        public void DeleteTourLog(TourLogModel tourLog)
+        {
+            _tourLogDAO.DeleteTourLog(tourLog);
+        }
+
+        public void EditTourLog(TourLogModel tourLog)
+        {
+            //TODO Calculate  TourLog Data
+
+
+            _tourLogDAO.UpdateTourLog(tourLog);
+        }
+
+        public ObservableCollection<TourLogModel> GetTourLogs(TourModel tour)
+        {
+            return _tourLogDAO.GetTourLogs(tour);
+        }
+
         public async Task GetMap(TourModel Tour)
         {
             MapQuest mapQuest = new(Tour);

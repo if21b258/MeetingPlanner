@@ -29,7 +29,7 @@ namespace TourPlannerDAL.DAO
             _dbContext.SaveChanges();
         }
 
-        public void UpdateTour(TourLogModel tourLog)
+        public void UpdateTourLog(TourLogModel tourLog)
         {
             _dbContext.TourLogs.Update(tourLog);
             _dbContext.SaveChanges();

@@ -8,6 +8,7 @@ using System.Windows.Input;
 using TourPlannerUI;
 using TourPlannerModel;
 using TourPlannerUI.ViewModel;
+using TourPlannerBL;
 
 namespace TourPlannerUI.ViewModel
 {
@@ -16,34 +17,23 @@ namespace TourPlannerUI.ViewModel
         //private TourItem _currentTour;
         
         private TourLogViewModel _tourLogViewModel;
-
-        private ICommand _addTourLogCommand;
-
+        private TourService _tourService;
+        public ICommand AddTourLogCommand { get; set; }
         private string _date;
-
-        private int _hours;
-        
+        private int _hours;   
         private int _minutes;
-
         private string _comment;
-
         private int _difficulty;
-
         private int _durationHours;
-
         private int _durationMinutes;
-
         private int _rating;
 
-        public AddTourLogViewModel(TourLogViewModel tourLogViewModel)
+        public AddTourLogViewModel(TourLogViewModel tourLogViewModel, TourService tourService)
         {
+            AddTourLogCommand = new RelayCommand<object>(AddTourLog);
             _tourLogViewModel = tourLogViewModel;
+            _tourService = tourService;
         }
-
-        public ICommand AddTourLogCommand => _addTourLogCommand ??= new RelayCommand<object>(AddTourLog);
-
-        //Bei Bedarf kann hier ein Cancelcommand kommen
-        
 
         public string Date
         {
@@ -141,7 +131,9 @@ namespace TourPlannerUI.ViewModel
             {
                 if (!String.IsNullOrEmpty(_date) && !String.IsNullOrEmpty(_comment))
                 {
-                    _tourLogViewModel.TourLogList.Add(new TourLogModel(_date, _hours, _minutes, _comment, _difficulty, _durationHours, _durationMinutes, _rating));
+                    TourLogModel tourLog = new TourLogModel(_date, _hours, _minutes, _comment, _difficulty, _durationHours, _durationMinutes, _rating);
+                    _tourService.AddTourLog(tourLog);
+                    _tourLogViewModel.TourLogList.Add(tourLog);
                 }
                 else
                 {
