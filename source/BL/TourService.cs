@@ -7,7 +7,7 @@ using TourPlannerModel;
 using System.Drawing;
 using System.Net.NetworkInformation;
 using TourPlannerDAL;
-using TourPlannerDAL.DAO;
+using TourPlannerDAL.Repository;
 using System.Configuration;
 using System.Collections.ObjectModel;
 
@@ -16,13 +16,13 @@ namespace TourPlannerBL
     public class TourService
     {
         //private MapQuest mapQuest = new();
-        private TourDAO _tourDAO;
-        private TourLogDAO _tourLogDAO;
+        private TourRepository _tourRepo;
+        private TourLogRepository _tourLogRepo;
 
         public TourService(TourPlannerDbContext dbContext)
         { 
-            _tourDAO = new TourDAO(dbContext);
-            _tourLogDAO = new TourLogDAO(dbContext);
+            _tourRepo = new TourRepository(dbContext);
+            _tourLogRepo = new TourLogRepository(dbContext);
         }
 
         public void AddTour(TourModel tour)
@@ -32,12 +32,12 @@ namespace TourPlannerBL
             tour.EstimatedTime = 0;
             tour.RouteInformation = "0";
 
-            _tourDAO.AddTour(tour);
+            _tourRepo.AddTour(tour);
         }
 
         public void DeleteTour(TourModel tour)
         {
-            _tourDAO.DeleteTour(tour);
+            _tourRepo.DeleteTour(tour);
         }
 
         public void EditTour(TourModel tour)
@@ -47,24 +47,24 @@ namespace TourPlannerBL
             tour.EstimatedTime = 0;
             tour.RouteInformation = "0";
 
-            _tourDAO.UpdateTour(tour);
+            _tourRepo.UpdateTour(tour);
         }
 
         public ObservableCollection<TourModel> GetTours()
         {
-            return _tourDAO.GetTours();
+            return _tourRepo.GetTours();
         }
 
         public void AddTourLog(TourLogModel tourLog)
         {
             //TODO Calculate TourLog Data
 
-            _tourLogDAO.AddTourLog(tourLog);
+            _tourLogRepo.AddTourLog(tourLog);
         }
 
         public void DeleteTourLog(TourLogModel tourLog)
         {
-            _tourLogDAO.DeleteTourLog(tourLog);
+            _tourLogRepo.DeleteTourLog(tourLog);
         }
 
         public void EditTourLog(TourLogModel tourLog)
@@ -72,12 +72,12 @@ namespace TourPlannerBL
             //TODO Calculate  TourLog Data
 
 
-            _tourLogDAO.UpdateTourLog(tourLog);
+            _tourLogRepo.UpdateTourLog(tourLog);
         }
 
         public ObservableCollection<TourLogModel> GetTourLogs(TourModel tour)
         {
-            return _tourLogDAO.GetTourLogs(tour);
+            return _tourLogRepo.GetTourLogs(tour);
         }
 
         public async Task GetMap(TourModel Tour)
@@ -90,38 +90,43 @@ namespace TourPlannerBL
 
 
         }
-        public void SaveImageToFile(TourModel Tour)
+        public void SaveImageToFile(TourModel tour)
         {
-
-            string filePath = GetFilePath();
+            string fileDir = GetFileDirectory();
+            string filePath = GetFilePath(tour);
             try
             {
-                if (!Directory.Exists(filePath))
+                if (!Directory.Exists(fileDir))
                 {
-                    Directory.CreateDirectory(filePath);
+                    Directory.CreateDirectory(fileDir);
                 }
 
-                using (MemoryStream fileStream = new MemoryStream(Tour.Map))
+                using (MemoryStream fileStream = new MemoryStream(tour.Map))
                 {
 
                     var image = Image.FromStream(fileStream);
-                    image.Save(filePath + Tour.Name + Tour.Id + ".png");
+                    image.Save(filePath);
 
                 }
-                Console.WriteLine("Bild erfolgreich gespeichert: " + filePath);
+                Console.WriteLine("Picture successfully saved in " + filePath);
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                Console.WriteLine("Fehler beim Speichern des Bildes: " + ex.Message);
+                Console.WriteLine("Error saving picture " + e.Message);
             }
         }
 
-        public string GetFilePath()
+        public string GetFileDirectory()
         {
-            string basePath = AppDomain.CurrentDomain.BaseDirectory;
-            string filePath = basePath + ConfigurationManager.AppSettings["MapImagePath"];
-            return filePath;
+            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            string configDir = ConfigurationManager.AppSettings["MapImagePath"];
+            return Path.Combine(baseDir, configDir);
+        }
 
+        public string GetFilePath(TourModel tour)
+        {
+            string filePath = GetFileDirectory() + tour.Id + ".png";
+            return filePath;
         }
     }
 }

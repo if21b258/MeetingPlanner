@@ -39,9 +39,9 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
-        public void GetImage(string imagePath)
+        public void GetImage(TourModel tour)
         {
-            string filePath = _tourService.GetFilePath() + imagePath;
+            string filePath = _tourService.GetFilePath(tour);
             byte[] image = File.ReadAllBytes(filePath);
             using (MemoryStream memoryStream = new MemoryStream(image))
             {
@@ -62,7 +62,7 @@ namespace TourPlannerUI.ViewModel
         private void HandleSelectedTourChanged(TourModel selectedTour)
         {
             _selectedTour = selectedTour;
-            GetImage($"{_selectedTour.Name}{_selectedTour.Id}.png");
+            GetImage(selectedTour);
         }
     }
 }

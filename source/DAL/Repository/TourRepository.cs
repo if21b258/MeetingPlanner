@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using TourPlannerModel;
 
-namespace TourPlannerDAL.DAO
+namespace TourPlannerDAL.Repository
 {
-    public class TourDAO
+    public class TourRepository
     {
         private TourPlannerDbContext _dbContext;
 
-        public TourDAO(TourPlannerDbContext dbContext)
+        public TourRepository(TourPlannerDbContext dbContext)
         {
             _dbContext = dbContext;
         }
