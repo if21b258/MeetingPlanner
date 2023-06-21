@@ -21,9 +21,6 @@ namespace TourPlannerModel
         public float EstimatedTime { get; set; }
         public string RouteInformation { get; set; }
 
-        [NotMapped]
-        public byte[] Map { get; set; }
-
         public TourModel() { }
 
         public TourModel(string name, string origin, string destination, string transportType, string description, float distance, float estimatedTime, string routeInformation)

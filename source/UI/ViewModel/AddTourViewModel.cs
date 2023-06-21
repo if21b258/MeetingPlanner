@@ -91,7 +91,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
-        private void AddTour(object commandParameter)
+        private async void AddTour(object commandParameter)
         {
             try
             {
@@ -99,8 +99,7 @@ namespace TourPlannerUI.ViewModel
                 && !String.IsNullOrEmpty(_transportType) && !String.IsNullOrEmpty(_description))
                 {
                     TourModel tour = new TourModel(_name, _origin, _destination, _transportType, _description);
-                    _tourServiceOfficer.GetMap(tour);
-                    _tourServiceOfficer.AddTour(tour);
+                    await _tourServiceOfficer.AddTour(tour);
                     _tourListViewModel.LoadTours();
 
 

@@ -12,5 +12,4 @@
         <Image HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill" Source="{Binding RouteImage}"></Image>
     </Grid>
 
-   
 </UserControl>
