@@ -16,7 +16,6 @@ namespace TourPlannerUI.ViewModel
         private TourService _tourService;
         private TourListViewModel _tourListViewModel;
         private TourModel _selectedTour;
-
         public ICommand EditTourCommand { get; set; }
 
         public EditTourViewModel(TourListViewModel tourListViewModel, TourService tourService)

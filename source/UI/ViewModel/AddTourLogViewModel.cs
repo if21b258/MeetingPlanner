@@ -18,7 +18,6 @@ namespace TourPlannerUI.ViewModel
         private TourService _tourService;
         private TourLogViewModel _tourLogViewModel;
         private TourModel _selectedTour;
-
         private string _date;
         private int _hours;
         private int _minutes;
@@ -27,7 +26,6 @@ namespace TourPlannerUI.ViewModel
         private int _durationHours;
         private int _durationMinutes;
         private int _rating;
-
         public ICommand AddTourLogCommand { get; set; }
 
         public AddTourLogViewModel(TourLogViewModel tourLogViewModel, TourService tourService)

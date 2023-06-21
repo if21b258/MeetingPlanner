@@ -16,26 +16,16 @@ namespace TourPlannerUI.ViewModel
 {
     public class TourListViewModel : BaseViewModel
     {
-        public ICommand AddTourCommand { get; set; }
-        public ICommand DeleteTourCommand { get; set; }
-        public ICommand EditTourCommand { get; set; }
-
-        public event Action<TourModel>? SelectedTourChanged;
         private TourService _tourService;
         private ObservableCollection<TourModel> _tourList;
         private TourModel? _selectedTour;
-        //private TourRouteViewModel _tourRouteViewModel;
+        public ICommand AddTourCommand { get; set; }
+        public ICommand DeleteTourCommand { get; set; }
+        public ICommand EditTourCommand { get; set; }
+        public event Action<TourModel>? SelectedTourChanged;
 
-        //public event EventHandler<TourModel> GetMapByRequest;
-
-        //private TourService _tourServiceOfficer; vielleicht brauchen wir die beiden 
-
-        //private MapQuest _mapQuest;
-
-        public TourListViewModel(/*ITourManager tourManager, IMapQuest mapquest*/TourService tourService)
+        public TourListViewModel(TourService tourService)
         {
-            /*this.tourManager = tourManager;
-            this.mapquest = mapquest;*/
             AddTourCommand = new RelayCommand<object>(AddTour);
             DeleteTourCommand = new RelayCommand<object>(DeleteTour);
             EditTourCommand = new RelayCommand<object>(EditTour);

@@ -25,12 +25,12 @@ namespace TourPlannerBL
         public string UrlRoute;
 
 
-        public MapQuest(TourModel Tour)
+        public MapQuest(TourModel tour)
         {
             Key = ConfigurationManager.AppSettings["MapQuestKey"];
-            Origin = Tour.Origin;
-            Destination = Tour.Destination;
-            TransportType = Tour.TransportType;
+            Origin = tour.Origin;
+            Destination = tour.Destination;
+            TransportType = tour.TransportType;
             Url = $"https://www.mapquestapi.com/staticmap/v5/map?start={Uri.EscapeDataString(Origin)}&end={Uri.EscapeDataString(Destination)}&size=600,400&key={Key}";
             UrlRoute = $"http://www.mapquestapi.com/directions/v2/route?key={Key}&from={Uri.EscapeDataString(Origin)}&to={Uri.EscapeDataString(Destination)}&routeType={Tour.TransportType}";
         }

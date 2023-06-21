@@ -14,16 +14,15 @@ namespace TourPlannerUI.ViewModel
 {
     public class TourRouteViewModel : BaseViewModel
     {
-        public BitmapImage _routeImage;
         private TourService _tourService;
         private TourListViewModel _tourListViewModel;
         private TourModel? _selectedTour;
+        public BitmapImage _routeImage;
 
         public TourRouteViewModel(TourService tourService, TourListViewModel tourListViewModel) {
             _tourService = tourService;
             _tourListViewModel = tourListViewModel;
             _tourListViewModel.SelectedTourChanged += HandleSelectedTourChanged;
-
         }
 
         public BitmapImage RouteImage

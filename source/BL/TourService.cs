@@ -15,7 +15,6 @@ namespace TourPlannerBL
 {
     public class TourService
     {
-        //private MapQuest mapQuest = new();
         private TourRepository _tourRepo;
         private TourLogRepository _tourLogRepo;
 
@@ -80,16 +79,13 @@ namespace TourPlannerBL
             return _tourLogRepo.GetTourLogs(tour);
         }
 
-        public async Task GetMap(TourModel Tour)
+        public async Task GetMap(TourModel tour)
         {
-            MapQuest mapQuest = new(Tour);
-            TourModel tour; 
-            tour = await mapQuest.GetWay(Tour);
+            MapQuest mapQuest = new(tour);
+            tour = await mapQuest.GetWay(tour);
             SaveImageToFile(tour);
-            
-
-
         }
+
         public void SaveImageToFile(TourModel tour)
         {
             string fileDir = GetFileDirectory();

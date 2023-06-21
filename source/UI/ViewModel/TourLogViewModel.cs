@@ -16,16 +16,15 @@ namespace TourPlannerUI.ViewModel
 {
     public class TourLogViewModel : BaseViewModel
     {
-        public ICommand AddTourLogCommand { get; set; }    
-        public ICommand DeleteTourLogCommand { get; set; }       
-        public ICommand EditTourLogCommand { get; set; }
-
-        public event Action<TourLogModel>? SelectedTourLogChanged;
         private TourService _tourService;
         private TourListViewModel _tourListViewModel;
         private TourModel? _selectedTour;
         private ObservableCollection<TourLogModel> _tourLogList;
         private TourLogModel? _selectedTourLog;
+        public ICommand AddTourLogCommand { get; set; }
+        public ICommand DeleteTourLogCommand { get; set; }
+        public ICommand EditTourLogCommand { get; set; }
+        public event Action<TourLogModel>? SelectedTourLogChanged;
 
         public TourLogViewModel(TourListViewModel tourListViewModel, TourService tourService)
         {

@@ -16,12 +16,12 @@ namespace TourPlannerUI.ViewModel
     {
         private TourListViewModel _tourListViewModel;
         private TourService _tourServiceOfficer;
-        public ICommand AddTourCommand { get; set; }
         private string _name = "";
         private string _origin = "";
         private string _destination = "";
         private string _transportType = "";
         private string _description = "";
+        public ICommand AddTourCommand { get; set; }
 
         //public event EventHandler<TourModel> GetMapByRequest;
 

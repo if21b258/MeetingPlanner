@@ -14,14 +14,14 @@ namespace TourPlannerUI.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
-        public ICommand ResetDatabaseCommand { get; set; }
         private TourPlannerDbContext _dbContext;
         private TourService _tourService;
         private TourListViewModel _tourListViewModel;
         private TourLogViewModel _tourLogViewModel;
         private TourInfoViewModel _tourInfoViewModel;
-
         private TourRouteViewModel _tourRouteViewModel;
+        public ICommand ResetDatabaseCommand { get; set; }
+
         public MainViewModel(TourPlannerDbContext dbContext, TourService tourService, TourListViewModel tourListViewModel, TourLogViewModel tourLogViewModel, TourInfoViewModel tourInfoViewModel, TourRouteViewModel tourRouteViewModel)
         {
             _dbContext = dbContext;
@@ -48,23 +48,5 @@ namespace TourPlannerUI.ViewModel
             _tourListViewModel.LoadTours();
             _tourLogViewModel.LoadTourLogs();
         }
-
-        /*private TourService _tourServiceOfficer { get; set; }
-
-private AddTourViewModel _addTourViewModel { get; set; }
-
-public MainViewModel(TourService TourServiceOff, AddTourViewModel AddTourVM) { //Hier gibts auch noch einen Mapquest mit
-
-    this._tourServiceOfficer = TourServiceOff; 
-
-    this._addTourViewModel = AddTourVM;
-
-
-    _addTourViewModel.GetMapByRequest += (_, tourModel) =>
-    {
-        _tourServiceOfficer.GetMap(tourModel);
-    };
-
-} */
     }
 }
