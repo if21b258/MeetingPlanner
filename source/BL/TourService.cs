@@ -24,14 +24,13 @@ namespace TourPlannerBL
             _tourLogRepo = new TourLogRepository(dbContext);
         }
 
-        public void AddTour(TourModel tour)
+        public async Task AddTour(TourModel tour)
         {
-            //TODO Calculate Tour Data
-            tour.Distance = 0;
-            tour.EstimatedTime = 0;
-            tour.RouteInformation = "0";
-
-            _tourRepo.AddTour(tour);
+            MapQuest mapQuest = new(tour);
+            //TourModel tour; 
+            byte[] image = await mapQuest.GetWay(tour);
+            _tourDAO.AddTour(tour);
+            SaveImageToFile(image, tour);
         }
 
         public void DeleteTour(TourModel tour)
@@ -79,14 +78,7 @@ namespace TourPlannerBL
             return _tourLogRepo.GetTourLogs(tour);
         }
 
-        public async Task GetMap(TourModel tour)
-        {
-            MapQuest mapQuest = new(tour);
-            tour = await mapQuest.GetWay(tour);
-            SaveImageToFile(tour);
-        }
-
-        public void SaveImageToFile(TourModel tour)
+        public void SaveImageToFile(byte[] MapImage, TourModel Tour)
         {
             string fileDir = GetFileDirectory();
             string filePath = GetFilePath(tour);
@@ -97,7 +89,7 @@ namespace TourPlannerBL
                     Directory.CreateDirectory(fileDir);
                 }
 
-                using (MemoryStream fileStream = new MemoryStream(tour.Map))
+                using (MemoryStream fileStream = new MemoryStream(MapImage))
                 {
 
                     var image = Image.FromStream(fileStream);

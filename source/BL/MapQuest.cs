@@ -35,7 +35,7 @@ namespace TourPlannerBL
             UrlRoute = $"http://www.mapquestapi.com/directions/v2/route?key={Key}&from={Uri.EscapeDataString(Origin)}&to={Uri.EscapeDataString(Destination)}&routeType={Tour.TransportType}";
         }
 
-        public async Task<TourModel> GetWay(TourModel tourModel)
+        public async Task<byte[]> GetWay(TourModel tourModel)
         {
            
             using (HttpClient client = new HttpClient())
@@ -61,10 +61,7 @@ namespace TourPlannerBL
                         tourModel.EstimatedTime = (float)Math.Round(JsonContent["route"]["realTime"].Value<float>(), 0);
 
                         
-                        tourModel.Map = await GetMap(tourModel);
-
-                        return tourModel;
-                       
+                        return await GetMap(tourModel);
                     }
 
                     //return responseContent;
