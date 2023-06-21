@@ -37,40 +37,46 @@ namespace TourPlannerBL
 
         public async Task<byte[]> GetWay(TourModel tourModel)
         {
-           
-            using (HttpClient client = new HttpClient())
+            try
             {
-                HttpResponseMessage response = await client.GetAsync(UrlRoute);
-                if (response.IsSuccessStatusCode)
+                using (HttpClient client = new HttpClient())
                 {
-                    string responseContent = await response.Content.ReadAsStringAsync();
-
-                    JObject JsonContent = JObject.Parse(responseContent);
-
-                    if (JsonContent["info"]["statuscode"].ToString() != "0") 
+                    HttpResponseMessage response = await client.GetAsync(UrlRoute);
+                    if (response.IsSuccessStatusCode)
                     {
-                        // throw Exception //To be Done
-                        return null;
-                    
+                        string responseContent = await response.Content.ReadAsStringAsync();
+
+                        JObject JsonContent = JObject.Parse(responseContent);
+
+                        if (JsonContent["info"]["statuscode"].ToString() != "0")
+                        {
+                            throw new Exception("Route calculation failed.");
+                        }
+                        else
+                        {
+                            var session = JsonContent["route"]["sessionId"].ToString();
+                            var route = JsonContent["route"];
+                            tourModel.Distance = (float)Math.Round(JsonContent["route"]["distance"].Value<double>(), 2);
+                            tourModel.EstimatedTime = (float)Math.Round(JsonContent["route"]["realTime"].Value<float>(), 0);
+
+                            return await GetMap(tourModel);
+                        }
                     }
                     else
                     {
-                        var session = JsonContent["route"]["sessionId"].ToString();
-                        var route = JsonContent["route"];
-                        tourModel.Distance = (float)Math.Round(JsonContent["route"]["distance"].Value<double>(), 2);
-                        tourModel.EstimatedTime = (float)Math.Round(JsonContent["route"]["realTime"].Value<float>(), 0);
-
-                        
-                        return await GetMap(tourModel);
+                        throw new HttpRequestException("Error occurred while fetching route data.");
                     }
-
-                    //return responseContent;
                 }
-                else
-                {
-                    // Handle the API request error
-                    return null;
-                }
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine("Error occurred while fetching route data: " + ex.Message);
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error occurred during route calculation: " + ex.Message);
+                return null;
             }
 
         }
@@ -78,23 +84,32 @@ namespace TourPlannerBL
 
         public async Task<byte[]> GetMap(TourModel tourModel)
         {
-            using (HttpClient client = new HttpClient())
+            try
             {
-
-                HttpResponseMessage response = await client.GetAsync(Url);
-                if (response.IsSuccessStatusCode)
+                using (HttpClient client = new HttpClient())
                 {
-                    byte[] image = await response.Content.ReadAsByteArrayAsync();
-                    return image;
 
-                    // Process the image bytes as needed (e.g., save to a file, display in an Image control, etc.)
-                }
-                else
-                {
-                    throw new Exception();
-                    Console.WriteLine("Error");
+                    HttpResponseMessage response = await client.GetAsync(Url);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        byte[] image = await response.Content.ReadAsByteArrayAsync();
+                        return image;
+
+                        // Process the image bytes as needed (e.g., save to a file, display in an Image control, etc.)
+                    }
+                    else
+                    {
+                        throw new HttpRequestException("Error occurred while fetching the map image.");
+                        Console.WriteLine("Error");
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error occurred while fetching the map image: " + ex.Message);
+                return null;
+            }
+           
 
         }
     }
