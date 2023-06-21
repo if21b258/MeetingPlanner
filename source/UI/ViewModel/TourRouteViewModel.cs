@@ -41,22 +41,31 @@ namespace TourPlannerUI.ViewModel
         }
         public void GetImage(TourModel tour)
         {
-            string filePath = _fileService.GetFilePath(tour);
-            byte[] image = File.ReadAllBytes(filePath);
-            using (MemoryStream memoryStream = new MemoryStream(image))
+            try
             {
-                // Create a new BitmapImage
-                BitmapImage bitmapImage = new BitmapImage();
+                string filePath = _fileService.GetFilePath(tour);
+                byte[] image = File.ReadAllBytes(filePath);
+                using (MemoryStream memoryStream = new MemoryStream(image))
+                {
+                    // Create a new BitmapImage
+                    BitmapImage bitmapImage = new BitmapImage();
 
-                // Set the MemoryStream as the source of the BitmapImage
-                bitmapImage.BeginInit();
-                bitmapImage.StreamSource = memoryStream;
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.EndInit();
+                    // Set the MemoryStream as the source of the BitmapImage
+                    bitmapImage.BeginInit();
+                    bitmapImage.StreamSource = memoryStream;
+                    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmapImage.EndInit();
 
-                // Set the BitmapImage as the ImageData property in your ViewModel
-                RouteImage = bitmapImage;
+                    // Set the BitmapImage as the ImageData property in your ViewModel
+                    RouteImage = bitmapImage;
+                }
+
             }
+            catch (Exception FileNotFoundException)
+            {
+                Console.WriteLine("File konnte nicht gefunden werden");
+            }
+            
         }
 
         private void HandleSelectedTourChanged(TourModel selectedTour)

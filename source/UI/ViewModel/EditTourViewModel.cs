@@ -15,13 +15,15 @@ namespace TourPlannerUI.ViewModel
     {
         private TourService _tourService;
         private TourListViewModel _tourListViewModel;
+        private TourRouteViewModel _tourRouteViewModel;
         private TourModel _selectedTour;
         public ICommand EditTourCommand { get; set; }
 
-        public EditTourViewModel(TourListViewModel tourListViewModel, TourService tourService)
+        public EditTourViewModel(TourListViewModel tourListViewModel, TourService tourService, TourRouteViewModel tourRouteViewModel)
         {
             _tourService = tourService;
             _tourListViewModel = tourListViewModel;
+            _tourRouteViewModel = tourRouteViewModel;
             _selectedTour = _tourListViewModel.SelectedTour;
             EditTourCommand = new RelayCommand<object>(EditTour);
         }
@@ -88,6 +90,7 @@ namespace TourPlannerUI.ViewModel
             {
                 _tourService.EditTour(_selectedTour);
                 _tourListViewModel.LoadTours();
+                _tourRouteViewModel.GetImage(_selectedTour);
             }
             else
             {

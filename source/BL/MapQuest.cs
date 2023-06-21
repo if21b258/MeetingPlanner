@@ -25,7 +25,6 @@ namespace TourPlannerBL
         public string UrlRoute;
 
 
-
         public MapQuest(TourModel tour)
         {
             Key = ConfigurationManager.AppSettings["MapQuestKey"];
@@ -90,7 +89,6 @@ namespace TourPlannerBL
                 using (HttpClient client = new HttpClient())
                 {
 
-<<<<<<< HEAD
                     HttpResponseMessage response = await client.GetAsync(Url);
                     if (response.IsSuccessStatusCode)
                     {
@@ -104,14 +102,6 @@ namespace TourPlannerBL
                         throw new HttpRequestException("Error occurred while fetching the map image.");
                         Console.WriteLine("Error");
                     }
-=======
-                    // Process the image bytes as needed (e.g., save to a file, display in an Image control, etc.)
-                }
-                else
-                {
-                    throw new Exception();
-                    Console.WriteLine("Error"); 
->>>>>>> 09üäpi
                 }
             }
             catch (Exception ex)
@@ -119,8 +109,13 @@ namespace TourPlannerBL
                 Console.WriteLine("Error occurred while fetching the map image: " + ex.Message);
                 return null;
             }
-           
+
 
         }
     }
 }
+
+
+
+
+

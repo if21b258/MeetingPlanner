@@ -35,7 +35,10 @@ namespace TourPlannerBL
                 {
                     Directory.CreateDirectory(fileDir);
                 }
-
+                if(mapImage == null)
+                {
+                    Console.WriteLine("No Image loaded");
+                }
                 using (MemoryStream fileStream = new MemoryStream(mapImage))
                 {
 

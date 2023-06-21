@@ -10,6 +10,7 @@ using TourPlannerDAL;
 using TourPlannerDAL.Repository;
 using System.Configuration;
 using System.Collections.ObjectModel;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TourPlannerBL
 {
@@ -28,11 +29,10 @@ namespace TourPlannerBL
 
         public async Task AddTour(TourModel tour)
         {
-            MapQuest mapQuest = new(tour);
-            //TourModel tour; 
-            byte[] image = await mapQuest.GetWay(tour);
+            byte[] image = await GetMap(tour);
             _tourRepo.AddTour(tour);
             _fileService.SaveImageToFile(image, tour);
+
         }
 
         public void DeleteTour(TourModel tour)
@@ -40,14 +40,19 @@ namespace TourPlannerBL
             _tourRepo.DeleteTour(tour);
         }
 
-        public void EditTour(TourModel tour)
+        public async Task EditTour(TourModel tour)
         {
-            //TODO Calculate  Tour Data
-            tour.Distance = 0;
-            tour.EstimatedTime = 0;
-
+            byte[] image = await GetMap(tour);
             _tourRepo.UpdateTour(tour);
+            _fileService.SaveImageToFile(image, tour);
         }
+
+        public async Task <byte[]> GetMap(TourModel tour)
+        {
+            MapQuest mapQuest = new(tour);
+            return await mapQuest.GetWay(tour);
+        }
+
 
         public ObservableCollection<TourModel> GetTours()
         {
