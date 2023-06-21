@@ -101,8 +101,6 @@ namespace TourPlannerUI.ViewModel
                     TourModel tour = new TourModel(_name, _origin, _destination, _transportType, _description);
                     await _tourServiceOfficer.AddTour(tour);
                     _tourListViewModel.LoadTours();
-
-
                 }
                 else
                 {

@@ -15,6 +15,7 @@ namespace TourPlannerUI.ViewModel
     public class TourRouteViewModel : BaseViewModel
     {
         private TourService _tourService;
+        private FileService _fileService;
         private TourListViewModel _tourListViewModel;
         private TourModel? _selectedTour;
         public BitmapImage _routeImage;
@@ -23,6 +24,7 @@ namespace TourPlannerUI.ViewModel
             _tourService = tourService;
             _tourListViewModel = tourListViewModel;
             _tourListViewModel.SelectedTourChanged += HandleSelectedTourChanged;
+            _fileService = new FileService();
         }
 
         public BitmapImage RouteImage
@@ -37,10 +39,9 @@ namespace TourPlannerUI.ViewModel
                 }
             }
         }
-
         public void GetImage(TourModel tour)
         {
-            string filePath = _tourService.GetFilePath(tour);
+            string filePath = _fileService.GetFilePath(tour);
             byte[] image = File.ReadAllBytes(filePath);
             using (MemoryStream memoryStream = new MemoryStream(image))
             {
@@ -56,8 +57,8 @@ namespace TourPlannerUI.ViewModel
                 // Set the BitmapImage as the ImageData property in your ViewModel
                 RouteImage = bitmapImage;
             }
-
         }
+
         private void HandleSelectedTourChanged(TourModel selectedTour)
         {
             _selectedTour = selectedTour;

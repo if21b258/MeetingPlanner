@@ -17,11 +17,13 @@ namespace TourPlannerBL
     {
         private TourRepository _tourRepo;
         private TourLogRepository _tourLogRepo;
+        private FileService _fileService;
 
         public TourService(TourPlannerDbContext dbContext)
         { 
             _tourRepo = new TourRepository(dbContext);
             _tourLogRepo = new TourLogRepository(dbContext);
+            _fileService = new FileService();
         }
 
         public async Task AddTour(TourModel tour)
@@ -30,7 +32,7 @@ namespace TourPlannerBL
             //TourModel tour; 
             byte[] image = await mapQuest.GetWay(tour);
             _tourRepo.AddTour(tour);
-            SaveImageToFile(image, tour);
+            _fileService.SaveImageToFile(image, tour);
         }
 
         public void DeleteTour(TourModel tour)
@@ -75,45 +77,6 @@ namespace TourPlannerBL
         public ObservableCollection<TourLogModel> GetTourLogs(TourModel tour)
         {
             return _tourLogRepo.GetTourLogs(tour);
-        }
-
-        public void SaveImageToFile(byte[] mapImage, TourModel tour)
-        {
-            string fileDir = GetFileDirectory();
-            string filePath = GetFilePath(tour);
-            try
-            {
-                if (!Directory.Exists(fileDir))
-                {
-                    Directory.CreateDirectory(fileDir);
-                }
-
-                using (MemoryStream fileStream = new MemoryStream(mapImage))
-                {
-
-                    var image = Image.FromStream(fileStream);
-                    image.Save(filePath);
-
-                }
-                Console.WriteLine("Picture successfully saved in " + filePath);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Error saving picture " + e.Message);
-            }
-        }
-
-        public string GetFileDirectory()
-        {
-            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
-            string configDir = ConfigurationManager.AppSettings["MapImagePath"];
-            return Path.Combine(baseDir, configDir);
-        }
-
-        public string GetFilePath(TourModel tour)
-        {
-            string filePath = GetFileDirectory() + tour.Id + ".png";
-            return filePath;
         }
     }
 }
