@@ -78,5 +78,47 @@ namespace TourPlannerBL
         {
             return _tourLogRepo.GetTourLogs(tour);
         }
+<<<<<<< HEAD
+=======
+
+        public void SaveImageToFile(byte[] mapImage, TourModel tour)
+        {
+            string fileDir = GetFileDirectory();
+            string filePath = GetFilePath(tour);
+            try
+            {
+                if (!Directory.Exists(fileDir))
+                {
+                    Directory.CreateDirectory(fileDir);
+                }
+
+                using (MemoryStream fileStream = new MemoryStream(mapImage))
+                {
+
+                    var image = Image.FromStream(fileStream);
+                    image.Save(filePath);
+
+                }
+                Console.WriteLine("Picture successfully saved in " + filePath);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error saving picture " + e.Message);
+            }
+        }
+
+        public string GetFileDirectory()
+        {
+            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            string configDir = ConfigurationManager.AppSettings["MapImagePath"];
+            return Path.Combine(baseDir, configDir);
+        }
+
+        public string GetFilePath(TourModel tour)
+        {
+            string filePath = GetFileDirectory() + tour.Id + ".png";
+            return filePath;
+        }
+>>>>>>> 09üäpi
     }
 }
