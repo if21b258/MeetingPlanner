@@ -50,5 +50,22 @@ namespace TourPlannerBL
                 Console.WriteLine("Error saving picture " + e.Message);
             }
         }
+
+        public void DeleteImageFolder()
+        {
+            string fileDir = GetFileDirectory();
+            try
+            {
+                if (Directory.Exists(fileDir))
+                {
+                    Directory.Delete(fileDir, true);
+                }
+                Console.WriteLine("Picture folder successfully deleted");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error deleting picture folder " + e.Message);
+            }
+        }
     }
 }

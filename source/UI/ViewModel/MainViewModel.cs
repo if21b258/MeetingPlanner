@@ -16,6 +16,7 @@ namespace TourPlannerUI.ViewModel
     {
         private TourPlannerDbContext _dbContext;
         private TourService _tourService;
+        private FileService _fileService;
         private TourListViewModel _tourListViewModel;
         private TourLogViewModel _tourLogViewModel;
         private TourInfoViewModel _tourInfoViewModel;
@@ -26,6 +27,7 @@ namespace TourPlannerUI.ViewModel
         {
             _dbContext = dbContext;
             _tourService = tourService;
+            _fileService = new FileService();
             _tourListViewModel = tourListViewModel;
             _tourLogViewModel = tourLogViewModel;
             _tourRouteViewModel = tourRouteViewModel;
@@ -38,6 +40,7 @@ namespace TourPlannerUI.ViewModel
         {
             _dbContext.Database.EnsureDeleted();
             _dbContext.Database.EnsureCreated();
+            _fileService.DeleteImageFolder();
             _tourListViewModel.LoadTours();
             _tourLogViewModel.LoadTourLogs();
         }
