@@ -39,14 +39,19 @@ namespace TourPlannerBL
                 {
                     Console.WriteLine("No Image loaded");
                 }
-                using (MemoryStream fileStream = new MemoryStream(mapImage))
+                else
                 {
+                    using (MemoryStream fileStream = new MemoryStream(mapImage))
+                    {
 
-                    var image = Image.FromStream(fileStream);
-                    image.Save(filePath);
+                        var image = Image.FromStream(fileStream);
+                        image.Save(filePath);
+
+                    }
+                    Console.WriteLine("Picture successfully saved in " + filePath);
 
                 }
-                Console.WriteLine("Picture successfully saved in " + filePath);
+              
             }
             catch (Exception e)
             {
