@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Primitives;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -17,6 +18,8 @@ namespace TourPlannerUI.ViewModel
         private TourListViewModel _tourListViewModel;
         private TourModel _selectedTour;
         public ICommand EditTourCommand { get; set; }
+        public ICommand CancelCommand { get; set; }
+        public Action<bool> CloseEvent;
 
         public EditTourViewModel(TourListViewModel tourListViewModel, TourService tourService)
         {
@@ -24,6 +27,7 @@ namespace TourPlannerUI.ViewModel
             _tourListViewModel = tourListViewModel;
             _selectedTour = _tourListViewModel.SelectedTour;
             EditTourCommand = new RelayCommand<object>(EditTour);
+            CancelCommand = new RelayCommand<object>(Cancel);
         }
 
         public string Name
@@ -86,6 +90,7 @@ namespace TourPlannerUI.ViewModel
             if (!String.IsNullOrEmpty(_selectedTour.Name) && !String.IsNullOrEmpty(_selectedTour.Origin) && !String.IsNullOrEmpty(_selectedTour.Destination)
                 && !String.IsNullOrEmpty(_selectedTour.TransportType) && !String.IsNullOrEmpty(_selectedTour.Description))
             {
+                CloseEvent?.Invoke(true);
                 _tourService.EditTour(_selectedTour);
                 _tourListViewModel.LoadTours();
             }
@@ -93,6 +98,11 @@ namespace TourPlannerUI.ViewModel
             {
                 throw new ArgumentException("Please fill in all fields");
             }
+        }
+
+        private void Cancel(object commandParameter)
+        {
+            CloseEvent?.Invoke(true);
         }
     }
 }
