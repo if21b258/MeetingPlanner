@@ -22,18 +22,15 @@ namespace TourPlannerUI.ViewModel
         private string _transportType = "";
         private string _description = "";
         public ICommand AddTourCommand { get; set; }
-
-        //public event EventHandler<TourModel> GetMapByRequest;
-
-        //private MapQuest _mapQuest;
-
-
+        public ICommand CancelCommand { get; set; }
+        public Action<bool> CloseEvent;
 
         public AddTourViewModel(TourListViewModel tourListViewModel, TourService TourServiceOff)
         {
-            AddTourCommand = new RelayCommand<object>(AddTour);
             _tourListViewModel = tourListViewModel;
             _tourServiceOfficer = TourServiceOff;
+            AddTourCommand = new RelayCommand<object>(AddTour);
+            CancelCommand = new RelayCommand<object>(Cancel);
         }
 
         public string Name
@@ -98,9 +95,11 @@ namespace TourPlannerUI.ViewModel
                 if (!String.IsNullOrEmpty(_name) && !String.IsNullOrEmpty(_origin) && !String.IsNullOrEmpty(_destination)
                 && !String.IsNullOrEmpty(_transportType) && !String.IsNullOrEmpty(_description))
                 {
+                    CloseEvent?.Invoke(true);
                     TourModel tour = new TourModel(_name, _origin, _destination, _transportType, _description);
                     await _tourServiceOfficer.AddTour(tour);
                     _tourListViewModel.LoadTours();
+
                 }
                 else
                 {
@@ -111,7 +110,11 @@ namespace TourPlannerUI.ViewModel
             {
                 Console.WriteLine($"Processing failed: {e.Message}");
             }
+        }
 
+        private void Cancel(object commandParameter)
+        {
+            CloseEvent?.Invoke(false);
         }
     }
 }

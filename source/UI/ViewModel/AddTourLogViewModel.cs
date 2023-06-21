@@ -27,6 +27,8 @@ namespace TourPlannerUI.ViewModel
         private int _durationMinutes;
         private int _rating;
         public ICommand AddTourLogCommand { get; set; }
+        public ICommand CancelCommand { get; set; }
+        public Action<bool> CloseEvent;
 
         public AddTourLogViewModel(TourLogViewModel tourLogViewModel, TourService tourService)
         {
@@ -34,6 +36,7 @@ namespace TourPlannerUI.ViewModel
             _tourLogViewModel = tourLogViewModel;
             _selectedTour = _tourLogViewModel.SelectedTour;
             AddTourLogCommand = new RelayCommand<object>(AddTourLog);
+            CancelCommand = new RelayCommand<object>(Cancel);
         }
 
         public string Date
@@ -132,6 +135,7 @@ namespace TourPlannerUI.ViewModel
             {
                 if (!String.IsNullOrEmpty(_date) && !String.IsNullOrEmpty(_comment))
                 {
+                    CloseEvent?.Invoke(true);
                     TourLogModel tourLog = new TourLogModel(_selectedTour, _date, _hours, _minutes, _comment, _difficulty, _durationHours, _durationMinutes, _rating);
                     _tourService.AddTourLog(tourLog);
                     _tourLogViewModel.LoadTourLogs();
@@ -146,6 +150,11 @@ namespace TourPlannerUI.ViewModel
                 Console.WriteLine($"Processing failed: {e.Message}");
             }
 
+        }
+
+        private void Cancel(object commandParameter)
+        {
+            CloseEvent?.Invoke(false);
         }
     }
 }

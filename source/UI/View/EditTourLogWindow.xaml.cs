@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TourPlannerUI.ViewModel;
 
 namespace TourPlannerUI.View
 {
@@ -22,10 +23,9 @@ namespace TourPlannerUI.View
         public EditTourLogWindow()
         {
             InitializeComponent();
-        }
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
+
+            var context = this.DataContext as EditTourLogViewModel;
+            context.CloseEvent += (value) => this.DialogResult = value;
         }
     }
 }
