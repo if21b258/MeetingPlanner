@@ -33,7 +33,7 @@
                         <TextBlock Text="General" VerticalAlignment="Center"/>
                     </Grid>
                 </TabItem.Header>
-                <local:TourInfo x:Name="TourInfo"/>
+                <local:TourInfoView x:Name="TourInfo"/>
             </TabItem>
             <TabItem Header="Route">
                 <local:TourRouteView x:Name="TourRoute"/>

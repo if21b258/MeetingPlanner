@@ -46,7 +46,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
-        public TourModel SelectedTour
+        public TourModel? SelectedTour
         {
             get { return _selectedTour; }
             set
@@ -73,6 +73,7 @@ namespace TourPlannerUI.ViewModel
                     "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     _tourService.DeleteTour(_selectedTour);
+                    _selectedTour = null;
                     LoadTours();
                 }
             }

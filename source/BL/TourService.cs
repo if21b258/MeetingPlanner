@@ -16,12 +16,14 @@ namespace TourPlannerBL
 {
     public class TourService
     {
+        private TourPlannerDbContext _dbContext;
         private ITourRepository _tourRepo;
         private ITourLogRepository _tourLogRepo;
         private FileService _fileService;
 
         public TourService(TourPlannerDbContext dbContext)
         {
+            _dbContext = dbContext;
             _tourRepo = new TourRepository(dbContext);
             _tourLogRepo = new TourLogRepository(dbContext);
             _fileService = new FileService();
@@ -87,6 +89,16 @@ namespace TourPlannerBL
         {
             MapQuest mapQuest = new(tour);
             return await mapQuest.GetWay(tour);
+        }
+
+        public void EnsureDatabaseCreated()
+        {
+            _dbContext.Database.EnsureCreated();
+        }
+
+        public void EnsureDatabaseDeleted()
+        {
+            _dbContext.Database.EnsureDeleted();
         }
     }
 }

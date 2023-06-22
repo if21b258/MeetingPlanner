@@ -15,8 +15,8 @@
                 <MenuItem Header="Export Tour" Command="{Binding ExportTourCommand}"/>
             </MenuItem>
             <MenuItem Header="Report">
-                <MenuItem Header="_Tour Report" Command="{Binding GenerateTourReportCommand}"/>
-                <MenuItem Header="_Tour Summary" Command="{Binding GenerateTourSummaryCommand}"/>
+                <MenuItem Header="Tour Report" Command="{Binding GenerateTourReportCommand}"/>
+                <MenuItem Header="Summary Report" Command="{Binding GenerateSummaryReportCommand}"/>
             </MenuItem>
             <MenuItem Header="Options">
                 <MenuItem Header="Reset Database" Command="{Binding ResetDatabaseCommand}"/>

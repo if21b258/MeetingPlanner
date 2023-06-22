@@ -11,6 +11,8 @@ using iText.Layout.Element;
 using iText.Layout.Properties;
 using iText.IO.Image;
 using System.Collections.ObjectModel;
+using iText.Kernel.Pdf.Canvas.Parser.Listener;
+using iText.StyledXmlParser.Css.Util;
 
 namespace TourPlannerBL
 {
@@ -28,7 +30,6 @@ namespace TourPlannerBL
             var pdf = new PdfDocument(writer);
             var document = new Document(pdf);
 
-
             // Add title
             var title = new Paragraph("Tour Report")
                 .SetBold()
@@ -38,11 +39,10 @@ namespace TourPlannerBL
             document.Add(title);
 
             // Add image
-            var image = new Image(ImageDataFactory.Create(_fileService.GetFilePath(tour)))
-            .SetWidth(UnitValue.CreatePercentValue(50))
-            .SetHorizontalAlignment(HorizontalAlignment.CENTER)
-            .SetMarginTop(20)
-            .SetMarginBottom(20);
+            var image = new Image(ImageDataFactory.Create(_fileService.GetFilePath(tour)));
+            image.SetWidth(UnitValue.CreatePercentValue(60));
+            image.SetMarginBottom(20);
+            image.SetProperty(Property.FLOAT, FloatPropertyValue.RIGHT);
             document.Add(image);
 
             // Add tour details
@@ -60,23 +60,53 @@ namespace TourPlannerBL
             document.Close();
         }
 
-        private void AddTourLogsToDocument(ICollection<TourLogModel> tourLogs, Document document)
+        public void GenerateSummaryReport(string path)
         {
-            document.Add(new Paragraph("Tour Logs"))
-                .SetBold()
-                .SetFontSize(14);
+            //log.Info("GenerateSummaryReport called");
+            var writer = new PdfWriter(path);
+            var pdf = new PdfDocument(writer);
+            var document = new Document(pdf);
 
-            foreach (var tourLog in tourLogs)
-            {
-                document.Add(new Paragraph($"Log ID: {tourLog.Id}"));
-                document.Add(new Paragraph($"Date: {tourLog.Date}"));
-                document.Add(new Paragraph($"Rating: {tourLog.Time}"));
-                document.Add(new Paragraph($"Average Speed: {tourLog.Comment}"));
-                document.Add(new Paragraph($"Max Speed: {tourLog.Difficulty}"));
-                document.Add(new Paragraph($"Min Speed: {tourLog.Duration}"));
-                document.Add(new Paragraph($"Average Step Count: {tourLog.Rating}"));
-            }
+            // Add summary
+            document.Add(new Paragraph("TODO SUMMARY"));
+            document.Close();
         }
 
+        private void AddTourLogsToDocument(ICollection<TourLogModel>? tourLogs, Document document)
+        {
+            var table = new Table(UnitValue.CreatePercentArray(7)).UseAllAvailableWidth();
+
+            table.AddHeaderCell("Id");
+            table.AddHeaderCell("Date");
+            table.AddHeaderCell("Time");
+            table.AddHeaderCell("Comment");
+            table.AddHeaderCell("Difficulty");
+            table.AddHeaderCell("Duration");
+            table.AddHeaderCell("Rating");
+
+
+
+            if (tourLogs != null)
+            {
+                foreach (var tourLog in tourLogs)
+                {
+                    table.AddCell(tourLog.Id.ToString());
+                    table.AddCell(tourLog.Date);
+                    table.AddCell(tourLog.Time);
+                    table.AddCell(tourLog.Comment);
+                    table.AddCell(tourLog.Difficulty.ToString());
+                    table.AddCell(tourLog.Duration);
+                    table.AddCell(tourLog.Rating.ToString());
+                }
+                document.Add(table);
+            }
+            else
+            {
+                document.Add(new Paragraph("No Logs available."));
+            }
+
+
+
+        }
     }
 }

@@ -37,46 +37,9 @@ namespace TourPlannerUI.ViewModel
 
         private void Startup()
         {
-            //_dbContext.Database.EnsureCreated();
+            _tourService.EnsureDatabaseCreated();
             _tourListViewModel.LoadTours();
             _tourLogViewModel.LoadTourLogs();
-        }
-
-        private void ResetDatabase(object obj)
-        {
-            //_dbContext.Database.EnsureDeleted();
-            //_dbContext.Database.EnsureCreated();
-            //_fileService.DeleteImageFolder();
-            _tourListViewModel.LoadTours();
-            _tourLogViewModel.LoadTourLogs();
-        }
-
-        private void GenerateTourReport(object obj)
-        {
-            string filePath = ShowSaveFileDialog("Tour", "pdf");
-            if(filePath != null)
-            {
-                //_reportService.GenerateTourReport(_tourListViewModel.SelectedTour,filePath);
-            }
-        }
-
-        public string? ShowSaveFileDialog(string defaultName, string ext)
-        {
-            SaveFileDialog dialog = new SaveFileDialog();
-            dialog.FileName = defaultName;
-            dialog.DefaultExt = $".{ext}";
-            dialog.Filter = $"{ext} documents |*.{ext}";
-
-            bool? result = dialog.ShowDialog();
-
-            if (result == true)
-            {
-                return dialog.FileName;
-            }
-            else
-            {
-                return null;
-            }
         }
     }
 }

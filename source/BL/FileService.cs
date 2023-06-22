@@ -15,7 +15,7 @@ namespace TourPlannerBL
         public string GetFileDirectory()
         {
             string baseDir = AppDomain.CurrentDomain.BaseDirectory;
-            string configDir = ConfigurationManager.AppSettings["ImagePath"];
+            string? configDir = ConfigurationManager.AppSettings["ImagePath"];
             return Path.Combine(baseDir, configDir);
         }
 

@@ -18,9 +18,9 @@ namespace TourPlannerUI.View
     /// <summary>
     /// Interaction logic for TourInfo.xaml
     /// </summary>
-    public partial class TourInfo : UserControl
+    public partial class TourInfoView : UserControl
     {
-        public TourInfo()
+        public TourInfoView()
         {
             InitializeComponent();
         }

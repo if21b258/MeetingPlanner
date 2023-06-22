@@ -37,7 +37,7 @@ namespace TourPlannerUI.ViewModel
             _tourLogList = new ObservableCollection<TourLogModel>();
         }
 
-        public TourModel SelectedTour
+        public TourModel? SelectedTour
         {
             get { return _selectedTour; }
         }
@@ -55,7 +55,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
-        public TourLogModel SelectedTourLog
+        public TourLogModel? SelectedTourLog
         {
             get { return _selectedTourLog; }
             set
@@ -89,8 +89,8 @@ namespace TourPlannerUI.ViewModel
                     "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     _tourService.DeleteTourLog(_selectedTourLog);
-                    _tourLogList.Remove(_selectedTourLog);
                     _selectedTourLog = null;
+                    LoadTourLogs();
                 }
             }
             else
