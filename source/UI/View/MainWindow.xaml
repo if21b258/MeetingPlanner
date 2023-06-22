@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="800"
         DataContext="{Binding MainViewModel, Source={StaticResource IoCConfig2}}"
         >
-    <Grid>
+    <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2.5*"/>
             <ColumnDefinition Width="7.5*"/>
@@ -19,16 +19,8 @@
             <RowDefinition Height="32"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        <Menu Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" VerticalAlignment="Center" Padding="6">
-            <MenuItem Header="_File"/>
-            <MenuItem Header="_Edit"/>
-            <MenuItem Header="_Options">
-                <MenuItem Header="_Reset Database" Command="{Binding ResetDatabaseCommand}"/>
-                <MenuItem Header="_Tour Report" Command="{Binding GenerateTourReportCommand}"/>
-            </MenuItem>
-            <MenuItem Header="_Help"/>
-        </Menu>
+
+        <local:MenuView x:Name="Menu" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"/>
 
         <local:SearchBarView x:Name="SearchBar" Grid.Column="0" Grid.Row="1"/>
 

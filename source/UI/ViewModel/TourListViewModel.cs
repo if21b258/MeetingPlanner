@@ -73,7 +73,7 @@ namespace TourPlannerUI.ViewModel
                     "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     _tourService.DeleteTour(_selectedTour);
-                    _tourList.Remove(_selectedTour);
+                    LoadTours();
                 }
             }
             else

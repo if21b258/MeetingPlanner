@@ -8,9 +8,10 @@ using TourPlannerModel;
 
 namespace TourPlannerDAL.Repository
 {
-    public class TourRepository
+    public class TourRepository : ITourRepository, IDisposable
     {
         private TourPlannerDbContext _dbContext;
+        private bool _disposed = false;
 
         public TourRepository(TourPlannerDbContext dbContext)
         {
@@ -20,19 +21,16 @@ namespace TourPlannerDAL.Repository
         public void AddTour(TourModel tour)
         {
             _dbContext.Tours.Add(tour);
-            _dbContext.SaveChanges();
         }
 
         public void DeleteTour(TourModel tour)
         {
             _dbContext.Tours.Remove(tour);
-            _dbContext.SaveChanges();
         }
 
         public void UpdateTour(TourModel tour)
         {
             _dbContext.Tours.Update(tour);
-            _dbContext.SaveChanges();
         }
 
         public ObservableCollection<TourModel> GetTours()
@@ -40,9 +38,28 @@ namespace TourPlannerDAL.Repository
             return new ObservableCollection<TourModel>(_dbContext.Tours.ToList());
         }
 
+        public void Save()
+        {
+            _dbContext.SaveChanges();
+        }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    _dbContext.Dispose();
+                }
+            }
+            _disposed = true;
+        }
 
-
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
     }
 }

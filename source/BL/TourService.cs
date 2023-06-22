@@ -16,8 +16,8 @@ namespace TourPlannerBL
 {
     public class TourService
     {
-        private TourRepository _tourRepo;
-        private TourLogRepository _tourLogRepo;
+        private ITourRepository _tourRepo;
+        private ITourLogRepository _tourLogRepo;
         private FileService _fileService;
 
         public TourService(TourPlannerDbContext dbContext)
@@ -31,6 +31,7 @@ namespace TourPlannerBL
         {
             byte[] image = await GetMap(tour);
             _tourRepo.AddTour(tour);
+            _tourRepo.Save();
             _fileService.SaveImageToFile(image, tour);
 
         }
@@ -38,21 +39,16 @@ namespace TourPlannerBL
         public void DeleteTour(TourModel tour)
         {
             _tourRepo.DeleteTour(tour);
+            _tourRepo.Save();
         }
 
         public async Task EditTour(TourModel tour)
         {
             byte[] image = await GetMap(tour);
             _tourRepo.UpdateTour(tour);
+            _tourRepo.Save();
             _fileService.SaveImageToFile(image, tour);
         }
-
-        public async Task <byte[]> GetMap(TourModel tour)
-        {
-            MapQuest mapQuest = new(tour);
-            return await mapQuest.GetWay(tour);
-        }
-
 
         public ObservableCollection<TourModel> GetTours()
         {
@@ -64,11 +60,13 @@ namespace TourPlannerBL
             //TODO Calculate TourLog Data
 
             _tourLogRepo.AddTourLog(tourLog);
+            _tourLogRepo.Save();
         }
 
         public void DeleteTourLog(TourLogModel tourLog)
         {
             _tourLogRepo.DeleteTourLog(tourLog);
+            _tourLogRepo.Save();
         }
 
         public void EditTourLog(TourLogModel tourLog)
@@ -77,11 +75,18 @@ namespace TourPlannerBL
 
 
             _tourLogRepo.UpdateTourLog(tourLog);
+            _tourLogRepo.Save();
         }
 
         public ObservableCollection<TourLogModel> GetTourLogs(TourModel tour)
         {
             return _tourLogRepo.GetTourLogs(tour);
+        }
+
+        public async Task<byte[]> GetMap(TourModel tour)
+        {
+            MapQuest mapQuest = new(tour);
+            return await mapQuest.GetWay(tour);
         }
     }
 }

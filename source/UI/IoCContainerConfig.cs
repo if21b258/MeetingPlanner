@@ -14,8 +14,8 @@ namespace TourPlannerUI
         {
             var services = new ServiceCollection();
 
-            //Database
-            services.AddSingleton<TourPlannerDbContext>();
+            //DataAccessLayer
+            services.AddTransient<TourPlannerDbContext>();
 
             //BuisnessLayer
             services.AddSingleton<TourService>();
@@ -28,9 +28,10 @@ namespace TourPlannerUI
             services.AddSingleton<TourLogViewModel>();
             services.AddTransient<AddTourLogViewModel>();
             services.AddTransient<EditTourLogViewModel>();
-            services.AddSingleton<SearchBarViewModel>();
             services.AddSingleton<TourRouteViewModel>();
             services.AddSingleton<TourInfoViewModel>();
+            services.AddSingleton<MenuViewModel>();
+            services.AddSingleton<SearchBarViewModel>();
 
             _serviceProvider = services.BuildServiceProvider();
         }
@@ -56,13 +57,16 @@ namespace TourPlannerUI
         public EditTourLogViewModel EditTourLogViewModel
             => _serviceProvider.GetRequiredService<EditTourLogViewModel>();
 
-        public SearchBarViewModel SearchBarViewModel
-            => _serviceProvider.GetRequiredService<SearchBarViewModel>();
-
         public TourRouteViewModel TourRouteViewModel
             => _serviceProvider.GetRequiredService<TourRouteViewModel>();
 
         public TourInfoViewModel TourInfoViewModel
             => _serviceProvider.GetRequiredService<TourInfoViewModel>();
+
+        public MenuViewModel MenuViewModel
+            => _serviceProvider.GetRequiredService<MenuViewModel>();
+
+        public SearchBarViewModel SearchBarViewModel
+            => _serviceProvider.GetRequiredService<SearchBarViewModel>();
     }
 }
