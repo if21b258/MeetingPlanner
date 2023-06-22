@@ -24,7 +24,8 @@
             <MenuItem Header="_File"/>
             <MenuItem Header="_Edit"/>
             <MenuItem Header="_Options">
-                <MenuItem Header="_Reset Database" Command="{Binding ResetDatabaseCommand}" />
+                <MenuItem Header="_Reset Database" Command="{Binding ResetDatabaseCommand}"/>
+                <MenuItem Header="_Tour Report" Command="{Binding GenerateTourReportCommand}"/>
             </MenuItem>
             <MenuItem Header="_Help"/>
         </Menu>
