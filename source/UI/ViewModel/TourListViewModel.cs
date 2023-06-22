@@ -22,7 +22,7 @@ namespace TourPlannerUI.ViewModel
         public ICommand AddTourCommand { get; set; }
         public ICommand DeleteTourCommand { get; set; }
         public ICommand EditTourCommand { get; set; }
-        public event Action<TourModel>? SelectedTourChanged;
+        public event Action<TourModel?>? SelectedTourChanged;
 
         public TourListViewModel(TourService tourService)
         {
@@ -73,7 +73,7 @@ namespace TourPlannerUI.ViewModel
                     "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     _tourService.DeleteTour(_selectedTour);
-                    _selectedTour = null;
+                    SelectedTour = null;
                     LoadTours();
                 }
             }

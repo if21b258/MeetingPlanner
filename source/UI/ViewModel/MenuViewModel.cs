@@ -62,7 +62,7 @@ namespace TourPlannerUI.ViewModel
         {
             if (_tourListViewModel.SelectedTour != null)
             {
-                string filePath = ShowSaveFileDialog("Tour", "pdf");
+                string? filePath = ShowSaveFileDialog("Tour", "pdf");
                 if (filePath != null)
                 {
                     _reportService.GenerateTourReport(_tourListViewModel.SelectedTour, filePath);
@@ -77,7 +77,7 @@ namespace TourPlannerUI.ViewModel
 
         private void GenerateSummaryReport(object obj)
         {
-            string filePath = ShowSaveFileDialog("Summary", "pdf");
+            string? filePath = ShowSaveFileDialog("Summary", "pdf");
             if (filePath != null)
             {
                 _reportService.GenerateSummaryReport(filePath);

@@ -24,22 +24,6 @@ namespace TourPlannerModel
 
         public TourLogModel() { }
 
-        public TourLogModel(string date, int hours, int minutes, string comment, int difficulty, int durationHours, int durationMinutes, int rating)
-        {
-            Id = 0;
-            Tour = null;
-            Date = date;
-            Time = hours + ":" + minutes;
-            THours = hours;
-            TMinutes = minutes;
-            Comment = comment;
-            Difficulty = difficulty;
-            Duration = durationHours + ":" + durationMinutes;
-            DHours = durationHours;
-            DMinutes = durationMinutes;
-            Rating = rating;
-        }
-
         public TourLogModel(TourModel selectedTour, string date, int hours, int minutes, string comment, int difficulty, int durationHours, int durationMinutes, int rating)
         {
             Id = 0;

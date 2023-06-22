@@ -43,6 +43,12 @@ namespace TourPlannerUI.ViewModel
         {
             try
             {
+                //Placeholder wenn tour gelöscht wird (tour=null) crashed das programm. Sollte in dem fall kein bild anzeigen.
+                if(tour == null)
+                {
+                    return;
+                }
+
                 string filePath = _fileService.GetFilePath(tour);
                 byte[] image = File.ReadAllBytes(filePath);
                 using (MemoryStream memoryStream = new MemoryStream(image))

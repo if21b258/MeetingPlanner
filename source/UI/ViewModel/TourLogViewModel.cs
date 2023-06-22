@@ -24,7 +24,7 @@ namespace TourPlannerUI.ViewModel
         public ICommand AddTourLogCommand { get; set; }
         public ICommand DeleteTourLogCommand { get; set; }
         public ICommand EditTourLogCommand { get; set; }
-        public event Action<TourLogModel>? SelectedTourLogChanged;
+        public event Action<TourLogModel?>? SelectedTourLogChanged;
 
         public TourLogViewModel(TourListViewModel tourListViewModel, TourService tourService)
         {
@@ -89,7 +89,7 @@ namespace TourPlannerUI.ViewModel
                     "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     _tourService.DeleteTourLog(_selectedTourLog);
-                    _selectedTourLog = null;
+                    SelectedTourLog = null;
                     LoadTourLogs();
                 }
             }
@@ -131,7 +131,7 @@ namespace TourPlannerUI.ViewModel
             SelectedTourLogChanged?.Invoke(SelectedTourLog);
         }
 
-        private void HandleSelectedTourChanged(TourModel selectedTour)
+        private void HandleSelectedTourChanged(TourModel? selectedTour)
         {
             _selectedTour = selectedTour;
             LoadTourLogs();
