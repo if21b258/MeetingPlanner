@@ -12,14 +12,10 @@ namespace TourPlannerModel
         public int Id { get; set; }
         public TourModel Tour { get; set; }
         public string Date { get; set; }
-        public string Time { get; set; }
-        public int THours { get; set; }
-        public int TMinutes { get; set; }
+        public DateTime Time { get; set; }
         public string Comment { get; set; }
         public int Difficulty { get; set; }
-        public string Duration { get; set; }
-        public int DHours { get; set; }
-        public int DMinutes { get; set; }
+        public float Duration { get; set; }
         public int Rating { get; set; }
 
         public TourLogModel() { }

@@ -7,20 +7,27 @@
         mc:Ignorable="d"
         Title="AddTourLog" Height="450" Width="800"
         DataContext="{Binding AddTourLogViewModel, Source={StaticResource IoCConfig2}}">
+    
     <Grid  Background="LightBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2.5*"/>
+            <ColumnDefinition Width="2.5*"/>
+            <ColumnDefinition Width="2.5*"/>
+            <ColumnDefinition Width="2.5*"/>
+        </Grid.ColumnDefinitions>
+        
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto" MinHeight="83"/>
-            <RowDefinition Height="Auto" MinHeight="60"/>
-            <RowDefinition Height="Auto" MinHeight="153.88"/>
-            <RowDefinition Height="Auto" MinHeight="71.96"/>
-            <RowDefinition/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
         <Label Content="Time: Hours:" Margin="382,2,178,9" Width="84" d:LayoutOverrides="VerticalAlignment"/>
         <ComboBox Grid.Row="0" Margin="471,6,0,14" Width="63" HorizontalAlignment="Left" Text="{Binding Hours}">
             <ComboBox.ItemsSource>
