@@ -80,7 +80,7 @@ namespace TourPlannerUI.ViewModel
             string? filePath = ShowSaveFileDialog("Summary", "pdf");
             if (filePath != null)
             {
-                _reportService.GenerateSummaryReport(filePath);
+                _reportService.GenerateSummaryReport(_tourListViewModel.TourList, filePath);
             }
         }
 

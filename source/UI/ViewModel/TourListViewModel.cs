@@ -101,6 +101,11 @@ namespace TourPlannerUI.ViewModel
         public void LoadTours()
         {
             TourList = _tourService.GetTours();
+
+            foreach (TourModel tour in TourList)
+            {
+                tour.Logs = _tourService.GetTourLogs(tour);
+            }
         }
 
         private void OnSelectedTourChanged()
