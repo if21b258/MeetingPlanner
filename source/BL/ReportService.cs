@@ -74,11 +74,10 @@ namespace TourPlannerBL
 
         private void AddTourLogsToDocument(ICollection<TourLogModel>? tourLogs, Document document)
         {
-            var table = new Table(UnitValue.CreatePercentArray(7)).UseAllAvailableWidth();
+            var table = new Table(UnitValue.CreatePercentArray(6)).UseAllAvailableWidth();
 
             table.AddHeaderCell("Id");
             table.AddHeaderCell("Date");
-            table.AddHeaderCell("Time");
             table.AddHeaderCell("Comment");
             table.AddHeaderCell("Difficulty");
             table.AddHeaderCell("Duration");
@@ -91,11 +90,10 @@ namespace TourPlannerBL
                 foreach (var tourLog in tourLogs)
                 {
                     table.AddCell(tourLog.Id.ToString());
-                    table.AddCell(tourLog.Date);
-                    table.AddCell(tourLog.Time);
+                    table.AddCell(tourLog.Date.ToString());
                     table.AddCell(tourLog.Comment);
                     table.AddCell(tourLog.Difficulty.ToString());
-                    table.AddCell(tourLog.Duration);
+                    table.AddCell(tourLog.Duration.ToString());
                     table.AddCell(tourLog.Rating.ToString());
                 }
                 document.Add(table);

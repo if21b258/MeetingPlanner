@@ -62,6 +62,7 @@ namespace TourPlannerUI.ViewModel
         private void AddTour(object obj)
         {
             AddTourWindow addtour = new AddTourWindow();
+            addtour.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             addtour.ShowDialog();
         }
 
@@ -88,6 +89,7 @@ namespace TourPlannerUI.ViewModel
             if(_selectedTour != null)
             {
                 EditTourWindow editTour = new EditTourWindow();
+                editTour.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 editTour.ShowDialog();
             }
             else

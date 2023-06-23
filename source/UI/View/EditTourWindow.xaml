@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourPlannerUI.View"
         mc:Ignorable="d"
-        Title="Edit Tour" Height="450" Width="800"
+        Title="Edit Tour" Height="300" Width="400" MinHeight="300" MinWidth="400"
         DataContext="{Binding EditTourViewModel,Source={StaticResource IoCConfig2}}"
         >
 
     <Grid Background="LightBlue">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*" MinWidth="100"/>
             <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
@@ -29,17 +29,17 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">Tour-Name:</Label>
-        <TextBox Grid.Column="1" Grid.ColumnSpan="2"  Height="36" Grid.Row="1" Text="{Binding Name}"></TextBox>
+        <TextBox Grid.Column="1" Grid.ColumnSpan="2"  Height="36" Grid.Row="1" Margin="5"  Text="{Binding Name}"></TextBox>
         <Label Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">Origin:</Label>
-        <TextBox Grid.Column="1" Grid.ColumnSpan="2" Height="36" Grid.Row="2" Text="{Binding Origin}"></TextBox>
+        <TextBox Grid.Column="1" Grid.ColumnSpan="2" Height="36" Grid.Row="2" Margin="5"  Text="{Binding Origin}"></TextBox>
         <Label Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center">Destination:</Label>
-        <TextBox Grid.Column="1" Grid.ColumnSpan="2" Height="36" Grid.Row="3" Text="{Binding Destination}"></TextBox>
+        <TextBox Grid.Column="1" Grid.ColumnSpan="2" Height="36" Grid.Row="3" Margin="5"  Text="{Binding Destination}"></TextBox>
         <Label Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center">Transport-Type:</Label>
-        <TextBox Grid.Column="1" Grid.ColumnSpan="2" Height="36" Grid.Row="4" Text="{Binding TransportType}"></TextBox>
+        <TextBox Grid.Column="1" Grid.ColumnSpan="2" Height="36" Grid.Row="4" Margin="5"  Text="{Binding TransportType}"></TextBox>
         <Label Grid.Column="0" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center">Tour-Description:</Label>
-        <TextBox Grid.Column="1" Grid.ColumnSpan="2" Height="90" Grid.Row="5" Grid.RowSpan="2" Text="{Binding Description}"></TextBox>
+        <TextBox Grid.Column="1" Grid.ColumnSpan="2" Height="90" Grid.Row="5" Margin="5"  Grid.RowSpan="2" Text="{Binding Description}"></TextBox>
 
-        <Button Grid.Column="1" Grid.Row="7" Background="Green" Command="{Binding EditTourCommand}">Edit</Button>
-        <Button Grid.Column="2" Grid.Row="7" Background="Red" Command="{Binding CancelCommand}">Cancel</Button>
+        <Button Grid.Column="1" Grid.Row="7" Background="Green" Margin="5" Command="{Binding EditTourCommand}">Edit</Button>
+        <Button Grid.Column="2" Grid.Row="7" Background="Red" Margin="5" Command="{Binding CancelCommand}">Cancel</Button>
     </Grid>
 </Window>

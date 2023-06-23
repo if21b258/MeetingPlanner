@@ -30,7 +30,7 @@ namespace TourPlannerUI.ViewModel
             CancelCommand = new RelayCommand<object>(Cancel);
         }
 
-        public string Date
+        public DateTime Date
         {
             get { return _selectedTourLog.Date; }
 
@@ -41,17 +41,6 @@ namespace TourPlannerUI.ViewModel
                 //Errorhandling fehlt noch 
             }
 
-        }
-
-        public string Time
-        {
-            get { return _selectedTourLog.Time; }
-            set
-            {
-                _selectedTourLog.Time = value;
-
-                //Errorhandling fehlt noch 
-            }
         }
 
         public string Comment
@@ -65,47 +54,6 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
-        public int DMinutes
-        {
-            get { return _selectedTourLog.DMinutes; }
-            set
-            {
-                _selectedTourLog.DMinutes = value;
-
-            }
-
-        }
-        public int DHours
-        {
-            get { return _selectedTourLog.DHours; }
-            set
-            {
-                _selectedTourLog.DHours = value;
-
-            }
-
-        }
-        public int THours
-        {
-            get { return _selectedTourLog.THours; }
-            set
-            {
-                _selectedTourLog.THours = value;
-
-            }
-
-        }
-        public int TMinutes
-        {
-            get { return _selectedTourLog.TMinutes; }
-            set
-            {
-                _selectedTourLog.TMinutes = value;
-
-            }
-
-        }
-
         public int Difficulty
         {
             get { return _selectedTourLog.Difficulty; }
@@ -117,7 +65,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
-        public string Duration
+        public TimeSpan Duration
         {
             get { return _selectedTourLog.Duration; }
             set
@@ -143,7 +91,7 @@ namespace TourPlannerUI.ViewModel
         {
             try
             {
-                if (!String.IsNullOrEmpty(_selectedTourLog.Date) && !String.IsNullOrEmpty(_selectedTourLog.Comment))
+                if (!String.IsNullOrEmpty(_selectedTourLog.Comment))
                 {
                     CloseEvent?.Invoke(true);
                     _tourService.EditTourLog(_selectedTourLog);

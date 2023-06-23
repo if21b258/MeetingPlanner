@@ -18,6 +18,7 @@ namespace TourPlannerDAL
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql(ConfigurationManager.ConnectionStrings["TourPlannerDb"].ConnectionString);
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
     }
 }

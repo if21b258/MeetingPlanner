@@ -18,13 +18,10 @@ namespace TourPlannerUI.ViewModel
         private TourService _tourService;
         private TourLogViewModel _tourLogViewModel;
         private TourModel _selectedTour;
-        private string _date;
-        private int _hours;
-        private int _minutes;
+        private DateTime _date = DateTime.Now;
         private string _comment;
         private int _difficulty;
-        private int _durationHours;
-        private int _durationMinutes;
+        private TimeSpan _duration;
         private int _rating;
         public ICommand AddTourLogCommand { get; set; }
         public ICommand CancelCommand { get; set; }
@@ -39,7 +36,7 @@ namespace TourPlannerUI.ViewModel
             CancelCommand = new RelayCommand<object>(Cancel);
         }
 
-        public string Date
+        public DateTime Date
         {
             get { return _date; }
 
@@ -50,28 +47,6 @@ namespace TourPlannerUI.ViewModel
                 //Errorhandling fehlt noch 
             }
 
-        }
-
-        public int Hours
-        {
-            get { return _hours; }
-            set
-            {
-                _hours = value;
-
-                //Errorhandling fehlt noch 
-            }
-        }
-
-        public int Minutes
-        {
-            get { return _minutes; }
-            set
-            {
-                _minutes = value;
-
-                //Errorhandling fehlt noch 
-            }
         }
 
         public string Comment
@@ -96,24 +71,12 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
-        public int DurationHours
+        public TimeSpan Duration
         {
-            get { return _durationHours; }
+            get { return _duration; }
             set
             {
-                _durationHours = value;
-
-                //Errorhandling fehlt noch 
-            }
-        }
-
-        public int DurationMinutes
-        {
-            get { return _durationMinutes; }
-            set
-            {
-                _durationMinutes = value;
-
+                _duration = value;
                 //Errorhandling fehlt noch 
             }
         }
@@ -133,10 +96,10 @@ namespace TourPlannerUI.ViewModel
         {
             try
             {
-                if (!String.IsNullOrEmpty(_date) && !String.IsNullOrEmpty(_comment))
+                if (!String.IsNullOrEmpty(_comment))
                 {
                     CloseEvent?.Invoke(true);
-                    TourLogModel tourLog = new TourLogModel(_selectedTour, _date, _hours, _minutes, _comment, _difficulty, _durationHours, _durationMinutes, _rating);
+                    TourLogModel tourLog = new TourLogModel(_selectedTour, _date, _comment, _difficulty, _duration, _rating);
                     _tourService.AddTourLog(tourLog);
                     _tourLogViewModel.LoadTourLogs();
                 }

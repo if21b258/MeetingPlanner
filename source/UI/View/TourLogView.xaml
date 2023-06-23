@@ -30,12 +30,11 @@
         <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" ItemsSource="{Binding TourLogList}" SelectedItem="{Binding SelectedTourLog}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" IsReadOnly="True">
             
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Date" Binding="{Binding Date}" />
-                <DataGridTextColumn Header="Time" Binding="{Binding Time}" />
-                <DataGridTextColumn Header="Duration" Binding="{Binding Duration}" />
-                <DataGridTextColumn Header="Difficulty" Binding="{Binding Difficulty}" />
-                <DataGridTextColumn Header="Comment" Binding="{Binding Comment}" />
-                <DataGridTextColumn Header="Rating" Binding="{Binding Rating}" />
+                <DataGridTextColumn Header="Date" Width="*" Binding="{Binding Date, StringFormat=dd.MM.yyyy HH:mm}"/>
+                <DataGridTextColumn Header="Duration" Width="*" Binding="{Binding Duration, StringFormat={}{0:%d}d {0:%h}h {0:%m}min}"/>
+                <DataGridTextColumn Header="Difficulty" Width="*" Binding="{Binding Difficulty}"/>
+                <DataGridTextColumn Header="Comment" Width="*" Binding="{Binding Comment}"/>
+                <DataGridTextColumn Header="Rating" Width="*" Binding="{Binding Rating}"/>
             </DataGrid.Columns>
             
         </DataGrid>

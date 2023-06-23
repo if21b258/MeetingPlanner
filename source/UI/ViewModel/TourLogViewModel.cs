@@ -73,6 +73,7 @@ namespace TourPlannerUI.ViewModel
             if(_selectedTour != null)
             {
                 AddTourLogWindow addTourLog = new AddTourLogWindow();
+                addTourLog.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 addTourLog.ShowDialog();
             }
             else
@@ -106,6 +107,7 @@ namespace TourPlannerUI.ViewModel
             if(_selectedTourLog != null)
             {
                 EditTourLogWindow editTourLog = new EditTourLogWindow();
+                editTourLog.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 editTourLog.ShowDialog();
             }
             else
