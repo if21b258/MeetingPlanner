@@ -28,7 +28,7 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <Label Content="Time: Hours:" Margin="382,2,178,9" Width="84" d:LayoutOverrides="VerticalAlignment"/>
+        <Label Grid.Column="0" Grid.Row="1" Content="Time: Hours:" />
         <ComboBox Grid.Row="0" Margin="471,6,0,14" Width="63" HorizontalAlignment="Left" Text="{Binding Hours}">
             <ComboBox.ItemsSource>
                 <x:Array Type="{x:Type ComboBoxItem}">
