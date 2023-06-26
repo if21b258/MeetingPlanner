@@ -56,7 +56,7 @@ namespace TourPlannerUI.ViewModel
             get { return _selectedTour?.Description; }
         }
 
-        public string? TransportType
+        public Transport? TransportType
         {
             get { return _selectedTour?.TransportType; }
         }

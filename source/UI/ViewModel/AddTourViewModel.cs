@@ -9,6 +9,7 @@ using TourPlannerUI;
 using TourPlannerModel;
 using TourPlannerUI.ViewModel;
 using TourPlannerBL;
+using System.Net;
 
 namespace TourPlannerUI.ViewModel
 {
@@ -72,9 +73,9 @@ namespace TourPlannerUI.ViewModel
             set
             {
                 _transportType = value;
-
-                //Errorhandling fehlt noch 
+             
             }
+
         }
 
         public string Description
@@ -93,10 +94,11 @@ namespace TourPlannerUI.ViewModel
             try
             {
                 if (!String.IsNullOrEmpty(_name) && !String.IsNullOrEmpty(_origin) && !String.IsNullOrEmpty(_destination)
-                && !String.IsNullOrEmpty(_transportType) && !String.IsNullOrEmpty(_description))
+                && !String.IsNullOrEmpty(_description))
                 {
                     CloseEvent?.Invoke(true);
-                    TourModel tour = new TourModel(_name, _origin, _destination, _transportType, _description);
+                    TourModel tour = new TourModel(_name, _origin, _destination, _description);
+                    tour.TransportType = this.GetTransportType(_transportType);
                     await _tourServiceOfficer.AddTour(tour);
                     _tourListViewModel.LoadTours();
 
@@ -111,6 +113,42 @@ namespace TourPlannerUI.ViewModel
                 Console.WriteLine($"Processing failed: {e.Message}");
             }
         }
+
+        private Transport GetTransportType(string comboBoxValue)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(comboBoxValue) && comboBoxValue.Contains(":"))
+                {
+                    int startIndex = comboBoxValue.IndexOf(":") + 1;
+                    string transportType = comboBoxValue.Substring(startIndex).Trim();
+                    switch (transportType)
+                    {
+                        case "Car":
+                            return Transport.Bicycle;
+                        case "By Foot":
+                            return Transport.Pedestrian;
+                        case "Bicycle":
+                            return Transport.Bicycle;
+                        default:
+                            return Transport.Fastest;
+                    }
+                }
+                else
+                {
+                    throw new NullReferenceException();
+                    
+                }
+
+            }
+            catch(NullReferenceException)
+            {
+                Console.WriteLine("Transporttype value was null");
+                return Transport.Fastest;
+            }
+            
+        }
+            
 
         private void Cancel(object commandParameter)
         {
