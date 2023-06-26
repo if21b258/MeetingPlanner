@@ -39,7 +39,6 @@ namespace TourPlannerModel
             Destination = destination;
             Description = description;
             Distance = 0;
-            //EstimatedTime = 0;
         }
     }
 }
