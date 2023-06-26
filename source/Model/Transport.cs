@@ -19,4 +19,48 @@ namespace TourPlannerModel
         [Display(Name = "Bicycle")]
         Bicycle
     }
+    
+    public static class TransportExtension
+    {
+
+        public static Transport GetTransportType(string comboBoxValue)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(comboBoxValue) && comboBoxValue.Contains(":"))
+                {
+                    int startIndex = comboBoxValue.IndexOf(":") + 1;
+                    string transportType = comboBoxValue.Substring(startIndex).Trim();
+                    switch (transportType)
+                    {
+                        case "Car":
+                            return Transport.Fastest;
+                        case "By Foot":
+                            return Transport.Pedestrian;
+                        case "Bicycle":
+                            return Transport.Bicycle;
+                        default:
+                            return Transport.Fastest;
+                    }
+                }
+                else
+                {
+                    throw new NullReferenceException();
+
+                }
+
+            }
+            catch (NullReferenceException)
+            {
+                Console.WriteLine("Transporttype value was null");
+                return Transport.Fastest;
+            }
+
+        }
+
+
+
+    }
+    
+   
 }

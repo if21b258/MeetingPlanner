@@ -34,10 +34,11 @@ namespace TourPlannerModel
             EstimatedTime = estimatedTime;
         }
 
-        public TourModel(string name, string origin, string destination, string description)
+        public TourModel(string name, string origin, Transport transporType, string destination, string description)
         {
             Name = name;
             Origin = origin;
+            TransportType = transporType;
             Destination = destination;
             Description = description;
             Distance = 0;

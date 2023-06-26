@@ -97,8 +97,9 @@ namespace TourPlannerUI.ViewModel
                 && !String.IsNullOrEmpty(_description))
                 {
                     CloseEvent?.Invoke(true);
-                    TourModel tour = new TourModel(_name, _origin, _destination, _description);
-                    tour.TransportType = this.GetTransportType(_transportType);
+                    var TransportType = TransportExtension.GetTransportType(_transportType);
+                    TourModel tour = new TourModel(_name, _origin, TransportType, _destination, _description);
+                    
                     await _tourServiceOfficer.AddTour(tour);
                     _tourListViewModel.LoadTours();
 
@@ -114,40 +115,6 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
-        private Transport GetTransportType(string comboBoxValue)
-        {
-            try
-            {
-                if (!string.IsNullOrEmpty(comboBoxValue) && comboBoxValue.Contains(":"))
-                {
-                    int startIndex = comboBoxValue.IndexOf(":") + 1;
-                    string transportType = comboBoxValue.Substring(startIndex).Trim();
-                    switch (transportType)
-                    {
-                        case "Car":
-                            return Transport.Fastest;
-                        case "By Foot":
-                            return Transport.Pedestrian;
-                        case "Bicycle":
-                            return Transport.Bicycle;
-                        default:
-                            return Transport.Fastest;
-                    }
-                }
-                else
-                {
-                    throw new NullReferenceException();
-                    
-                }
-
-            }
-            catch(NullReferenceException)
-            {
-                Console.WriteLine("Transporttype value was null");
-                return Transport.Fastest;
-            }
-            
-        }
             
 
         private void Cancel(object commandParameter)

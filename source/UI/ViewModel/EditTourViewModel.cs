@@ -18,6 +18,7 @@ namespace TourPlannerUI.ViewModel
         private TourListViewModel _tourListViewModel;
         private TourRouteViewModel _tourRouteViewModel;
         private TourModel _selectedTour;
+        private string transport;
         public ICommand EditTourCommand { get; set; }
         public ICommand CancelCommand { get; set; }
         public Action<bool> CloseEvent;
@@ -65,16 +66,26 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
-        public Transport TransportType
+        public string TransportType
         {
-            get { return _selectedTour.TransportType; }
+            get { return transport; }
             set
             {
-                _selectedTour.TransportType = value;
+                transport = value;
 
                 //Errorhandling fehlt noch 
             }
         }
+        /*public Transport TransportType
+        {
+            get { return _selectedTour.TransportType; }
+            set
+            {
+                _selectedTour.TransportType = TransportExtension.GetTransportType(transport);
+
+                //Errorhandling fehlt noch 
+            }
+        }*/
 
         public string Description
         {
@@ -93,6 +104,7 @@ namespace TourPlannerUI.ViewModel
             && !String.IsNullOrEmpty(_selectedTour.Description))
             {
                 CloseEvent?.Invoke(true);
+                _selectedTour.TransportType = TransportExtension.GetTransportType(transport);
                 _tourService.EditTour(_selectedTour);
                 _tourListViewModel.LoadTours();
                 _tourRouteViewModel.GetImage(_selectedTour);
