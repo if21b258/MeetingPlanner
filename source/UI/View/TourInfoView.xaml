@@ -43,7 +43,7 @@
         <Label Grid.Row="6" Grid.Column="1" Content="Distance:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
         <Label Grid.Row="6" Grid.Column="2" Content="{Binding Distance}" ContentStringFormat="{}{0} km" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Label Grid.Row="7" Grid.Column="1" Content="Estimated Time:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <Label Grid.Row="7" Grid.Column="2" Content="{Binding EstimatedTime}" ContentStringFormat="{}{0} time?" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Grid.Row="7" Grid.Column="2" Content="{Binding EstimatedTime}" ContentStringFormat="{}{0:%d}d {0:%h}h {0:%m}min" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Label Grid.Row="8" Grid.Column="1" Content="Tour Id:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
         <Label Grid.Row="8" Grid.Column="2" Content="{Binding Id}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
     </Grid>

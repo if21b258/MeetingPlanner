@@ -56,17 +56,8 @@ namespace TourPlannerBL
                             var session = JsonContent["route"]["sessionId"].ToString();
                             var route = JsonContent["route"];
                             tourModel.Distance = (float)Math.Round(JsonContent["route"]["distance"].Value<double>(), 2);
-                            //string estimationTime = JsonContent["route"]["formattedTime"].Value<string>();
                             float estimationTime = (float)Math.Round(JsonContent["route"]["realTime"].Value<float>(), 0);
                             tourModel.EstimatedTime = TimeSpan.FromSeconds(estimationTime);
-                            /*if (TimeSpan.TryParse(estimationTime, out TimeSpan EstimatedTime))
-                            {
-                                tourModel.EstimatedTime = EstimatedTime;
-                            }
-                            else
-                            {
-                                Console.WriteLine("Did not worked");
-                            }*/
                             return await GetMap(tourModel);
                         }
                     }
