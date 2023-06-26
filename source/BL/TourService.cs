@@ -41,6 +41,7 @@ namespace TourPlannerBL
 
         public void DeleteTour(TourModel tour)
         {
+            _fileService.DeleteImage(tour);
             _tourRepo.DeleteTour(tour);
             _tourRepo.Save();
         }

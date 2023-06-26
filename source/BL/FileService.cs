@@ -75,5 +75,23 @@ namespace TourPlannerBL
                 Console.WriteLine("Error deleting picture folder " + e.Message);
             }
         }
+
+        public void DeleteImage(TourModel tour)
+        {
+            string filePath = GetFilePath(tour);
+
+            try
+            {
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                }
+                Console.WriteLine("Image successfully deleted");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error deleting image " + e.Message);
+            }
+        }
     }
 }
