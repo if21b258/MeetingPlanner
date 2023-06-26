@@ -90,7 +90,7 @@ namespace TourPlannerUI.ViewModel
         private void EditTour(object commandParameter)
         {
             if (!String.IsNullOrEmpty(_selectedTour.Name) && !String.IsNullOrEmpty(_selectedTour.Origin) && !String.IsNullOrEmpty(_selectedTour.Destination)
-                && /*!String.IsNullOrEmpty(_selectedTour.TransportType) &&*/ !String.IsNullOrEmpty(_selectedTour.Description))
+            && !String.IsNullOrEmpty(_selectedTour.Description))
             {
                 CloseEvent?.Invoke(true);
                 _tourService.EditTour(_selectedTour);
