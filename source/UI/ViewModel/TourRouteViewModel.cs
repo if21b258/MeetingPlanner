@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.Tracing;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -70,6 +71,7 @@ namespace TourPlannerUI.ViewModel
             catch (Exception FileNotFoundException)
             {
                 Console.WriteLine("File konnte nicht gefunden werden");
+                RouteImage = null;
             }
             
         }
