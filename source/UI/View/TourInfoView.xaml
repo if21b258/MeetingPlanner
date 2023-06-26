@@ -9,16 +9,13 @@
              DataContext="{Binding TourInfoViewModel, Source={StaticResource IoCConfig2}}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1.5*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1.5*"/>
 
         </Grid.RowDefinitions>
 
@@ -26,25 +23,38 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="5*"/>
             <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Content="Tour Info" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" Content="Tour Info" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        
         <Label Grid.Row="1" Grid.Column="1" Content="Tour Name:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
         <Label Grid.Row="1" Grid.Column="2" Content="{Binding Name}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Grid.Row="1" Grid.Column="3" Content="Tour Id:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label Grid.Row="1" Grid.Column="4" Content="{Binding Id}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        
         <Label Grid.Row="2" Grid.Column="1" Content="Origin:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
         <Label Grid.Row="2" Grid.Column="2" Content="{Binding Origin}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Grid.Row="3" Grid.Column="1" Content="Destination:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <Label Grid.Row="3" Grid.Column="2" Content="{Binding Destination}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Grid.Row="4" Grid.Column="1" Content="Transport Type:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <Label Grid.Row="4" Grid.Column="2" Content="{Binding TransportType}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Grid.Row="5" Grid.Column="1" Content="Description:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <Label Grid.Row="5" Grid.Column="2" Content="{Binding Description}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Grid.Row="6" Grid.Column="1" Content="Distance:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <Label Grid.Row="6" Grid.Column="2" Content="{Binding Distance}" ContentStringFormat="{}{0} km" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Grid.Row="7" Grid.Column="1" Content="Estimated Time:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <Label Grid.Row="7" Grid.Column="2" Content="{Binding EstimatedTime}" ContentStringFormat="{}{0:%d}d {0:%h}h {0:%m}min" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Grid.Row="8" Grid.Column="1" Content="Tour Id:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <Label Grid.Row="8" Grid.Column="2" Content="{Binding Id}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Grid.Row="2" Grid.Column="3" Content="Destination:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label Grid.Row="2" Grid.Column="4" Content="{Binding Destination}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+        <Label Grid.Row="3" Grid.Column="1" Content="Distance:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label Grid.Row="3" Grid.Column="2" Content="{Binding Distance}" ContentStringFormat="{}{0} km" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Grid.Row="3" Grid.Column="3" Content="Estimated Time:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label Grid.Row="3" Grid.Column="4" Content="{Binding EstimatedTime}" ContentStringFormat="{}{0:%d}d {0:%h}h {0:%m}min" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+        <Label Grid.Row="4" Grid.Column="1" Content="Popularity:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label Grid.Row="4" Grid.Column="2" Content="{Binding Popularity}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Grid.Row="4" Grid.Column="3" Content="Child-Friendliness:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label Grid.Row="4" Grid.Column="4" Content="{Binding ChildFriendliness}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+        <Label Grid.Row="5" Grid.Column="1" Content="Transport Type:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label Grid.Row="5" Grid.Column="2" Content="{Binding TransportType}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Grid.Row="5" Grid.Column="3" Content="Description:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label Grid.Row="5" Grid.Column="4" Content="{Binding Description}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        
+
     </Grid>
 </UserControl>

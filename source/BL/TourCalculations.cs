@@ -9,15 +9,19 @@ namespace TourPlannerBL
 {
     public class TourCalculations
     {
-        public int? GetPopularity(TourModel tour)
+        public int? GetPopularity(TourModel? tour)
         {
+            if (tour == null) { return null; }
+
             if (tour.Logs == null) { return null; }
 
             return (tour.Logs.Count());
         }
 
-        public float? GetChildFriendliness(TourModel tour)
+        public float? GetChildFriendliness(TourModel? tour)
         {
+            if (tour == null) { return null; }
+
             if (tour.Logs == null) { return null; }
 
             if (tour.Logs.Count == 0) { return null; }

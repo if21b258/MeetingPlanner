@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using TourPlannerBL;
 using TourPlannerModel;
 
 namespace TourPlannerUI.ViewModel
@@ -13,6 +14,7 @@ namespace TourPlannerUI.ViewModel
     {
         private TourListViewModel _tourListViewModel;
         private TourModel? _selectedTour;
+        private TourCalculations _tourCalculations = new TourCalculations();
 
         public TourInfoViewModel(TourListViewModel tourListViewModel)
         {
@@ -33,6 +35,8 @@ namespace TourPlannerUI.ViewModel
                 RaisePropertyChangedEvent(nameof(Distance));
                 RaisePropertyChangedEvent(nameof(EstimatedTime));
                 RaisePropertyChangedEvent(nameof(Id));
+                RaisePropertyChangedEvent(nameof(Popularity));
+                RaisePropertyChangedEvent(nameof(ChildFriendliness));
             }
         }
 
@@ -74,6 +78,16 @@ namespace TourPlannerUI.ViewModel
         public int? Id
         {
             get { return _selectedTour?.Id; }
+        }
+
+        public int? Popularity
+        {
+            get { return _tourCalculations.GetPopularity(_selectedTour); }
+        }
+
+        public float? ChildFriendliness
+        {
+            get { return _tourCalculations.GetChildFriendliness(_selectedTour); }
         }
     }
 }
