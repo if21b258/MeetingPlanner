@@ -18,11 +18,11 @@ namespace TourPlannerModel
         public Transport TransportType { get; set; }
         public string Description { get; set; }
         public float Distance { get; set; }
-        public float EstimatedTime { get; set; }
+        public TimeSpan? EstimatedTime { get; set; }
 
         public TourModel() { }
 
-        public TourModel(string name, string origin, string destination, string description, float distance, float estimatedTime)
+        public TourModel(string name, string origin, string destination, string description, float distance, TimeSpan estimatedTime)
         {
             Name = name;
             Origin = origin;
@@ -39,7 +39,7 @@ namespace TourPlannerModel
             Destination = destination;
             Description = description;
             Distance = 0;
-            EstimatedTime = 0;
+            //EstimatedTime = 0;
         }
     }
 }

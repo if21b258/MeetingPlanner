@@ -66,7 +66,7 @@ namespace TourPlannerUI.ViewModel
             get { return _selectedTour?.Distance; }
         }
 
-        public float? EstimatedTime
+        public TimeSpan? EstimatedTime
         {
             get { return _selectedTour?.EstimatedTime; }
         }

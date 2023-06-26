@@ -125,7 +125,7 @@ namespace TourPlannerUI.ViewModel
                     switch (transportType)
                     {
                         case "Car":
-                            return Transport.Bicycle;
+                            return Transport.Fastest;
                         case "By Foot":
                             return Transport.Pedestrian;
                         case "Bicycle":
