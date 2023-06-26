@@ -41,7 +41,7 @@ namespace TourPlannerUI.ViewModel
 
         private async void ImportTour(object obj)
         {
-                string? filePath = ShowSaveFileDialog("Imported Tour", "json");
+                string? filePath = ShowSaveFileDialog("Tour", "json");
                 if (filePath != null)
                 {
                     await _tourService.ImportTour(filePath);
@@ -53,7 +53,7 @@ namespace TourPlannerUI.ViewModel
         {
             if (_tourListViewModel.SelectedTour != null)
             {
-                string? filePath = ShowSaveFileDialog("Exported Tour", "json");
+                string? filePath = ShowSaveFileDialog("Tour", "json");
                 if (filePath != null)
                 {
                     _tourService.ExportTour(_tourListViewModel.SelectedTour, filePath);
