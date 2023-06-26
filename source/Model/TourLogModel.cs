@@ -4,12 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace TourPlannerModel
 {
     public class TourLogModel
     {
+        [JsonIgnore]
         public int? Id { get; set; }
+        [JsonIgnore]
         public TourModel Tour { get; set; }
         public DateTime Date { get; set; }
         public string Comment { get; set; }

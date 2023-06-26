@@ -39,18 +39,25 @@ namespace TourPlannerUI.ViewModel
             AboutCommand = new RelayCommand<object>(About);
         }
 
-        private void ImportTour(object obj)
+        private async void ImportTour(object obj)
         {
-            //TODO Import Tour
-            throw new NotImplementedException();
+                string? filePath = ShowSaveFileDialog("Imported Tour", "json");
+                if (filePath != null)
+                {
+                    await _tourService.ImportTour(filePath);
+                    _tourListViewModel.LoadTours();
+                }
         }
 
         private void ExportTour(object obj)
         {
             if (_tourListViewModel.SelectedTour != null)
             {
-                //TODO Export Tour
-                throw new NotImplementedException();
+                string? filePath = ShowSaveFileDialog("Exported Tour", "json");
+                if (filePath != null)
+                {
+                    _tourService.ExportTour(_tourListViewModel.SelectedTour, filePath);
+                }
             }
             else
             {
@@ -62,7 +69,7 @@ namespace TourPlannerUI.ViewModel
         {
             if (_tourListViewModel.SelectedTour != null)
             {
-                string? filePath = ShowSaveFileDialog("Tour", "pdf");
+                string? filePath = ShowSaveFileDialog("Tour Report", "pdf");
                 if (filePath != null)
                 {
                     _reportService.GenerateTourReport(_tourListViewModel.SelectedTour, filePath);
@@ -77,7 +84,7 @@ namespace TourPlannerUI.ViewModel
 
         private void GenerateSummaryReport(object obj)
         {
-            string? filePath = ShowSaveFileDialog("Summary", "pdf");
+            string? filePath = ShowSaveFileDialog("Summary Report", "pdf");
             if (filePath != null)
             {
                 _reportService.GenerateSummaryReport(_tourListViewModel.TourList, filePath);
@@ -102,6 +109,24 @@ namespace TourPlannerUI.ViewModel
         {
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.FileName = defaultName;
+            dialog.DefaultExt = $".{ext}";
+            dialog.Filter = $"{ext} documents |*.{ext}";
+
+            bool? result = dialog.ShowDialog();
+
+            if (result == true)
+            {
+                return dialog.FileName;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public string? ShowSelectFileDialog(string ext)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
             dialog.DefaultExt = $".{ext}";
             dialog.Filter = $"{ext} documents |*.{ext}";
 

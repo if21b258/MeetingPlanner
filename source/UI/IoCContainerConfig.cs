@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using TourPlannerUI.ViewModel;
 using TourPlannerDAL;
 using TourPlannerBL;
+using Newtonsoft.Json;
 
 namespace TourPlannerUI
 {
