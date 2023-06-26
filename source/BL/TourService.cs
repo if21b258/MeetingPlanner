@@ -10,7 +10,9 @@ using TourPlannerDAL;
 using TourPlannerDAL.Repository;
 using System.Configuration;
 using System.Collections.ObjectModel;
+using System.Text.Json;
 using static System.Net.Mime.MediaTypeNames;
+
 
 namespace TourPlannerBL
 {
@@ -35,7 +37,6 @@ namespace TourPlannerBL
             _tourRepo.AddTour(tour);
             _tourRepo.Save();
             _fileService.SaveImageToFile(image, tour);
-
         }
 
         public void DeleteTour(TourModel tour)
@@ -99,6 +100,20 @@ namespace TourPlannerBL
         public void EnsureDatabaseDeleted()
         {
             _dbContext.Database.EnsureDeleted();
+        }
+
+        public void ExportTour(TourModel tour, string filePath)
+        {
+
+            string jsonString = JsonSerializer.Serialize(tour, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(filePath, jsonString);
+        }
+
+        public async Task ImportTour(string filePath)
+        {
+            string jsonString = File.ReadAllText(filePath);
+            TourModel tour = JsonSerializer.Deserialize<TourModel>(jsonString);
+            await AddTour(tour);
         }
     }
 }

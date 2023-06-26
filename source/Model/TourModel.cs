@@ -5,11 +5,13 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace TourPlannerModel
 {
     public class TourModel
     {
+        [JsonIgnore]
         public int? Id { get; set; }
         public ICollection<TourLogModel> Logs { get; set; }
         public string Name { get; set; }
