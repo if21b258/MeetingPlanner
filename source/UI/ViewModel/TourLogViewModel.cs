@@ -42,6 +42,7 @@ namespace TourPlannerUI.ViewModel
             get { return _selectedTour; }
         }
 
+        // The Observable Collection 
         public ObservableCollection<TourLogModel> TourLogList
         {
             get { return _tourLogList; }
@@ -54,7 +55,7 @@ namespace TourPlannerUI.ViewModel
                 }
             }
         }
-
+        //Get the selected TourLog
         public TourLogModel? SelectedTourLog
         {
             get { return _selectedTourLog; }
@@ -68,6 +69,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        //AddWindow will show up
         private void AddTourLog(object obj)
         {
             if(_selectedTour != null)
@@ -82,6 +84,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        //Delete popup to make sure if the user would like to delete this tourLog
         private void DeleteTourLog(object obj)
         {
             if(_selectedTourLog != null)
@@ -102,6 +105,7 @@ namespace TourPlannerUI.ViewModel
 
         }
 
+        //EditWindow will be shown up
         private void EditTourLog(object obj)
         {
             if(_selectedTourLog != null)
@@ -116,6 +120,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        //´Loading TourLogs
         public void LoadTourLogs()
         {
             if (_selectedTour != null)
@@ -128,6 +133,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        //If a new tourlog has been selected
         private void OnSelectedTourLogChanged()
         {
             SelectedTourLogChanged?.Invoke(SelectedTourLog);

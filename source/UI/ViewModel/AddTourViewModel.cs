@@ -32,6 +32,7 @@ namespace TourPlannerUI.ViewModel
             _validation = new Validation();
         }
 
+        // Enum for handling the values of the combobox
         public Dictionary<Transport, string> TransportEnumForCombo { get; } =
         new Dictionary<Transport, string>()
         {
@@ -40,6 +41,7 @@ namespace TourPlannerUI.ViewModel
             {Transport.Bicycle, "Bicycle" },
         };
 
+        //Name
         private string _name = "";
         public string Name
         {
@@ -50,6 +52,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        //Origin
         private string _origin = "";
         public string Origin
         {
@@ -60,6 +63,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        //Destination
         private string _destination = "";
         public string Destination
         {
@@ -70,6 +74,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        //TransportType
         private Transport _transportType = Transport.Fastest;
         public Transport TransportType
         {
@@ -81,6 +86,7 @@ namespace TourPlannerUI.ViewModel
 
         }
 
+        //Description
         private string _description = "";
         public string Description
         {
@@ -91,6 +97,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        // Tour will be validated and added to the tourlist
         private async void AddTour(object commandParameter)
         {
             try
@@ -114,6 +121,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        // Window will be closed
         private void Cancel(object commandParameter)
         {
             CloseEvent?.Invoke(false);

@@ -38,7 +38,7 @@ namespace TourPlannerUI.ViewModel
             CancelCommand = new RelayCommand<object>(Cancel);
             _validation = new Validation();
         }
-
+        //Date
         public DateTime Date
         {
             get { return _date; }
@@ -49,7 +49,7 @@ namespace TourPlannerUI.ViewModel
             }
 
         }
-
+        //Comment
         public string Comment
         {
             get { return _comment; }
@@ -58,7 +58,7 @@ namespace TourPlannerUI.ViewModel
                 _comment = value;
             }
         }
-
+        //Difficulty
         public int Difficulty
         {
             get { return _difficulty; }
@@ -67,7 +67,7 @@ namespace TourPlannerUI.ViewModel
                 _difficulty = value;
             }
         }
-
+        //Duration
         public TimeSpan Duration
         {
             get { return _duration; }
@@ -76,7 +76,7 @@ namespace TourPlannerUI.ViewModel
                 _duration = value;
             }
         }
-
+        //Rating
         public int Rating
         {
             get { return _rating; }
@@ -85,7 +85,7 @@ namespace TourPlannerUI.ViewModel
                 _rating = value;
             }
         }
-
+        // TourLog will be validated and added to the tourLoglist
         private void AddTourLog(object commandParameter)
         {
             try
@@ -116,6 +116,7 @@ namespace TourPlannerUI.ViewModel
 
         }
 
+        // Window will be closed
         private void Cancel(object commandParameter)
         {
             CloseEvent?.Invoke(false);

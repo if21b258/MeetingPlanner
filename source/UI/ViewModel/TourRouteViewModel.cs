@@ -28,6 +28,7 @@ namespace TourPlannerUI.ViewModel
             _fileService = new FileService();
         }
 
+        //Get the new Image
         public BitmapImage RouteImage
         {
             get { return _routeImage; }
@@ -44,7 +45,6 @@ namespace TourPlannerUI.ViewModel
         {
             try
             {
-                //Placeholder wenn tour gelöscht wird (tour=null) crashed das programm. Sollte in dem fall kein bild anzeigen.
                 if(tour == null)
                 {
                     return;
@@ -57,13 +57,13 @@ namespace TourPlannerUI.ViewModel
                     // Create a new BitmapImage
                     BitmapImage bitmapImage = new BitmapImage();
 
-                    // Set the MemoryStream as the source of the BitmapImage
+                    //Get the BitmapImage
                     bitmapImage.BeginInit();
                     bitmapImage.StreamSource = memoryStream;
                     bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
                     bitmapImage.EndInit();
 
-                    // Set the BitmapImage as the ImageData property in your ViewModel
+                    // Set the BitmapImage to RouteImage, so that it will be shown in the UI
                     RouteImage = bitmapImage;
                 }
 
@@ -76,6 +76,7 @@ namespace TourPlannerUI.ViewModel
             
         }
 
+        //If the user has selected a new tour
         private void HandleSelectedTourChanged(TourModel selectedTour)
         {
             _selectedTour = selectedTour;

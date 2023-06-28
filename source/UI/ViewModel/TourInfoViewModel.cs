@@ -37,6 +37,7 @@ namespace TourPlannerUI.ViewModel
             RaisePropertyChangedEvent(nameof(ChildFriendliness));
         }
 
+        //Get the Attributes from the selected tour for showing it in the general column
         public string? Name
         {
             get { return _selectedTour?.Name; }

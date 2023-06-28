@@ -33,6 +33,7 @@ namespace TourPlannerUI.ViewModel
             _validation = new Validation();
         }
 
+        //Date
         public DateTime Date
         {
             get { return _selectedTourLog.Date; }
@@ -44,6 +45,7 @@ namespace TourPlannerUI.ViewModel
 
         }
 
+        //Comment
         public string Comment
         {
             get { return _selectedTourLog.Comment; }
@@ -54,6 +56,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        //Difficulty
         public int Difficulty
         {
             get { return _selectedTourLog.Difficulty; }
@@ -64,6 +67,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        //Duration
         public TimeSpan Duration
         {
             get { return _selectedTourLog.Duration; }
@@ -73,6 +77,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        //Rating
         public int Rating
         {
             get { return _selectedTourLog.Rating; }
@@ -82,6 +87,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        // new TourLog will be validated and added to the tourLoglist if it has the right input
         private void EditTourLog(object commandParameter)
         {
             try
@@ -111,6 +117,7 @@ namespace TourPlannerUI.ViewModel
 
         }
 
+        // Window will be closed
         private void Cancel(object commandParameter)
         {
             CloseEvent?.Invoke(false);

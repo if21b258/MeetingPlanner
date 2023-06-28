@@ -35,6 +35,7 @@ namespace TourPlannerUI.ViewModel
             _tourService = tourService;
         }
 
+        // The Obervable Collection
         private ObservableCollection<TourModel> _tourList;
         public ObservableCollection<TourModel> TourList
         {
@@ -49,6 +50,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        // The tour which will be selected by the user in the tourlistview
         private TourModel? _selectedTour;
         public TourModel? SelectedTour
         {
@@ -63,6 +65,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        //AddWindow will be shown up
         private void AddTour(object obj)
         {
             AddTourWindow addtour = new AddTourWindow();
@@ -70,6 +73,7 @@ namespace TourPlannerUI.ViewModel
             addtour.ShowDialog();
         }
 
+        //Delete popup to make sure if the user would like to delete this tour
         private void DeleteTour(object obj)
         {
             if(_selectedTour != null)
@@ -88,6 +92,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        //EditWindow will be shown up
         private void EditTour(object obj)
         {
             if(_selectedTour != null)
@@ -102,6 +107,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        //Loading Tours
         public void LoadTours()
         {
             TourList = _tourService.GetTours();
@@ -112,6 +118,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        //If another Tour has been chosen
         public void OnSelectedTourChanged()
         {
             SelectedTourChanged?.Invoke(SelectedTour);
