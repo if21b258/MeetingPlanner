@@ -39,10 +39,10 @@ namespace TourPlannerUI.ViewModel
             _tourListViewModel = tourListViewModel;
             _tourRouteViewModel = tourRouteViewModel;
             _selectedTour = _tourListViewModel.SelectedTour;
+            _validation = new Validation();
             EditTourCommand = new RelayCommand<object>(EditTour);
             CancelCommand = new RelayCommand<object>(Cancel);
             InitializeFields();
-            _validation = new Validation();
         }
 
 
@@ -53,8 +53,6 @@ namespace TourPlannerUI.ViewModel
             set
             {
                 _name = value;
-
-                //Errorhandling fehlt noch 
             }
         }
 
@@ -65,8 +63,6 @@ namespace TourPlannerUI.ViewModel
             set
             {
                 _origin = value;
-
-                //Errorhandling fehlt noch 
             }
         }
 
@@ -77,8 +73,6 @@ namespace TourPlannerUI.ViewModel
             set
             {
                 _destination = value;
-
-                //Errorhandling fehlt noch 
             }
         }
 
@@ -89,7 +83,6 @@ namespace TourPlannerUI.ViewModel
             set
             {
                 _transportType = value;
-
             }
 
         }
@@ -101,40 +94,34 @@ namespace TourPlannerUI.ViewModel
             set
             {
                 _description = value;
-
-                //Errorhandling fehlt noch 
             }
         }
 
         private async void EditTour(object commandParameter)
         {
-            if (!String.IsNullOrEmpty(_selectedTour.Name) && !String.IsNullOrEmpty(_selectedTour.Origin) && !String.IsNullOrEmpty(_selectedTour.Destination)
-            && !String.IsNullOrEmpty(_selectedTour.Description))
+            try
             {
-                CloseEvent?.Invoke(true);
-                ApplyChanges();
-                await _tourService.EditTour(_selectedTour);
-                _tourListViewModel.LoadTours();
-                _tourListViewModel.OnSelectedTourChanged();
-                _tourRouteViewModel.GetImage(_selectedTour);
-            }
-            else
-            {
-                if (_validation.ValidateTourInput(_selectedTour))
+                TourModel temp = new TourModel();
+                ApplyChanges(temp);
+                if (_validation.ValidateTourInput(temp))
                 {
-                    _tourService.EditTour(_selectedTour);
+                    ApplyChanges(_selectedTour);
+                    await _tourService.EditTour(_selectedTour);
                     _tourListViewModel.LoadTours();
+                    _tourListViewModel.OnSelectedTourChanged();
                     _tourRouteViewModel.GetImage(_selectedTour);
+                    CloseEvent?.Invoke(true);
                 }
                 else
                 {
-                    MessageBox.Show("Your input was invalid, please make sure that your description is not longer than 100 characters");
+                    MessageBox.Show("Your input was invalid, please make sure that your description is not longer than 100 characters and all fields are filled in");
                 }
             }
-            else
+            catch (Exception e)
             {
-                throw new ArgumentException("Please fill in all fields");
+                Console.WriteLine($"Processing failed: {e.Message}");
             }
+
         }
 
         private void InitializeFields()
@@ -146,13 +133,13 @@ namespace TourPlannerUI.ViewModel
             _transportType = _selectedTour.TransportType;
         }
 
-        private void ApplyChanges()
+        private void ApplyChanges(TourModel tour)
         {
-            _selectedTour.Name = _name;
-            _selectedTour.Origin = _origin;
-            _selectedTour.Destination = _destination;
-            _selectedTour.Description = _description;
-            _selectedTour.TransportType = _transportType;
+            tour.Name = _name;
+            tour.Origin = _origin;
+            tour.Destination = _destination;
+            tour.Description = _description;
+            tour.TransportType = _transportType;
         }
 
         private void Cancel(object commandParameter)

@@ -18,11 +18,7 @@ namespace TourPlannerUI.ViewModel
         private TourListViewModel _tourListViewModel;
         private TourService _tourServiceOfficer;
         private Validation _validation;
-        private string _name = "";
-        private string _origin = "";
-        private string _destination = "";
-        private Transport _transportType;
-        private string _description = "";
+
         public ICommand AddTourCommand { get; set; }
         public ICommand CancelCommand { get; set; }
         public Action<bool> CloseEvent;
@@ -99,24 +95,17 @@ namespace TourPlannerUI.ViewModel
         {
             try
             {
-                if (!String.IsNullOrEmpty(_name) && !String.IsNullOrEmpty(_origin) && !String.IsNullOrEmpty(_destination)
-                && !String.IsNullOrEmpty(_description))
+                TourModel tour = new TourModel(_name, _origin, _transportType, _destination, _description);
+                if (_validation.ValidateTourInput(tour))
                 {
+                    await _tourServiceOfficer.AddTour(tour);
+                    _tourListViewModel.LoadTours();
                     CloseEvent?.Invoke(true);
-                    TourModel tour = new TourModel(_name, _origin, _transportType, _destination, _description);
-                    if (_validation.ValidateTourInput(tour))
-                    {
-                        await _tourServiceOfficer.AddTour(tour);
-                        _tourListViewModel.LoadTours();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Your input was invalid, please make sure that your description is not longer than 100 characters");
-                    } 
                 }
                 else
                 {
-                    throw new ArgumentException("Please fill in all fields");
+                    MessageBox.Show("Your input was invalid, please make sure that your description is not longer than 100 characters and all fields are filled");
+                    throw new ArgumentException("Invalid Input");
                 }
             }
             catch (Exception e)
