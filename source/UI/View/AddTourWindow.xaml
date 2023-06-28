@@ -35,14 +35,12 @@
         <Label Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center">Destination:</Label>
         <TextBox Grid.Column="1" Grid.ColumnSpan="2" Height="36" Grid.Row="3" Margin="5"  Text="{Binding Destination}"></TextBox>
         <Label Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center">Transport-Type:</Label>
-        <ComboBox SelectedIndex="0" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Margin="5" SelectedItem="{Binding TransportType}">
-            <ComboBox.Items>
-                <ComboBoxItem Content="Car"/>
-                <ComboBoxItem Content="By Foot"/>
-                <ComboBoxItem Content="Bicycle"/>
-            </ComboBox.Items>
+        <ComboBox Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Margin="5"
+                        ItemsSource="{Binding Path=TransportEnumForCombo}" 
+                        DisplayMemberPath="Value" 
+                        SelectedValuePath="Key"
+                        SelectedValue="{Binding Path=TransportType, Mode=TwoWay}">
         </ComboBox>
-
         <Label Grid.Column="0" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center">Tour-Description:</Label>
         <TextBox Grid.Column="1" Grid.ColumnSpan="2" Height="90" Grid.Row="5" Margin="5"  Grid.RowSpan="2" Text="{Binding Description}"></TextBox>
 

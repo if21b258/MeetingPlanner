@@ -20,7 +20,7 @@ namespace TourPlannerUI.ViewModel
         private string _name = "";
         private string _origin = "";
         private string _destination = "";
-        private string _transportType = "";
+        private Transport _transportType;
         private string _description = "";
         public ICommand AddTourCommand { get; set; }
         public ICommand CancelCommand { get; set; }
@@ -33,6 +33,14 @@ namespace TourPlannerUI.ViewModel
             AddTourCommand = new RelayCommand<object>(AddTour);
             CancelCommand = new RelayCommand<object>(Cancel);
         }
+
+        public Dictionary<Transport, string> TransportEnumForCombo { get; } =
+        new Dictionary<Transport, string>()
+        {
+            {Transport.Fastest, "Car"},
+            {Transport.Pedestrian, "By Foot"},
+            {Transport.Bicycle, "Bicycle" },
+        };
 
         public string Name
         {
@@ -67,7 +75,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
-        public string TransportType
+        public Transport TransportType
         {
             get { return _transportType; }
             set
@@ -97,12 +105,9 @@ namespace TourPlannerUI.ViewModel
                 && !String.IsNullOrEmpty(_description))
                 {
                     CloseEvent?.Invoke(true);
-                    var TransportType = TransportExtension.GetTransportType(_transportType);
-                    TourModel tour = new TourModel(_name, _origin, TransportType, _destination, _description);
-                    
+                    TourModel tour = new TourModel(_name, _origin, _transportType, _destination, _description);
                     await _tourServiceOfficer.AddTour(tour);
                     _tourListViewModel.LoadTours();
-
                 }
                 else
                 {
@@ -114,8 +119,6 @@ namespace TourPlannerUI.ViewModel
                 Console.WriteLine($"Processing failed: {e.Message}");
             }
         }
-
-            
 
         private void Cancel(object commandParameter)
         {

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -18,7 +19,7 @@ namespace TourPlannerUI.ViewModel
         private TourListViewModel _tourListViewModel;
         private TourRouteViewModel _tourRouteViewModel;
         private TourModel _selectedTour;
-        private string transport;
+        private Transport transport;
         public ICommand EditTourCommand { get; set; }
         public ICommand CancelCommand { get; set; }
         public Action<bool> CloseEvent;
@@ -32,7 +33,13 @@ namespace TourPlannerUI.ViewModel
             EditTourCommand = new RelayCommand<object>(EditTour);
             CancelCommand = new RelayCommand<object>(Cancel);
         }
-
+        public Dictionary<Transport, string> TransportEnumForCombo { get; } =
+        new Dictionary<Transport, string>()
+        {
+            {Transport.Fastest, "Car"},
+            {Transport.Pedestrian, "By Foot"},
+            {Transport.Bicycle, "Bicycle" },
+        };
         public string Name
         {
             get { return _selectedTour.Name; }
@@ -66,26 +73,16 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
-        public string TransportType
-        {
-            get { return transport; }
-            set
-            {
-                transport = value;
-
-                //Errorhandling fehlt noch 
-            }
-        }
-        /*public Transport TransportType
+        public Transport TransportType
         {
             get { return _selectedTour.TransportType; }
             set
             {
-                _selectedTour.TransportType = TransportExtension.GetTransportType(transport);
+                _selectedTour.TransportType = value;
 
                 //Errorhandling fehlt noch 
             }
-        }*/
+        }
 
         public string Description
         {
@@ -104,7 +101,6 @@ namespace TourPlannerUI.ViewModel
             && !String.IsNullOrEmpty(_selectedTour.Description))
             {
                 CloseEvent?.Invoke(true);
-                _selectedTour.TransportType = TransportExtension.GetTransportType(transport);
                 _tourService.EditTour(_selectedTour);
                 _tourListViewModel.LoadTours();
                 _tourRouteViewModel.GetImage(_selectedTour);
