@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace TourPlannerModel
 {
@@ -23,6 +25,19 @@ namespace TourPlannerModel
         public TimeSpan? EstimatedTime { get; set; }
 
         public TourModel() { }
+
+        public TourModel(int? id, ICollection<TourLogModel> logs, string name, string origin, string destination, Transport transportType, string description, float distance, TimeSpan? estimatedTime)
+        {
+            Id = id;
+            Logs = logs;
+            Name = name;
+            Origin = origin;
+            Destination = destination;
+            TransportType = transportType;
+            Description = description;
+            Distance = distance;
+            EstimatedTime = estimatedTime;
+        }
 
         public TourModel(string name, string origin, string destination, string description, float distance, TimeSpan estimatedTime)
         {

@@ -24,20 +24,17 @@ namespace TourPlannerUI.ViewModel
 
         private void HandleSelectedTourChanged(TourModel selectedTour)
         {
-            if (_selectedTour != selectedTour)
-            {
-                _selectedTour = selectedTour;
-                RaisePropertyChangedEvent(nameof(Name));
-                RaisePropertyChangedEvent(nameof(Origin));
-                RaisePropertyChangedEvent(nameof(Destination));
-                RaisePropertyChangedEvent(nameof(Description));
-                RaisePropertyChangedEvent(nameof(TransportType));
-                RaisePropertyChangedEvent(nameof(Distance));
-                RaisePropertyChangedEvent(nameof(EstimatedTime));
-                RaisePropertyChangedEvent(nameof(Id));
-                RaisePropertyChangedEvent(nameof(Popularity));
-                RaisePropertyChangedEvent(nameof(ChildFriendliness));
-            }
+            _selectedTour = selectedTour;
+            RaisePropertyChangedEvent(nameof(Name));
+            RaisePropertyChangedEvent(nameof(Origin));
+            RaisePropertyChangedEvent(nameof(Destination));
+            RaisePropertyChangedEvent(nameof(Description));
+            RaisePropertyChangedEvent(nameof(TransportType));
+            RaisePropertyChangedEvent(nameof(Distance));
+            RaisePropertyChangedEvent(nameof(EstimatedTime));
+            RaisePropertyChangedEvent(nameof(Id));
+            RaisePropertyChangedEvent(nameof(Popularity));
+            RaisePropertyChangedEvent(nameof(ChildFriendliness));
         }
 
         public string? Name

@@ -1,21 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using TourPlannerDAL;
-using TourPlannerUI.ViewModel;
-using TourPlannerBL;
-using System.IO;
-using System.Configuration;
-using System.Runtime.CompilerServices;
-using Microsoft.Win32;
+﻿using TourPlannerBL;
+using TourPlannerBL.Logging;
 
 namespace TourPlannerUI.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
+        private readonly ILoggerWrapper log = LoggerFactory.GetLogger();
+
         private TourService _tourService;
         private TourListViewModel _tourListViewModel;
         private TourLogViewModel _tourLogViewModel;
@@ -37,6 +28,8 @@ namespace TourPlannerUI.ViewModel
 
         private void Startup()
         {
+            log.Info("Tour Planner started.");
+
             _tourService.EnsureDatabaseCreated();
             _tourListViewModel.LoadTours();
             _tourLogViewModel.LoadTourLogs();
