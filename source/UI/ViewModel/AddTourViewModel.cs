@@ -17,6 +17,7 @@ namespace TourPlannerUI.ViewModel
     {
         private TourListViewModel _tourListViewModel;
         private TourService _tourServiceOfficer;
+        private Validation _validation;
         private string _name = "";
         private string _origin = "";
         private string _destination = "";
@@ -32,6 +33,7 @@ namespace TourPlannerUI.ViewModel
             _tourServiceOfficer = TourServiceOff;
             AddTourCommand = new RelayCommand<object>(AddTour);
             CancelCommand = new RelayCommand<object>(Cancel);
+            _validation = new Validation();
         }
 
         public Dictionary<Transport, string> TransportEnumForCombo { get; } =
@@ -48,8 +50,6 @@ namespace TourPlannerUI.ViewModel
             set
             {
                 _name = value;
-
-                //Errorhandling fehlt noch 
             }
         }
 
@@ -59,8 +59,6 @@ namespace TourPlannerUI.ViewModel
             set
             {
                 _origin = value;
-
-                //Errorhandling fehlt noch 
             }
         }
 
@@ -70,8 +68,6 @@ namespace TourPlannerUI.ViewModel
             set
             {
                 _destination = value;
-
-                //Errorhandling fehlt noch 
             }
         }
 
@@ -81,7 +77,6 @@ namespace TourPlannerUI.ViewModel
             set
             {
                 _transportType = value;
-             
             }
 
         }
@@ -92,8 +87,6 @@ namespace TourPlannerUI.ViewModel
             set
             {
                 _description = value;
-
-                //Errorhandling fehlt noch 
             }
         }
 
@@ -106,8 +99,15 @@ namespace TourPlannerUI.ViewModel
                 {
                     CloseEvent?.Invoke(true);
                     TourModel tour = new TourModel(_name, _origin, _transportType, _destination, _description);
-                    await _tourServiceOfficer.AddTour(tour);
-                    _tourListViewModel.LoadTours();
+                    if (_validation.ValidateTourInput(tour))
+                    {
+                        await _tourServiceOfficer.AddTour(tour);
+                        _tourListViewModel.LoadTours();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Your input was invalid, please make sure that your description is not longer than 100 characters");
+                    } 
                 }
                 else
                 {
@@ -124,5 +124,6 @@ namespace TourPlannerUI.ViewModel
         {
             CloseEvent?.Invoke(false);
         }
+        
     }
 }

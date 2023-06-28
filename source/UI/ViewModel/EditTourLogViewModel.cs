@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Xml.Linq;
@@ -17,6 +18,7 @@ namespace TourPlannerUI.ViewModel
         private TourService _tourService;
         private TourLogViewModel _tourLogViewModel;
         private TourLogModel _selectedTourLog;
+        private Validation _validation;
         public ICommand EditTourLogCommand { get; set; }
         public ICommand CancelCommand { get; set; }
         public Action<bool> CloseEvent;
@@ -28,6 +30,7 @@ namespace TourPlannerUI.ViewModel
             _selectedTourLog = _tourLogViewModel.SelectedTourLog;
             EditTourLogCommand = new RelayCommand<object>(EditTourLog);
             CancelCommand = new RelayCommand<object>(Cancel);
+            _validation = new Validation();
         }
 
         public DateTime Date
@@ -37,8 +40,6 @@ namespace TourPlannerUI.ViewModel
             set
             {
                 _selectedTourLog.Date = value;
-
-                //Errorhandling fehlt noch 
             }
 
         }
@@ -50,7 +51,6 @@ namespace TourPlannerUI.ViewModel
             {
                 _selectedTourLog.Comment = value;
 
-                //Errorhandling fehlt noch 
             }
         }
 
@@ -61,7 +61,6 @@ namespace TourPlannerUI.ViewModel
             {
                 _selectedTourLog.Difficulty = value;
 
-                //Errorhandling fehlt noch 
             }
         }
 
@@ -71,8 +70,6 @@ namespace TourPlannerUI.ViewModel
             set
             {
                 _selectedTourLog.Duration = value;
-
-                //Errorhandling fehlt noch 
             }
         }
 
@@ -81,9 +78,7 @@ namespace TourPlannerUI.ViewModel
             get { return _selectedTourLog.Rating; }
             set
             {
-                _selectedTourLog.Rating = value;
-
-                //Errorhandling fehlt noch 
+                _selectedTourLog.Rating = value; 
             }
         }
 
@@ -94,8 +89,15 @@ namespace TourPlannerUI.ViewModel
                 if (!String.IsNullOrEmpty(_selectedTourLog.Comment))
                 {
                     CloseEvent?.Invoke(true);
-                    _tourService.EditTourLog(_selectedTourLog);
-                    _tourLogViewModel.LoadTourLogs();
+                    if (_validation.ValidateTourLogInput(_selectedTourLog))
+                    {
+                        _tourService.EditTourLog(_selectedTourLog);
+                        _tourLogViewModel.LoadTourLogs();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Your input was invalid, please make sure that your comment is not longer than 100 characters");
+                    }
                 }
                 else
                 {

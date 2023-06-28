@@ -9,6 +9,7 @@ using TourPlannerUI;
 using TourPlannerModel;
 using TourPlannerUI.ViewModel;
 using TourPlannerBL;
+using System.Windows;
 
 namespace TourPlannerUI.ViewModel
 {
@@ -18,6 +19,7 @@ namespace TourPlannerUI.ViewModel
         private TourService _tourService;
         private TourLogViewModel _tourLogViewModel;
         private TourModel _selectedTour;
+        private Validation _validation;
         private DateTime _date = DateTime.Now;
         private string _comment;
         private int _difficulty;
@@ -34,6 +36,7 @@ namespace TourPlannerUI.ViewModel
             _selectedTour = _tourLogViewModel.SelectedTour;
             AddTourLogCommand = new RelayCommand<object>(AddTourLog);
             CancelCommand = new RelayCommand<object>(Cancel);
+            _validation = new Validation();
         }
 
         public DateTime Date
@@ -43,8 +46,6 @@ namespace TourPlannerUI.ViewModel
             set
             {
                 _date = value;
-
-                //Errorhandling fehlt noch 
             }
 
         }
@@ -55,8 +56,6 @@ namespace TourPlannerUI.ViewModel
             set
             {
                 _comment = value;
-
-                //Errorhandling fehlt noch 
             }
         }
 
@@ -66,8 +65,6 @@ namespace TourPlannerUI.ViewModel
             set
             {
                 _difficulty = value;
-
-                //Errorhandling fehlt noch 
             }
         }
 
@@ -77,7 +74,6 @@ namespace TourPlannerUI.ViewModel
             set
             {
                 _duration = value;
-                //Errorhandling fehlt noch 
             }
         }
 
@@ -87,8 +83,6 @@ namespace TourPlannerUI.ViewModel
             set
             {
                 _rating = value;
-
-                //Errorhandling fehlt noch 
             }
         }
 
@@ -100,8 +94,15 @@ namespace TourPlannerUI.ViewModel
                 {
                     CloseEvent?.Invoke(true);
                     TourLogModel tourLog = new TourLogModel(_selectedTour, _date, _comment, _difficulty, _duration, _rating);
-                    _tourService.AddTourLog(tourLog);
-                    _tourLogViewModel.LoadTourLogs();
+                    if (_validation.ValidateTourLogInput(tourLog))
+                    {
+                        _tourService.AddTourLog(tourLog);
+                        _tourLogViewModel.LoadTourLogs();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Your input was invalid, please make sure that your comment is not longer than 100 characters");
+                    }
                 }
                 else
                 {
