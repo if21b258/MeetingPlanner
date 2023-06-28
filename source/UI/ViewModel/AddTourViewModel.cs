@@ -17,11 +17,6 @@ namespace TourPlannerUI.ViewModel
     {
         private TourListViewModel _tourListViewModel;
         private TourService _tourServiceOfficer;
-        private string _name = "";
-        private string _origin = "";
-        private string _destination = "";
-        private Transport _transportType;
-        private string _description = "";
         public ICommand AddTourCommand { get; set; }
         public ICommand CancelCommand { get; set; }
         public Action<bool> CloseEvent;
@@ -42,6 +37,7 @@ namespace TourPlannerUI.ViewModel
             {Transport.Bicycle, "Bicycle" },
         };
 
+        private string _name = "";
         public string Name
         {
             get { return _name; }
@@ -53,6 +49,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        private string _origin = "";
         public string Origin
         {
             get { return _origin; }
@@ -64,6 +61,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        private string _destination = "";
         public string Destination
         {
             get { return _destination; }
@@ -75,6 +73,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        private Transport _transportType = Transport.Fastest;
         public Transport TransportType
         {
             get { return _transportType; }
@@ -86,6 +85,7 @@ namespace TourPlannerUI.ViewModel
 
         }
 
+        private string _description = "";
         public string Description
         {
             get { return _description; }

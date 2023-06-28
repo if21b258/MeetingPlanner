@@ -10,15 +10,17 @@ using TourPlannerUI.View;
 using TourPlannerModel;
 using System.ComponentModel;
 using TourPlannerBL;
+using TourPlannerBL.Logging;
 using System.Windows;
 
 namespace TourPlannerUI.ViewModel
 {
     public class TourListViewModel : BaseViewModel
     {
+        private readonly ILoggerWrapper log = LoggerFactory.GetLogger();
+
         private TourService _tourService;
-        private ObservableCollection<TourModel> _tourList;
-        private TourModel? _selectedTour;
+
         public ICommand AddTourCommand { get; set; }
         public ICommand DeleteTourCommand { get; set; }
         public ICommand EditTourCommand { get; set; }
@@ -33,6 +35,7 @@ namespace TourPlannerUI.ViewModel
             _tourService = tourService;
         }
 
+        private ObservableCollection<TourModel> _tourList;
         public ObservableCollection<TourModel> TourList
         {
             get { return _tourList; }
@@ -46,6 +49,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        private TourModel? _selectedTour;
         public TourModel? SelectedTour
         {
             get { return _selectedTour; }
@@ -108,7 +112,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
-        private void OnSelectedTourChanged()
+        public void OnSelectedTourChanged()
         {
             SelectedTourChanged?.Invoke(SelectedTour);
         }
