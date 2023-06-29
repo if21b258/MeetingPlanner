@@ -15,14 +15,13 @@ namespace TourPlannerBL.Service
         private TourPlannerDbContext _dbContext;
         private ITourRepository _tourRepo;
         private ITourLogRepository _tourLogRepo;
-        private FileService _fileService;
+        private FileService _fileService = new FileService();
 
         public TourService(TourPlannerDbContext dbContext)
         {
             _dbContext = dbContext;
             _tourRepo = new TourRepository(dbContext);
             _tourLogRepo = new TourLogRepository(dbContext);
-            _fileService = new FileService();
         }
 
         public async Task AddTour(TourModel tour)
@@ -61,8 +60,6 @@ namespace TourPlannerBL.Service
 
         public void AddTourLog(TourLogModel tourLog)
         {
-            //TODO Calculate TourLog Data
-
             _tourLogRepo.AddTourLog(tourLog);
             _tourLogRepo.Save();
 

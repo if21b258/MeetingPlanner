@@ -9,10 +9,20 @@ namespace TourPlannerDAL
         public DbSet<TourModel> Tours { get; set; }
         public DbSet<TourLogModel> TourLogs { get; set; }
 
+        public TourPlannerDbContext() { }
+
+        public TourPlannerDbContext(DbContextOptions<TourPlannerDbContext> options) : base(options) { }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(ConfigurationManager.ConnectionStrings["TourPlannerDb"].ConnectionString);
-            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+            var isConfigured = optionsBuilder.IsConfigured;
+
+            if (!isConfigured)
+            {
+                optionsBuilder.UseNpgsql(ConfigurationManager.ConnectionStrings["TourPlannerDb"].ConnectionString);
+                AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+            }
+
         }
     }
 }
