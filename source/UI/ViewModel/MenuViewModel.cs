@@ -1,8 +1,16 @@
 ﻿using Microsoft.Win32;
+using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using TourPlannerBL.Logging;
-using TourPlannerBL.Service;
+using TourPlannerBL;
+using TourPlannerModel;
+using TourPlannerUI.View;
 
 namespace TourPlannerUI.ViewModel
 {
@@ -21,6 +29,8 @@ namespace TourPlannerUI.ViewModel
         public ICommand GenerateTourReportCommand { get; set; }
         public ICommand GenerateSummaryReportCommand { get; set; }
         public ICommand ResetDatabaseCommand { get; set; }
+        public ICommand SortAlphabeticallyCommand { get; set; }
+        public ICommand SortIdCommand { get; set; }
         public ICommand AboutCommand { get; set; }
 
         public MenuViewModel(TourService tourService, TourListViewModel tourListViewModel, TourLogViewModel tourLogViewModel)
@@ -33,6 +43,8 @@ namespace TourPlannerUI.ViewModel
             GenerateTourReportCommand = new RelayCommand<object>(GenerateTourReport);
             GenerateSummaryReportCommand = new RelayCommand<object>(GenerateSummaryReport);
             ResetDatabaseCommand = new RelayCommand<object>(ResetDatabase);
+            SortAlphabeticallyCommand = new RelayCommand<object>(SortAlphabetical);
+            SortIdCommand = new RelayCommand<object>(SortId);
             AboutCommand = new RelayCommand<object>(About);
         }
 
@@ -152,6 +164,16 @@ namespace TourPlannerUI.ViewModel
             {
                 return null;
             }
+        }
+
+        public void SortAlphabetical(object obj)
+        {
+            _tourListViewModel.SortToursAlphabetical();
+        }
+        
+        public void SortId(object obj)
+        {
+            _tourListViewModel.SortToursId();
         }
     }
 }

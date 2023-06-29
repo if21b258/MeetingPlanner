@@ -117,5 +117,13 @@ namespace TourPlannerUI.ViewModel
         {
             SelectedTourChanged?.Invoke(SelectedTour);
         }
+        public void SortToursAlphabetical()
+        {
+            TourList = new ObservableCollection<TourModel>(TourList.OrderBy(t => t.Name));
+        }
+        public void SortToursId()
+        {
+            TourList = new ObservableCollection<TourModel>(TourList.OrderBy(t => t.Id));
+        }
     }
 }
