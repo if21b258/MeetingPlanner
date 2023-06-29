@@ -1,18 +1,16 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using TourPlannerBL;
-using TourPlannerUI.View;
+using TourPlannerBL.Logging;
 
 namespace TourPlannerUI.ViewModel
 {
     public class MenuViewModel
     {
+        private readonly ILoggerWrapper log = LoggerFactory.GetLogger();
+
         private TourService _tourService;
         private FileService _fileService = new FileService();
         private ReportService _reportService = new ReportService();
@@ -39,18 +37,20 @@ namespace TourPlannerUI.ViewModel
             AboutCommand = new RelayCommand<object>(About);
         }
 
-        //Import triggered by File
+        //Import tour from chosen file path
         private async void ImportTour(object obj)
         {
-                string? filePath = ShowSaveFileDialog("Tour", "json");
-                if (filePath != null)
-                {
-                    await _tourService.ImportTour(filePath);
-                    _tourListViewModel.LoadTours();
-                }
+            string? filePath = ShowSaveFileDialog("Tour", "json");
+            if (filePath != null)
+            {
+                log.Info("Import tour from " + filePath);
+
+                await _tourService.ImportTour(filePath);
+                _tourListViewModel.LoadTours();
+            }
         }
 
-        //Export riggered by File
+        //Export tour to chosen file path
         private void ExportTour(object obj)
         {
             if (_tourListViewModel.SelectedTour != null)
@@ -58,6 +58,8 @@ namespace TourPlannerUI.ViewModel
                 string? filePath = ShowSaveFileDialog("Tour", "json");
                 if (filePath != null)
                 {
+                    log.Info("Export tour to " + filePath);
+
                     _tourService.ExportTour(_tourListViewModel.SelectedTour, filePath);
                 }
             }
@@ -67,7 +69,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
-        //Function for creating the Tourreport
+        //Method for creating the tour report
         private void GenerateTourReport(object obj)
         {
             if (_tourListViewModel.SelectedTour != null)
@@ -75,6 +77,8 @@ namespace TourPlannerUI.ViewModel
                 string? filePath = ShowSaveFileDialog("Tour Report", "pdf");
                 if (filePath != null)
                 {
+                    log.Info("Create tour report at " + filePath);
+
                     _reportService.GenerateTourReport(_tourListViewModel.SelectedTour, filePath);
                 }
             }
@@ -84,12 +88,14 @@ namespace TourPlannerUI.ViewModel
             }
 
         }
-        //Function for creating the summary
+        //Method for creating the summary report
         private void GenerateSummaryReport(object obj)
         {
             string? filePath = ShowSaveFileDialog("Summary Report", "pdf");
             if (filePath != null)
             {
+                log.Info("Create summary report at " + filePath);
+
                 _reportService.GenerateSummaryReport(_tourListViewModel.TourList, filePath);
             }
         }
@@ -97,6 +103,8 @@ namespace TourPlannerUI.ViewModel
         //Database is able to reset by clicking the reset button in Top-Bar by pressing options
         private void ResetDatabase(object obj)
         {
+            log.Info("Database reset");
+
             _tourService.EnsureDatabaseDeleted();
             _tourService.EnsureDatabaseCreated();
             _fileService.DeleteImageFolder();

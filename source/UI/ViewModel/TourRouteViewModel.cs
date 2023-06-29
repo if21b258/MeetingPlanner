@@ -1,34 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics.Tracing;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
-using TourPlannerBL;
 using TourPlannerModel;
+using TourPlannerBL;
+using TourPlannerBL.Logging;
 
 namespace TourPlannerUI.ViewModel
 {
     public class TourRouteViewModel : BaseViewModel
     {
-        private TourService _tourService;
-        private FileService _fileService;
+        private readonly ILoggerWrapper log = LoggerFactory.GetLogger();
+
+        private FileService _fileService = new FileService();
         private TourListViewModel _tourListViewModel;
         private TourModel? _selectedTour;
-        public BitmapImage _routeImage;
 
-        public TourRouteViewModel(TourService tourService, TourListViewModel tourListViewModel) {
-            _tourService = tourService;
+        public TourRouteViewModel(TourListViewModel tourListViewModel) {
             _tourListViewModel = tourListViewModel;
             _tourListViewModel.SelectedTourChanged += HandleSelectedTourChanged;
-            _fileService = new FileService();
         }
 
         //Get the new Image
+        private BitmapImage _routeImage;
         public BitmapImage RouteImage
         {
             get { return _routeImage; }
@@ -47,6 +40,7 @@ namespace TourPlannerUI.ViewModel
             {
                 if(tour == null)
                 {
+                    log.Warn("tried to get image of null tour");
                     return;
                 }
 
@@ -70,7 +64,7 @@ namespace TourPlannerUI.ViewModel
             }
             catch (Exception FileNotFoundException)
             {
-                Console.WriteLine("File konnte nicht gefunden werden");
+                log.Error($"File for tour id: {tour.Id} could not be found");
                 RouteImage = null;
             }
             
@@ -80,7 +74,7 @@ namespace TourPlannerUI.ViewModel
         private void HandleSelectedTourChanged(TourModel selectedTour)
         {
             _selectedTour = selectedTour;
-            GetImage(selectedTour);
+            GetImage(_selectedTour);
         }
     }
 }
