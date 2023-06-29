@@ -1,4 +1,4 @@
-namespace TourPlannerTest
+namespace TourPlannerTest.BL
 {
     public class Tests
     {
