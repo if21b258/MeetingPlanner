@@ -26,37 +26,13 @@ namespace TourPlannerModel
 
         public TourModel() { }
 
-        public TourModel(int? id, ICollection<TourLogModel> logs, string name, string origin, string destination, Transport transportType, string description, float distance, TimeSpan? estimatedTime)
+        public TourModel(string name, string origin, string destination, Transport transportType, string description)
         {
-            Id = id;
-            Logs = logs;
             Name = name;
             Origin = origin;
             Destination = destination;
             TransportType = transportType;
             Description = description;
-            Distance = distance;
-            EstimatedTime = estimatedTime;
-        }
-
-        public TourModel(string name, string origin, string destination, string description, float distance, TimeSpan estimatedTime)
-        {
-            Name = name;
-            Origin = origin;
-            Destination = destination;
-            Description = description;
-            Distance = distance;
-            EstimatedTime = estimatedTime;
-        }
-
-        public TourModel(string name, string origin, Transport transporType, string destination, string description)
-        {
-            Name = name;
-            Origin = origin;
-            TransportType = transporType;
-            Destination = destination;
-            Description = description;
-            Distance = 0;
         }
     }
 }

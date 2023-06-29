@@ -1,30 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using TourPlannerUI;
-using TourPlannerModel;
-using TourPlannerUI.ViewModel;
-using TourPlannerBL;
 using System.Windows;
+using System.Windows.Input;
+using TourPlannerModel;
+using TourPlannerBL;
+using TourPlannerBL.Logging;
 
 namespace TourPlannerUI.ViewModel
 {
     public class AddTourLogViewModel : BaseViewModel
     {
+        private readonly ILoggerWrapper log = LoggerFactory.GetLogger();
 
         private TourService _tourService;
         private TourLogViewModel _tourLogViewModel;
         private TourModel _selectedTour;
-        private Validation _validation;
-        private DateTime _date = DateTime.Now;
-        private string _comment;
-        private int _difficulty;
-        private TimeSpan _duration;
-        private int _rating;
+        private Validation _validation = new Validation();
         public ICommand AddTourLogCommand { get; set; }
         public ICommand CancelCommand { get; set; }
         public Action<bool> CloseEvent;
@@ -36,9 +26,9 @@ namespace TourPlannerUI.ViewModel
             _selectedTour = _tourLogViewModel.SelectedTour;
             AddTourLogCommand = new RelayCommand<object>(AddTourLog);
             CancelCommand = new RelayCommand<object>(Cancel);
-            _validation = new Validation();
         }
 
+        private DateTime _date = DateTime.Now;
         public DateTime Date
         {
             get { return _date; }
@@ -50,6 +40,7 @@ namespace TourPlannerUI.ViewModel
 
         }
 
+        private string _comment = "";
         public string Comment
         {
             get { return _comment; }
@@ -59,6 +50,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        private int _difficulty = 0;
         public int Difficulty
         {
             get { return _difficulty; }
@@ -68,6 +60,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        private TimeSpan _duration = new TimeSpan();
         public TimeSpan Duration
         {
             get { return _duration; }
@@ -77,6 +70,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        private int _rating = 0;
         public int Rating
         {
             get { return _rating; }
@@ -90,28 +84,25 @@ namespace TourPlannerUI.ViewModel
         {
             try
             {
-                if (!String.IsNullOrEmpty(_comment))
+                TourLogModel tourLog = new TourLogModel(_selectedTour, _date, _comment, _difficulty, _duration, _rating);
+
+                if (_validation.ValidateTourLogInput(tourLog))
                 {
+                    log.Info("Adding Tour log for tour with id: " + tourLog.Tour.Id);
+
+                    _tourService.AddTourLog(tourLog);
+                    _tourLogViewModel.LoadTourLogs();
                     CloseEvent?.Invoke(true);
-                    TourLogModel tourLog = new TourLogModel(_selectedTour, _date, _comment, _difficulty, _duration, _rating);
-                    if (_validation.ValidateTourLogInput(tourLog))
-                    {
-                        _tourService.AddTourLog(tourLog);
-                        _tourLogViewModel.LoadTourLogs();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Your input was invalid, please make sure that your comment is not longer than 100 characters");
-                    }
                 }
                 else
                 {
-                    throw new ArgumentException("Please fill in all fields");
+                    MessageBox.Show("Your input was invalid, please make sure that your comment is not longer than 100 characters and all fields are filled in");
+                    throw new ArgumentException("Invalid input");
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Processing failed: {e.Message}");
+                log.Warn($"Add tour log failed: {e.Message}");
             }
 
         }

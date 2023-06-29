@@ -1,23 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using TourPlannerUI;
 using TourPlannerModel;
-using TourPlannerUI.ViewModel;
 using TourPlannerBL;
-using System.Net;
+using TourPlannerBL.Logging;
 
 namespace TourPlannerUI.ViewModel
 {
     public class AddTourViewModel : BaseViewModel
     {
+        private readonly ILoggerWrapper log = LoggerFactory.GetLogger();
+
         private TourListViewModel _tourListViewModel;
         private TourService _tourServiceOfficer;
-        private Validation _validation;
+        private Validation _validation = new Validation();
 
         public ICommand AddTourCommand { get; set; }
         public ICommand CancelCommand { get; set; }
@@ -29,7 +26,6 @@ namespace TourPlannerUI.ViewModel
             _tourServiceOfficer = TourServiceOff;
             AddTourCommand = new RelayCommand<object>(AddTour);
             CancelCommand = new RelayCommand<object>(Cancel);
-            _validation = new Validation();
         }
 
         public Dictionary<Transport, string> TransportEnumForCombo { get; } =
@@ -95,22 +91,27 @@ namespace TourPlannerUI.ViewModel
         {
             try
             {
-                TourModel tour = new TourModel(_name, _origin, _transportType, _destination, _description);
+                TourModel tour = new TourModel(_name, _origin, _destination, _transportType, _description);
+
+
                 if (_validation.ValidateTourInput(tour))
                 {
+                    log.Info("Adding Tour: " + tour.Name);
+
                     await _tourServiceOfficer.AddTour(tour);
                     _tourListViewModel.LoadTours();
                     CloseEvent?.Invoke(true);
                 }
+
                 else
                 {
                     MessageBox.Show("Your input was invalid, please make sure that your description is not longer than 100 characters and all fields are filled");
-                    throw new ArgumentException("Invalid Input");
+                    throw new ArgumentException("Invalid input");
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Processing failed: {e.Message}");
+                log.Warn($"Add tour failed: {e.Message}");
             }
         }
 

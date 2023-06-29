@@ -1,29 +1,36 @@
-﻿using Microsoft.Extensions.Primitives;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
 using System.Windows;
 using System.Windows.Input;
-using TourPlannerBL;
 using TourPlannerModel;
+using TourPlannerBL;
+using TourPlannerBL.Logging;
 
 namespace TourPlannerUI.ViewModel
 {
     public class EditTourViewModel : BaseViewModel
     {
+        private readonly ILoggerWrapper log = LoggerFactory.GetLogger();
+
         private TourService _tourService;
         private TourListViewModel _tourListViewModel;
         private TourRouteViewModel _tourRouteViewModel;
-        private Validation _validation;
+        private Validation _validation = new Validation();
         private TourModel _selectedTour;
         public ICommand EditTourCommand { get; set; }
         public ICommand CancelCommand { get; set; }
         public Action<bool> CloseEvent;
+
+        public EditTourViewModel(TourListViewModel tourListViewModel, TourService tourService, TourRouteViewModel tourRouteViewModel)
+        {
+            _tourService = tourService;
+            _tourListViewModel = tourListViewModel;
+            _tourRouteViewModel = tourRouteViewModel;
+            _selectedTour = _tourListViewModel.SelectedTour;
+            EditTourCommand = new RelayCommand<object>(EditTour);
+            CancelCommand = new RelayCommand<object>(Cancel);
+            InitializeFields();
+        }
 
         public Dictionary<Transport, string> TransportEnumForCombo { get; } =
             new Dictionary<Transport, string>()
@@ -32,19 +39,6 @@ namespace TourPlannerUI.ViewModel
                 {Transport.Pedestrian, "By Foot"},
                 {Transport.Bicycle, "Bicycle" },
             };
-
-        public EditTourViewModel(TourListViewModel tourListViewModel, TourService tourService, TourRouteViewModel tourRouteViewModel)
-        {
-            _tourService = tourService;
-            _tourListViewModel = tourListViewModel;
-            _tourRouteViewModel = tourRouteViewModel;
-            _selectedTour = _tourListViewModel.SelectedTour;
-            _validation = new Validation();
-            EditTourCommand = new RelayCommand<object>(EditTour);
-            CancelCommand = new RelayCommand<object>(Cancel);
-            InitializeFields();
-        }
-
 
         private string _name = "";
         public string Name
@@ -105,6 +99,8 @@ namespace TourPlannerUI.ViewModel
                 ApplyChanges(temp);
                 if (_validation.ValidateTourInput(temp))
                 {
+                    log.Info("Editing Tour: " + _selectedTour.Name);
+
                     ApplyChanges(_selectedTour);
                     await _tourService.EditTour(_selectedTour);
                     _tourListViewModel.LoadTours();
@@ -115,11 +111,12 @@ namespace TourPlannerUI.ViewModel
                 else
                 {
                     MessageBox.Show("Your input was invalid, please make sure that your description is not longer than 100 characters and all fields are filled in");
+                    throw new ArgumentException("Invalid input");
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Processing failed: {e.Message}");
+                log.Warn($"Edit tour failed: {e.Message}");
             }
 
         }

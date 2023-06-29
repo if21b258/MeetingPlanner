@@ -1,26 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using TourPlannerUI.View;
 using TourPlannerModel;
 using TourPlannerBL;
-using System.Windows;
-using System.IO;
-using System.Windows.Media.Imaging;
+using TourPlannerBL.Logging;
+
 
 namespace TourPlannerUI.ViewModel
 {
     public class TourLogViewModel : BaseViewModel
     {
+        private readonly ILoggerWrapper log = LoggerFactory.GetLogger();
+
         private TourService _tourService;
         private TourListViewModel _tourListViewModel;
-        private TourModel? _selectedTour;
-        private ObservableCollection<TourLogModel> _tourLogList;
-        private TourLogModel? _selectedTourLog;
         public ICommand AddTourLogCommand { get; set; }
         public ICommand DeleteTourLogCommand { get; set; }
         public ICommand EditTourLogCommand { get; set; }
@@ -28,20 +23,21 @@ namespace TourPlannerUI.ViewModel
 
         public TourLogViewModel(TourListViewModel tourListViewModel, TourService tourService)
         {
+            _tourService = tourService;
+            _tourListViewModel = tourListViewModel;
+            _tourListViewModel.SelectedTourChanged += HandleSelectedTourChanged;
             AddTourLogCommand = new RelayCommand<object>(AddTourLog);
             DeleteTourLogCommand = new RelayCommand<object>(DeleteTourLog);
             EditTourLogCommand = new RelayCommand<object>(EditTourLog);
-            _tourListViewModel = tourListViewModel;
-            _tourListViewModel.SelectedTourChanged += HandleSelectedTourChanged;
-            _tourService = tourService;
-            _tourLogList = new ObservableCollection<TourLogModel>();
         }
 
+        private TourModel? _selectedTour;
         public TourModel? SelectedTour
         {
             get { return _selectedTour; }
         }
 
+        private ObservableCollection<TourLogModel> _tourLogList = new ObservableCollection<TourLogModel>();
         public ObservableCollection<TourLogModel> TourLogList
         {
             get { return _tourLogList; }
@@ -55,6 +51,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        private TourLogModel? _selectedTourLog;
         public TourLogModel? SelectedTourLog
         {
             get { return _selectedTourLog; }
@@ -89,6 +86,8 @@ namespace TourPlannerUI.ViewModel
                 if (MessageBox.Show("Do you want to delete this Log?",
                     "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
+                    log.Info("Deleting tour with Id: " + _selectedTour.Id);
+
                     _tourService.DeleteTourLog(_selectedTourLog);
                     SelectedTourLog = null;
                     LoadTourLogs();
