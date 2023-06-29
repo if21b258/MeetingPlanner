@@ -34,7 +34,7 @@ namespace TourPlannerUI.ViewModel
                 }
             }
         }
-        public void GetImage(TourModel tour)
+        private void LoadImage(TourModel tour)
         {
             try
             {
@@ -74,7 +74,7 @@ namespace TourPlannerUI.ViewModel
         private void HandleSelectedTourChanged(TourModel selectedTour)
         {
             _selectedTour = selectedTour;
-            GetImage(_selectedTour);
+            LoadImage(_selectedTour);
         }
     }
 }

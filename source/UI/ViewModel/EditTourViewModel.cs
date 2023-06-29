@@ -14,18 +14,16 @@ namespace TourPlannerUI.ViewModel
 
         private TourService _tourService;
         private TourListViewModel _tourListViewModel;
-        private TourRouteViewModel _tourRouteViewModel;
         private Validation _validation = new Validation();
         private TourModel _selectedTour;
         public ICommand EditTourCommand { get; set; }
         public ICommand CancelCommand { get; set; }
         public Action<bool> CloseEvent;
 
-        public EditTourViewModel(TourListViewModel tourListViewModel, TourService tourService, TourRouteViewModel tourRouteViewModel)
+        public EditTourViewModel(TourListViewModel tourListViewModel, TourService tourService)
         {
             _tourService = tourService;
             _tourListViewModel = tourListViewModel;
-            _tourRouteViewModel = tourRouteViewModel;
             _selectedTour = _tourListViewModel.SelectedTour;
             EditTourCommand = new RelayCommand<object>(EditTour);
             CancelCommand = new RelayCommand<object>(Cancel);
@@ -110,7 +108,6 @@ namespace TourPlannerUI.ViewModel
                     await _tourService.EditTour(_selectedTour);
                     _tourListViewModel.LoadTours();
                     _tourListViewModel.OnSelectedTourChanged();
-                    _tourRouteViewModel.GetImage(_selectedTour);
                     CloseEvent?.Invoke(true);
                 }
                 else
