@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TourPlannerModel;
-using System.Drawing;
-using System.Net.NetworkInformation;
+﻿using System.Collections.ObjectModel;
+using System.Text.Json;
+using TourPlannerBL.Logging;
 using TourPlannerDAL;
 using TourPlannerDAL.Repository;
-using TourPlannerBL.Logging;
-using System.Configuration;
-using System.Collections.ObjectModel;
-using System.Text.Json;
-using static System.Net.Mime.MediaTypeNames;
+using TourPlannerModel;
 
 //This class is managing the data which has been received by the frontend
 namespace TourPlannerBL.Service

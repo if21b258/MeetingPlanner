@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TourPlannerBL.Logging;
-using TourPlannerModel;
+﻿using iText.IO.Image;
 using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
-using iText.IO.Image;
 using System.Collections.ObjectModel;
-using iText.Kernel.Pdf.Canvas.Parser.Listener;
-using iText.StyledXmlParser.Css.Util;
+using TourPlannerBL.Logging;
 using TourPlannerBL.Util;
+using TourPlannerModel;
 
 namespace TourPlannerBL.Service
 {
