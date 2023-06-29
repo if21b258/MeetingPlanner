@@ -7,10 +7,11 @@ using TourPlannerModel;
 
 namespace TourPlannerBL
 {
+    //This class validates the Userinput of the tours and tourlogs
     public class Validation
     {
 
-
+        //Tours
         public bool ValidateTourInput(TourModel tour)
         {
             if (string.IsNullOrEmpty(tour.Name))
@@ -46,6 +47,8 @@ namespace TourPlannerBL
             return true;
 
         }
+
+        //TourLogs
         public bool ValidateTourLogInput(TourLogModel tourLog)
         {
 

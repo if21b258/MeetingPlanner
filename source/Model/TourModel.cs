@@ -9,6 +9,7 @@ using System.Text.Json.Serialization;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
+//Model for the Tour
 namespace TourPlannerModel
 {
     public class TourModel

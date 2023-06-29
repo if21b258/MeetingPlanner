@@ -39,6 +39,7 @@ namespace TourPlannerUI.ViewModel
             AboutCommand = new RelayCommand<object>(About);
         }
 
+        //Import triggered by File
         private async void ImportTour(object obj)
         {
                 string? filePath = ShowSaveFileDialog("Tour", "json");
@@ -49,6 +50,7 @@ namespace TourPlannerUI.ViewModel
                 }
         }
 
+        //Export riggered by File
         private void ExportTour(object obj)
         {
             if (_tourListViewModel.SelectedTour != null)
@@ -65,6 +67,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        //Function for creating the Tourreport
         private void GenerateTourReport(object obj)
         {
             if (_tourListViewModel.SelectedTour != null)
@@ -81,7 +84,7 @@ namespace TourPlannerUI.ViewModel
             }
 
         }
-
+        //Function for creating the summary
         private void GenerateSummaryReport(object obj)
         {
             string? filePath = ShowSaveFileDialog("Summary Report", "pdf");
@@ -91,6 +94,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        //Database is able to reset by clicking the reset button in Top-Bar by pressing options
         private void ResetDatabase(object obj)
         {
             _tourService.EnsureDatabaseDeleted();
@@ -100,6 +104,7 @@ namespace TourPlannerUI.ViewModel
             _tourLogViewModel.LoadTourLogs();
         }
 
+        //About Dialog
         private void About(object obj)
         {
             MessageBox.Show("Tour Planner made by Josua and Felix");

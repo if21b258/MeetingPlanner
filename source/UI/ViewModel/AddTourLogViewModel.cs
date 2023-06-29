@@ -79,7 +79,7 @@ namespace TourPlannerUI.ViewModel
                 _rating = value;
             }
         }
-
+        // TourLog will be validated and added to the tourLoglist
         private void AddTourLog(object commandParameter)
         {
             try
@@ -107,6 +107,7 @@ namespace TourPlannerUI.ViewModel
 
         }
 
+        // Window will be closed
         private void Cancel(object commandParameter)
         {
             CloseEvent?.Invoke(false);

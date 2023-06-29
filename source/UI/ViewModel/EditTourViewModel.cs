@@ -50,6 +50,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        //Origin
         private string _origin = "";
         public string Origin
         {
@@ -60,6 +61,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        //Destination
         private string _destination = "";
         public string Destination
         {
@@ -70,6 +72,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        //TransportType
         private Transport _transportType = Transport.Fastest;
         public Transport TransportType
         {
@@ -81,6 +84,7 @@ namespace TourPlannerUI.ViewModel
 
         }
 
+        //Description
         private string _description = "";
         public string Description
         {
@@ -91,6 +95,7 @@ namespace TourPlannerUI.ViewModel
             }
         }
 
+        // Tour will be validated and the tourlist will be updated if it has the right userinput
         private async void EditTour(object commandParameter)
         {
             try
@@ -139,6 +144,7 @@ namespace TourPlannerUI.ViewModel
             tour.TransportType = _transportType;
         }
 
+        // Window will be closed
         private void Cancel(object commandParameter)
         {
             CloseEvent?.Invoke(true);

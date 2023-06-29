@@ -13,7 +13,7 @@ using System.Collections.ObjectModel;
 using System.Text.Json;
 using static System.Net.Mime.MediaTypeNames;
 
-
+//This class is managing the data which has been received by the frontend
 namespace TourPlannerBL
 {
     public class TourService

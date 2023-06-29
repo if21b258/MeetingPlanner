@@ -26,6 +26,7 @@ namespace TourPlannerUI.ViewModel
             Startup();
         }
 
+        //Start TourPlanner
         private void Startup()
         {
             log.Info("Tour Planner started.");
