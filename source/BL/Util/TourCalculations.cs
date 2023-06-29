@@ -35,6 +35,8 @@ namespace TourPlannerBL.Util
 
         public TimeSpan? GetAverageDuration(TourModel tour)
         {
+            if (tour == null) { return null; }
+
             if (tour.Logs == null) { return null; }
 
             if (tour.Logs.Count == 0) { return null; }
@@ -44,6 +46,8 @@ namespace TourPlannerBL.Util
 
         public float? GetAverageDifficulty(TourModel tour)
         {
+            if (tour == null) { return null; }
+
             if (tour.Logs == null) { return null; }
 
             if (tour.Logs.Count == 0) { return null; }
@@ -53,6 +57,8 @@ namespace TourPlannerBL.Util
 
         public float? GetAverageRating(TourModel tour)
         {
+            if (tour == null) { return null; }
+
             if (tour.Logs == null) { return null; }
 
             if (tour.Logs.Count == 0) { return null; }
