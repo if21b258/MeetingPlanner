@@ -20,6 +20,8 @@
             </MenuItem>
             <MenuItem Header="Options">
                 <MenuItem Header="Reset Database" Command="{Binding ResetDatabaseCommand}"/>
+                <MenuItem Header="Sort Tours Alphabetical" Command="{Binding SortAlphabeticallyCommand}"/>
+                <MenuItem Header="Sort Tours Id" Command="{Binding SortIdCommand}"/>
             </MenuItem>
             <MenuItem Header="Help">
                 <MenuItem Header="About" Command="{Binding AboutCommand}"/>
