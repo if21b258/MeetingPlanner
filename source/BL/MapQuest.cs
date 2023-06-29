@@ -10,11 +10,12 @@ using System.Text.Json.Nodes;
 using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using TourPlannerModel; //Hier kann Fehler sein
+using TourPlannerModel;
 
 
 namespace TourPlannerBL
 {
+    //Class for requesting mapimage and further information
     public class MapQuest
     {
         public string Key;
@@ -27,6 +28,7 @@ namespace TourPlannerBL
 
         public MapQuest(TourModel tour)
         {
+            //Getting Key from the Appconfig file
             Key = ConfigurationManager.AppSettings["MapQuestKey"];
             Origin = tour.Origin;
             Destination = tour.Destination;
@@ -34,6 +36,7 @@ namespace TourPlannerBL
             UrlRoute = $"http://www.mapquestapi.com/directions/v2/route?key={Key}&from={Uri.EscapeDataString(Origin)}&to={Uri.EscapeDataString(Destination)}&routeType={tour.TransportType}&unit=k";
         }
 
+        //Getting further information about the route
         public async Task<byte[]> GetWay(TourModel tourModel)
         {
             try
@@ -80,7 +83,7 @@ namespace TourPlannerBL
 
         }
 
-
+        //Requesting the Routeimage
         public async Task<byte[]> GetMap(TourModel tourModel)
         {
             try

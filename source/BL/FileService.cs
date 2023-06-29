@@ -10,6 +10,7 @@ using System.IO;
 
 namespace TourPlannerBL
 {
+    //Class to handle the file directory and the mapquest image
     public class FileService
     {
         public string GetFileDirectory()
@@ -76,6 +77,7 @@ namespace TourPlannerBL
             }
         }
 
+        //Deletes Image if tour does not exist anymore
         public void DeleteImage(TourModel tour)
         {
             string filePath = GetFilePath(tour);
