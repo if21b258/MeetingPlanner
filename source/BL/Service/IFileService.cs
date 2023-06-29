@@ -2,7 +2,7 @@
 
 namespace TourPlannerBL.Service
 {
-    internal interface IFileService
+    public interface IFileService
     {
         public string GetFileDirectory();
         public string GetFilePath(TourModel tour);

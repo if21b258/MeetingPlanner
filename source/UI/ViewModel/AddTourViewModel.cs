@@ -15,7 +15,7 @@ namespace TourPlannerUI.ViewModel
 
         private TourListViewModel _tourListViewModel;
         private TourService _tourServiceOfficer;
-        private Validation _validation = new Validation();
+        private TourPlannerValidation _validation = new TourPlannerValidation();
 
         public ICommand AddTourCommand { get; set; }
         public ICommand CancelCommand { get; set; }
@@ -28,6 +28,7 @@ namespace TourPlannerUI.ViewModel
             AddTourCommand = new RelayCommand<object>(AddTour);
             CancelCommand = new RelayCommand<object>(Cancel);
         }
+        public AddTourViewModel() { }
 
         // Enum for handling the values of the combobox
         public Dictionary<Transport, string> TransportEnumForCombo { get; } =

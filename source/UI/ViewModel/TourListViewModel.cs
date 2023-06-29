@@ -21,6 +21,7 @@ namespace TourPlannerUI.ViewModel
 
         public event Action<TourModel?>? SelectedTourChanged;
 
+        
         public TourListViewModel(TourService tourService)
         {
             _tourService = tourService;
@@ -28,6 +29,7 @@ namespace TourPlannerUI.ViewModel
             DeleteTourCommand = new RelayCommand<object>(DeleteTour);
             EditTourCommand = new RelayCommand<object>(EditTour);
         }
+
 
         private ObservableCollection<TourModel> _tourList = new ObservableCollection<TourModel>();
         public ObservableCollection<TourModel> TourList

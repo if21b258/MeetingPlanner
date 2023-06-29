@@ -3,7 +3,7 @@ using TourPlannerModel;
 
 namespace TourPlannerBL.Service
 {
-    internal interface ITourService
+    public interface ITourService
     {
         public Task AddTour(TourModel tour);
         public void DeleteTour(TourModel tour);

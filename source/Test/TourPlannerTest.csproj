@@ -19,8 +19,4 @@
 	  <ProjectReference Include="..\UI\TourPlannerUI.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="UI\" />
-	</ItemGroup>
-
 </Project>

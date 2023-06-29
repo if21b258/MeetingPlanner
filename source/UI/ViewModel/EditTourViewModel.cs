@@ -15,7 +15,7 @@ namespace TourPlannerUI.ViewModel
 
         private TourService _tourService;
         private TourListViewModel _tourListViewModel;
-        private Validation _validation = new Validation();
+        private TourPlannerValidation _validation = new TourPlannerValidation();
         private TourModel _selectedTour;
         public ICommand EditTourCommand { get; set; }
         public ICommand CancelCommand { get; set; }

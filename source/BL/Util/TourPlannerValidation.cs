@@ -3,7 +3,7 @@
 namespace TourPlannerBL.Util
 {
     //This class validates the Userinput of the tours and tourlogs
-    public class Validation
+    public class TourPlannerValidation
     {
 
         //Tours
@@ -57,7 +57,7 @@ namespace TourPlannerBL.Util
                 return false;
             }
 
-            if (tourLog.Difficulty < 0 | tourLog.Rating > 10)
+            if (tourLog.Difficulty < 0 | tourLog.Difficulty > 10)
             {
                 return false;
             }
