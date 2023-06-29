@@ -17,7 +17,7 @@ using TourPlannerBL.Util;
 
 namespace TourPlannerBL.Service
 {
-    public class ReportService
+    public class ReportService : IReportService
     {
         private readonly ILoggerWrapper log = LoggerFactory.GetLogger();
         private FileService _fileService = new FileService();

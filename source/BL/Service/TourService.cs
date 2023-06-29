@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Net.NetworkInformation;
 using TourPlannerDAL;
 using TourPlannerDAL.Repository;
+using TourPlannerBL.Logging;
 using System.Configuration;
 using System.Collections.ObjectModel;
 using System.Text.Json;
@@ -18,6 +19,8 @@ namespace TourPlannerBL.Service
 {
     public class TourService : ITourService
     {
+        private readonly ILoggerWrapper log = LoggerFactory.GetLogger();
+
         private TourPlannerDbContext _dbContext;
         private ITourRepository _tourRepo;
         private ITourLogRepository _tourLogRepo;
