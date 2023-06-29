@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
-using TourPlannerModel;
-using TourPlannerBL;
 using TourPlannerBL.Logging;
+using TourPlannerBL.Service;
+using TourPlannerBL.Util;
+using TourPlannerModel;
 
 namespace TourPlannerUI.ViewModel
 {

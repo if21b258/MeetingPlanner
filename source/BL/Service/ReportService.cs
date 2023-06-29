@@ -13,8 +13,9 @@ using iText.IO.Image;
 using System.Collections.ObjectModel;
 using iText.Kernel.Pdf.Canvas.Parser.Listener;
 using iText.StyledXmlParser.Css.Util;
+using TourPlannerBL.Util;
 
-namespace TourPlannerBL
+namespace TourPlannerBL.Service
 {
     public class ReportService
     {

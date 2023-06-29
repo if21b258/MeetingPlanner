@@ -1,5 +1,5 @@
-﻿using TourPlannerBL;
-using TourPlannerBL.Logging;
+﻿using TourPlannerBL.Logging;
+using TourPlannerBL.Service;
 
 namespace TourPlannerUI.ViewModel
 {

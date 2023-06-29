@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TourPlannerBL.Util;
 using TourPlannerModel;
 
-namespace TourPlannerBL
+namespace TourPlannerBL.Util
 {
     public class TourCalculations
     {
@@ -15,7 +16,7 @@ namespace TourPlannerBL
 
             if (tour.Logs == null) { return null; }
 
-            return (tour.Logs.Count());
+            return tour.Logs.Count();
         }
 
         public float? GetChildFriendliness(TourModel? tour)

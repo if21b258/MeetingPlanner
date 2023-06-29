@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TourPlannerBL.Util;
 
-namespace TourPlannerBL
+namespace TourPlannerBL.Util
 {
     public static class LinqExtensions
     {

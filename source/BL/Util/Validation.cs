@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TourPlannerModel;
 
-namespace TourPlannerBL
+namespace TourPlannerBL.Util
 {
     //This class validates the Userinput of the tours and tourlogs
     public class Validation

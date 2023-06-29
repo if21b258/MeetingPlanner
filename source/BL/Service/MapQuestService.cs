@@ -13,10 +13,10 @@ using System.Windows.Input;
 using TourPlannerModel;
 
 
-namespace TourPlannerBL
+namespace TourPlannerBL.Service
 {
     //Class for requesting mapimage and further information
-    public class MapQuest
+    public class MapQuestService : IMapQuestService
     {
         public string Key;
         public string Origin;
@@ -26,7 +26,7 @@ namespace TourPlannerBL
         public string UrlRoute;
 
 
-        public MapQuest(TourModel tour)
+        public MapQuestService(TourModel tour)
         {
             //Getting Key from the Appconfig file
             Key = ConfigurationManager.AppSettings["MapQuestKey"];

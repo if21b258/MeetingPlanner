@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TourPlannerModel;
+﻿using System.Configuration;
 using System.Drawing;
-using System.IO;
+using TourPlannerModel;
 
-namespace TourPlannerBL
+namespace TourPlannerBL.Service
 {
     //Class to handle the file directory and the mapquest image
-    public class FileService
+    public class FileService : IFileService
     {
         public string GetFileDirectory()
         {
@@ -36,7 +30,7 @@ namespace TourPlannerBL
                 {
                     Directory.CreateDirectory(fileDir);
                 }
-                if(mapImage == null)
+                if (mapImage == null)
                 {
                     Console.WriteLine("No Image loaded");
                 }
@@ -52,7 +46,7 @@ namespace TourPlannerBL
                     Console.WriteLine("Picture successfully saved in " + filePath);
 
                 }
-              
+
             }
             catch (Exception e)
             {

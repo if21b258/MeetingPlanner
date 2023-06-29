@@ -14,9 +14,9 @@ using System.Text.Json;
 using static System.Net.Mime.MediaTypeNames;
 
 //This class is managing the data which has been received by the frontend
-namespace TourPlannerBL
+namespace TourPlannerBL.Service
 {
-    public class TourService
+    public class TourService : ITourService
     {
         private TourPlannerDbContext _dbContext;
         private ITourRepository _tourRepo;
@@ -89,7 +89,7 @@ namespace TourPlannerBL
 
         public async Task<byte[]> GetMap(TourModel tour)
         {
-            MapQuest mapQuest = new(tour);
+            MapQuestService mapQuest = new(tour);
             return await mapQuest.GetWay(tour);
         }
 

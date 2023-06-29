@@ -1,9 +1,8 @@
 ﻿using Microsoft.Win32;
-using System;
 using System.Windows;
 using System.Windows.Input;
-using TourPlannerBL;
 using TourPlannerBL.Logging;
+using TourPlannerBL.Service;
 
 namespace TourPlannerUI.ViewModel
 {

@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Windows;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
-using TourPlannerUI.View;
-using TourPlannerModel;
-using TourPlannerBL;
 using TourPlannerBL.Logging;
+using TourPlannerBL.Service;
+using TourPlannerModel;
+using TourPlannerUI.View;
 
 namespace TourPlannerUI.ViewModel
 {
@@ -50,7 +49,7 @@ namespace TourPlannerUI.ViewModel
             get { return _selectedTour; }
             set
             {
-                if(_selectedTour != value)
+                if (_selectedTour != value)
                 {
                     _selectedTour = value;
                     OnSelectedTourChanged();
@@ -69,7 +68,7 @@ namespace TourPlannerUI.ViewModel
         //Delete popup to make sure if the user would like to delete this tour
         private void DeleteTour(object obj)
         {
-            if(_selectedTour != null)
+            if (_selectedTour != null)
             {
                 if (MessageBox.Show("Do you want to delete this Tour?",
                     "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
@@ -90,7 +89,7 @@ namespace TourPlannerUI.ViewModel
         //EditWindow will be shown up
         private void EditTour(object obj)
         {
-            if(_selectedTour != null)
+            if (_selectedTour != null)
             {
                 EditTourWindow editTour = new EditTourWindow();
                 editTour.WindowStartupLocation = WindowStartupLocation.CenterScreen;

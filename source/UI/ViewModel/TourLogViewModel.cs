@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Windows;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
-using TourPlannerUI.View;
-using TourPlannerModel;
-using TourPlannerBL;
 using TourPlannerBL.Logging;
+using TourPlannerBL.Service;
+using TourPlannerModel;
+using TourPlannerUI.View;
 
 
 namespace TourPlannerUI.ViewModel
@@ -68,7 +68,7 @@ namespace TourPlannerUI.ViewModel
         //AddWindow will show up
         private void AddTourLog(object obj)
         {
-            if(_selectedTour != null)
+            if (_selectedTour != null)
             {
                 AddTourLogWindow addTourLog = new AddTourLogWindow();
                 addTourLog.WindowStartupLocation = WindowStartupLocation.CenterScreen;
@@ -83,7 +83,7 @@ namespace TourPlannerUI.ViewModel
         //Delete popup to make sure if the user would like to delete this tourLog
         private void DeleteTourLog(object obj)
         {
-            if(_selectedTourLog != null)
+            if (_selectedTourLog != null)
             {
                 if (MessageBox.Show("Do you want to delete this Log?",
                     "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
@@ -106,7 +106,7 @@ namespace TourPlannerUI.ViewModel
         //EditWindow will be shown up
         private void EditTourLog(object obj)
         {
-            if(_selectedTourLog != null)
+            if (_selectedTourLog != null)
             {
                 EditTourLogWindow editTourLog = new EditTourLogWindow();
                 editTourLog.WindowStartupLocation = WindowStartupLocation.CenterScreen;

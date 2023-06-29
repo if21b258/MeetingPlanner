@@ -1,5 +1,5 @@
 ﻿using System;
-using TourPlannerBL;
+using TourPlannerBL.Util;
 using TourPlannerModel;
 
 namespace TourPlannerUI.ViewModel

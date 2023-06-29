@@ -1,9 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using TourPlannerUI.ViewModel;
+using TourPlannerBL.Service;
 using TourPlannerDAL;
-using TourPlannerBL;
-using Newtonsoft.Json;
+using TourPlannerUI.ViewModel;
 
 namespace TourPlannerUI
 {

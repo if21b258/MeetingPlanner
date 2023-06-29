@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Media.Imaging;
-using TourPlannerModel;
-using TourPlannerBL;
 using TourPlannerBL.Logging;
+using TourPlannerBL.Service;
+using TourPlannerModel;
 
 namespace TourPlannerUI.ViewModel
 {
@@ -15,7 +15,8 @@ namespace TourPlannerUI.ViewModel
         private TourListViewModel _tourListViewModel;
         private TourModel? _selectedTour;
 
-        public TourRouteViewModel(TourListViewModel tourListViewModel) {
+        public TourRouteViewModel(TourListViewModel tourListViewModel)
+        {
             _tourListViewModel = tourListViewModel;
             _tourListViewModel.SelectedTourChanged += HandleSelectedTourChanged;
         }
@@ -38,7 +39,7 @@ namespace TourPlannerUI.ViewModel
         {
             try
             {
-                if(tour == null)
+                if (tour == null)
                 {
                     log.Warn("tried to get image of null tour");
                     return;
@@ -67,7 +68,7 @@ namespace TourPlannerUI.ViewModel
                 log.Error($"File for tour id: {tour.Id} could not be found");
                 RouteImage = null;
             }
-            
+
         }
 
         //If the user has selected a new tour
