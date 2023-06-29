@@ -31,6 +31,8 @@ namespace TourPlannerBL.Service
             _tourRepo.AddTour(tour);
             _tourRepo.Save();
             _fileService.SaveImageToFile(image, tour);
+
+            log.Info($"Tour with id: {tour.Id} added to database");
         }
 
         public void DeleteTour(TourModel tour)
@@ -38,6 +40,8 @@ namespace TourPlannerBL.Service
             _fileService.DeleteImage(tour);
             _tourRepo.DeleteTour(tour);
             _tourRepo.Save();
+
+            log.Info($"Tour with id: {tour.Id} removed from database");
         }
 
         public async Task EditTour(TourModel tour)
@@ -46,6 +50,8 @@ namespace TourPlannerBL.Service
             _tourRepo.UpdateTour(tour);
             _tourRepo.Save();
             _fileService.SaveImageToFile(image, tour);
+
+            log.Info($"Tour with id: {tour.Id} updated in database");
         }
 
         public ObservableCollection<TourModel> GetTours()
@@ -59,21 +65,24 @@ namespace TourPlannerBL.Service
 
             _tourLogRepo.AddTourLog(tourLog);
             _tourLogRepo.Save();
+
+            log.Info($"Tour log with id: {tourLog.Id} added to database");
         }
 
         public void DeleteTourLog(TourLogModel tourLog)
         {
             _tourLogRepo.DeleteTourLog(tourLog);
             _tourLogRepo.Save();
+
+            log.Info($"Tour log with id: {tourLog.Id} removed from database");
         }
 
         public void EditTourLog(TourLogModel tourLog)
         {
-            //TODO Calculate  TourLog Data
-
-
             _tourLogRepo.UpdateTourLog(tourLog);
             _tourLogRepo.Save();
+
+            log.Info($"Tour log with id: {tourLog.Id} updated in database");
         }
 
         public ObservableCollection<TourLogModel> GetTourLogs(TourModel tour)

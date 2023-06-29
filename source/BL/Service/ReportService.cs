@@ -13,6 +13,7 @@ namespace TourPlannerBL.Service
     public class ReportService : IReportService
     {
         private readonly ILoggerWrapper log = LoggerFactory.GetLogger();
+
         private FileService _fileService = new FileService();
         private TourCalculations _tourCalculations = new TourCalculations();
 

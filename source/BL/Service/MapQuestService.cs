@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Configuration;
 using TourPlannerModel;
+using TourPlannerBL.Logging;
 
 
 namespace TourPlannerBL.Service
@@ -8,6 +9,8 @@ namespace TourPlannerBL.Service
     //Class for requesting mapimage and further information
     public class MapQuestService : IMapQuestService
     {
+        private readonly ILoggerWrapper log = LoggerFactory.GetLogger();
+
         public string Key;
         public string Origin;
         public string Destination;
@@ -42,6 +45,7 @@ namespace TourPlannerBL.Service
 
                         if (JsonContent["info"]["statuscode"].ToString() != "0")
                         {
+                            log.Error("Route calculation failed.");
                             throw new Exception("Route calculation failed.");
                         }
                         else
@@ -51,23 +55,27 @@ namespace TourPlannerBL.Service
                             tourModel.Distance = (float)Math.Round(JsonContent["route"]["distance"].Value<double>(), 2);
                             float estimationTime = (float)Math.Round(JsonContent["route"]["realTime"].Value<float>(), 0);
                             tourModel.EstimatedTime = TimeSpan.FromSeconds(estimationTime);
+
+                            log.Info($"Retrieved tour info for tour: {tourModel.Name}");
+
                             return await GetMap(tourModel);
                         }
                     }
                     else
                     {
+                        log.Error("Error occurred while fetching route data.");
                         throw new HttpRequestException("Error occurred while fetching route data.");
                     }
                 }
             }
             catch (HttpRequestException ex)
             {
-                Console.WriteLine("Error occurred while fetching route data: " + ex.Message);
+                log.Error("Error occurred while fetching route data: " + ex.Message);
                 return null;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error occurred during route calculation: " + ex.Message);
+                log.Error("Error occurred during route calculation: " + ex.Message);
                 return null;
             }
 
@@ -85,20 +93,20 @@ namespace TourPlannerBL.Service
                     if (response.IsSuccessStatusCode)
                     {
                         byte[] image = await response.Content.ReadAsByteArrayAsync();
-                        return image;
+                        log.Info($"Image for tour: {tourModel.Name} successfully retrieved.");
 
-                        // Process the image bytes as needed (e.g., save to a file, display in an Image control, etc.)
+                        return image;
                     }
                     else
                     {
+                        log.Error("Error occurred while fetching the map image.");
                         throw new HttpRequestException("Error occurred while fetching the map image.");
-                        Console.WriteLine("Error");
                     }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error occurred while fetching the map image: " + ex.Message);
+                log.Error("Error occurred while fetching the map image: " + ex.Message);
                 return null;
             }
 

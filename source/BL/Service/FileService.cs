@@ -1,12 +1,15 @@
 ﻿using System.Configuration;
 using System.Drawing;
 using TourPlannerModel;
+using TourPlannerBL.Logging;
 
 namespace TourPlannerBL.Service
 {
     //Class to handle the file directory and the mapquest image
     public class FileService : IFileService
     {
+        private readonly ILoggerWrapper log = LoggerFactory.GetLogger();
+
         public string GetFileDirectory()
         {
             string baseDir = AppDomain.CurrentDomain.BaseDirectory;
@@ -29,10 +32,11 @@ namespace TourPlannerBL.Service
                 if (!Directory.Exists(fileDir))
                 {
                     Directory.CreateDirectory(fileDir);
+                    log.Info("New image directory created");
                 }
                 if (mapImage == null)
                 {
-                    Console.WriteLine("No Image loaded");
+                    log.Warn("No image loaded");
                 }
                 else
                 {
@@ -43,14 +47,13 @@ namespace TourPlannerBL.Service
                         image.Save(filePath);
 
                     }
-                    Console.WriteLine("Picture successfully saved in " + filePath);
-
+                    log.Info("Image successfully saved in: " + filePath);
                 }
 
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error saving picture " + e.Message);
+                log.Error("Error saving image: " + e.Message);
             }
         }
 
@@ -62,12 +65,12 @@ namespace TourPlannerBL.Service
                 if (Directory.Exists(fileDir))
                 {
                     Directory.Delete(fileDir, true);
+                    log.Info("Image folder successfully deleted");
                 }
-                Console.WriteLine("Picture folder successfully deleted");
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error deleting picture folder " + e.Message);
+                log.Error("Error deleting image folder " + e.Message);
             }
         }
 
@@ -81,12 +84,13 @@ namespace TourPlannerBL.Service
                 if (File.Exists(filePath))
                 {
                     File.Delete(filePath);
+                    log.Info("Image successfully deleted");
                 }
-                Console.WriteLine("Image successfully deleted");
+
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error deleting image " + e.Message);
+                log.Error("Error deleting image " + e.Message);
             }
         }
     }
