@@ -25,7 +25,7 @@
             <Button Grid.Row="0" Grid.Column="2" Content="-" Command="{Binding DeleteTourCommand}"/>
             <Button Grid.Row="0" Grid.Column="3" Content="..." Command="{Binding EditTourCommand}"/>
 
-        <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" ItemsSource="{Binding TourList}" SelectedItem="{Binding SelectedTour}">
+        <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" ItemsSource="{Binding TourListVisible}" SelectedItem="{Binding SelectedTour}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

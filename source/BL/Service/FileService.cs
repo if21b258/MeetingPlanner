@@ -28,7 +28,7 @@ namespace TourPlannerBL.Service
             string fileDir = GetFileDirectory();
             string filePath = GetFilePath(tour);
             try
-            {
+            { 
                 if (!Directory.Exists(fileDir))
                 {
                     Directory.CreateDirectory(fileDir);

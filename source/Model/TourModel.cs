@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 //Model for the Tour
 namespace TourPlannerModel
@@ -15,6 +16,8 @@ namespace TourPlannerModel
         public string Description { get; set; }
         public float Distance { get; set; }
         public TimeSpan? EstimatedTime { get; set; }
+        [NotMapped]
+        public bool Visible { get; set; } = true;
 
         public TourModel() { }
 

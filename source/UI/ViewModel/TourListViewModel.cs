@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -41,9 +43,13 @@ namespace TourPlannerUI.ViewModel
                 {
                     _tourList = value;
                     RaisePropertyChangedEvent(nameof(TourList));
+                    RaisePropertyChangedEvent(nameof(TourListVisible));
                 }
             }
         }
+
+        //get all tours which are visible
+        public IEnumerable<TourModel> TourListVisible => TourList.Where(t => t.Visible);
 
         // The tour which will be selected by the user in the tourlistview
         private TourModel? _selectedTour;
@@ -120,6 +126,12 @@ namespace TourPlannerUI.ViewModel
         {
             SelectedTourChanged?.Invoke(SelectedTour);
         }
+
+        public void OnVisibilityChanged()
+        {
+            RaisePropertyChangedEvent(nameof(TourListVisible));
+        }
+
         public void SortToursAlphabetical()
         {
             TourList = new ObservableCollection<TourModel>(TourList.OrderBy(t => t.Name));
