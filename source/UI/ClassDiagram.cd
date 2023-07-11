@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TourPlannerModel.TourModel">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier />
+  </Class>
+  <Class Name="TourPlannerUI.ViewModel.MainViewModel">
+    <Position X="0.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEIAAAQAAgACAAAAAAAIQAAAAAAAAQAAAA=</HashCode>
+      <FileName>ViewModel\MainViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TourPlannerUI.ViewModel.TourListViewModel">
+    <Position X="2.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AABAAAoACBAIAOCAAAAACAAAAAAAAAADUAAAEAA0AAA=</HashCode>
+      <FileName>ViewModel\TourListViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TourPlannerBL.Service.TourService">
+    <Position X="8.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TourPlannerUI.ViewModel.AddTourViewModel">
+    <Position X="4.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>QAEQIAQQQAEgACAEBABAGAQAAAAAAAAFAAAAAAgAAAA=</HashCode>
+      <FileName>ViewModel\AddTourViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TourPlannerUI.ViewModel.EditTourViewModel">
+    <Position X="6.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>QAEQIA4QQBEoECAEBAAAGASAAAAAAAAEAAAAAAgAAAA=</HashCode>
+      <FileName>ViewModel\EditTourViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TourPlannerDAL.Repository.TourRepository">
+    <Position X="10.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
