@@ -23,8 +23,8 @@ namespace TourPlannerTest.BL
         public void Setup()
         {
             var options = new DbContextOptionsBuilder<TourPlannerDbContext>()
-            .UseInMemoryDatabase(databaseName: "InMemoryDb")
-            .Options;
+                .UseInMemoryDatabase(databaseName: "InMemoryDb")
+                .Options;
 
             using (var context = new TourPlannerDbContext(options))
             {
@@ -37,8 +37,7 @@ namespace TourPlannerTest.BL
 
                 context.TourLogs.Add(log1);
                 context.TourLogs.Add(log2);
-
-                context.SaveChanges();
+                                context.SaveChanges();
             }
         }
 
