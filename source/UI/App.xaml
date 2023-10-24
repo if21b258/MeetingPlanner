@@ -1,7 +1,7 @@
-﻿<Application x:Class="TourPlannerUI.App"
+﻿<Application x:Class="MeetingPlannerUI.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:TourPlannerUI"
+             xmlns:local="clr-namespace:MeetingPlannerUI"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>

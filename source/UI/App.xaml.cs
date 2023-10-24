@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace TourPlannerUI;
+namespace MeetingPlannerUI;
 
 /// <summary>
 /// Interaction logic for App.xaml

@@ -1,11 +1,10 @@
 ﻿using System.Collections.ObjectModel;
-using TourPlannerModel;
+using MeetingPlannerModel;
 
-namespace TourPlannerBL.Service
+namespace MeetingPlannerBL.Service
 {
     public interface IReportService
     {
-        public void GenerateTourReport(TourModel tour, string path);
-        public void GenerateSummaryReport(ObservableCollection<TourModel> tours, string path);
+        public void GenerateMeetingReport(MeetingModel meeting, string path);
     }
 }

@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using TourPlannerBL.Service;
-using TourPlannerDAL;
-using TourPlannerUI.ViewModel;
+using MeetingPlannerBL.Service;
+using MeetingPlannerDAL;
+using MeetingPlannerUI.ViewModel;
 
-namespace TourPlannerUI
+namespace MeetingPlannerUI
 {
     public class IoCContainerConfig
     {
@@ -14,21 +14,20 @@ namespace TourPlannerUI
             var services = new ServiceCollection();
 
             //DataAccessLayer
-            services.AddTransient<TourPlannerDbContext>();
+            services.AddTransient<MeetingPlannerDbContext>();
 
             //BuisnessLayer
-            services.AddSingleton<TourService>();
+            services.AddSingleton<MeetingService>();
 
             //ViewModels
             services.AddSingleton<MainViewModel>();
-            services.AddSingleton<TourListViewModel>();
-            services.AddTransient<AddTourViewModel>();
-            services.AddTransient<EditTourViewModel>();
-            services.AddSingleton<TourLogViewModel>();
-            services.AddTransient<AddTourLogViewModel>();
-            services.AddTransient<EditTourLogViewModel>();
-            services.AddSingleton<TourRouteViewModel>();
-            services.AddSingleton<TourInfoViewModel>();
+            services.AddSingleton<MeetingListViewModel>();
+            services.AddTransient<AddMeetingViewModel>();
+            services.AddTransient<EditMeetingViewModel>();
+            services.AddSingleton<MeetingNoteViewModel>();
+            services.AddTransient<AddMeetingNoteViewModel>();
+            services.AddTransient<EditMeetingNoteViewModel>();
+            services.AddSingleton<MeetingInfoViewModel>();
             services.AddSingleton<MenuViewModel>();
             services.AddSingleton<SearchBarViewModel>();
 
@@ -38,29 +37,26 @@ namespace TourPlannerUI
         public MainViewModel MainViewModel
             => _serviceProvider.GetRequiredService<MainViewModel>();
 
-        public TourListViewModel TourListViewModel
-            => _serviceProvider.GetRequiredService<TourListViewModel>();
+        public MeetingListViewModel MeetingListViewModel
+            => _serviceProvider.GetRequiredService<MeetingListViewModel>();
 
-        public AddTourViewModel AddTourViewModel
-            => _serviceProvider.GetRequiredService<AddTourViewModel>();
+        public AddMeetingViewModel AddMeetingViewModel
+            => _serviceProvider.GetRequiredService<AddMeetingViewModel>();
 
-        public EditTourViewModel EditTourViewModel
-            => _serviceProvider.GetRequiredService<EditTourViewModel>();
+        public EditMeetingViewModel EditMeetingViewModel
+            => _serviceProvider.GetRequiredService<EditMeetingViewModel>();
 
-        public TourLogViewModel TourLogViewModel
-            => _serviceProvider.GetRequiredService<TourLogViewModel>();
+        public MeetingNoteViewModel MeetingNoteViewModel
+            => _serviceProvider.GetRequiredService<MeetingNoteViewModel>();
 
-        public AddTourLogViewModel AddTourLogViewModel
-            => _serviceProvider.GetRequiredService<AddTourLogViewModel>();
+        public AddMeetingNoteViewModel AddMeetingNoteViewModel
+            => _serviceProvider.GetRequiredService<AddMeetingNoteViewModel>();
 
-        public EditTourLogViewModel EditTourLogViewModel
-            => _serviceProvider.GetRequiredService<EditTourLogViewModel>();
+        public EditMeetingNoteViewModel EditMeetingNoteViewModel
+            => _serviceProvider.GetRequiredService<EditMeetingNoteViewModel>();
 
-        public TourRouteViewModel TourRouteViewModel
-            => _serviceProvider.GetRequiredService<TourRouteViewModel>();
-
-        public TourInfoViewModel TourInfoViewModel
-            => _serviceProvider.GetRequiredService<TourInfoViewModel>();
+        public MeetingInfoViewModel MeetingInfoViewModel
+            => _serviceProvider.GetRequiredService<MeetingInfoViewModel>();
 
         public MenuViewModel MenuViewModel
             => _serviceProvider.GetRequiredService<MenuViewModel>();

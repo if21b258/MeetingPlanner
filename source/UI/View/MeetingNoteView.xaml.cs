@@ -3,11 +3,11 @@
 namespace MeetingPlannerUI.View
 {
     /// <summary>
-    /// Interaction logic for MenuView.xaml
+    /// Interaction logic for MeetingNoteView.xaml
     /// </summary>
-    public partial class MenuView : UserControl
+    public partial class MeetingNoteView : UserControl
     {
-        public MenuView()
+        public MeetingNoteView()
         {
             InitializeComponent();
         }

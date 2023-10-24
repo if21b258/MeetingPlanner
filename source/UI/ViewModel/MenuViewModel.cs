@@ -1,124 +1,104 @@
 ﻿using Microsoft.Win32;
 using System.Windows;
 using System.Windows.Input;
-using TourPlannerBL.Logging;
-using TourPlannerBL.Service;
+using MeetingPlannerBL.Logging;
+using MeetingPlannerBL.Service;
 
-namespace TourPlannerUI.ViewModel
+namespace MeetingPlannerUI.ViewModel
 {
     public class MenuViewModel
     {
         private readonly ILoggerWrapper log = LoggerFactory.GetLogger();
 
-        private TourService _tourService;
-        private FileService _fileService = new FileService();
+        private MeetingService _meetingService;
         private ReportService _reportService = new ReportService();
-        private TourListViewModel _tourListViewModel;
-        private TourLogViewModel _tourLogViewModel;
+        private MeetingListViewModel _meetingListViewModel;
+        private MeetingNoteViewModel _meetingNoteViewModel;
 
-        public ICommand ImportTourCommand { get; set; }
-        public ICommand ExportTourCommand { get; set; }
-        public ICommand GenerateTourReportCommand { get; set; }
-        public ICommand GenerateSummaryReportCommand { get; set; }
+        public ICommand ImportMeetingCommand { get; set; }
+        public ICommand ExportMeetingCommand { get; set; }
+        public ICommand GenerateMeetingReportCommand { get; set; }
         public ICommand ResetDatabaseCommand { get; set; }
         public ICommand SortAlphabeticallyCommand { get; set; }
         public ICommand SortIdCommand { get; set; }
         public ICommand AboutCommand { get; set; }
 
-        public MenuViewModel(TourService tourService, TourListViewModel tourListViewModel, TourLogViewModel tourLogViewModel)
+        public MenuViewModel(MeetingService meetingService, MeetingListViewModel meetingListViewModel, MeetingNoteViewModel meetingNoteViewModel)
         {
-            _tourService = tourService;
-            _tourListViewModel = tourListViewModel;
-            _tourLogViewModel = tourLogViewModel;
-            ImportTourCommand = new RelayCommand<object>(ImportTour);
-            ExportTourCommand = new RelayCommand<object>(ExportTour);
-            GenerateTourReportCommand = new RelayCommand<object>(GenerateTourReport);
-            GenerateSummaryReportCommand = new RelayCommand<object>(GenerateSummaryReport);
+            _meetingService = meetingService;
+            _meetingListViewModel = meetingListViewModel;
+            _meetingNoteViewModel = meetingNoteViewModel;
+            ImportMeetingCommand = new RelayCommand<object>(ImportMeeting);
+            ExportMeetingCommand = new RelayCommand<object>(ExportMeeting);
+            GenerateMeetingReportCommand = new RelayCommand<object>(GenerateMeetingReport);
             ResetDatabaseCommand = new RelayCommand<object>(ResetDatabase);
             SortAlphabeticallyCommand = new RelayCommand<object>(SortAlphabetical);
             SortIdCommand = new RelayCommand<object>(SortId);
             AboutCommand = new RelayCommand<object>(About);
         }
 
-        //Import tour from chosen file path
-        private async void ImportTour(object obj)
+        private void ImportMeeting(object obj)
         {
-            string? filePath = ShowSaveFileDialog("Tour", "json");
+            string? filePath = ShowSelectFileDialog("json");
             if (filePath != null)
             {
-                log.Info("Import tour from " + filePath);
+                log.Info("Import meeting from " + filePath);
 
-                await _tourService.ImportTour(filePath);
-                _tourListViewModel.LoadTours();
+                _meetingService.ImportMeeting(filePath);
+                _meetingListViewModel.LoadMeetings();
             }
         }
 
-        //Export tour to chosen file path
-        private void ExportTour(object obj)
+        private void ExportMeeting(object obj)
         {
-            if (_tourListViewModel.SelectedTour != null)
+            if (_meetingListViewModel.SelectedMeeting != null)
             {
-                string? filePath = ShowSaveFileDialog("Tour", "json");
+                string? filePath = ShowSaveFileDialog("Meeting", "json");
                 if (filePath != null)
                 {
-                    log.Info("Export tour to " + filePath);
+                    log.Info("Export meeting to " + filePath);
 
-                    _tourService.ExportTour(_tourListViewModel.SelectedTour, filePath);
+                    _meetingService.ExportMeeting(_meetingListViewModel.SelectedMeeting, filePath);
                 }
             }
             else
             {
-                MessageBox.Show("Please select a Tour to export");
+                MessageBox.Show("Please select a Meeting to export");
             }
         }
 
-        //Method for creating the tour report
-        private void GenerateTourReport(object obj)
+        private void GenerateMeetingReport(object obj)
         {
-            if (_tourListViewModel.SelectedTour != null)
+            if (_meetingListViewModel.SelectedMeeting != null)
             {
-                string? filePath = ShowSaveFileDialog("Tour Report", "pdf");
+                string? filePath = ShowSaveFileDialog("Meeting Report", "pdf");
                 if (filePath != null)
                 {
-                    log.Info("Create tour report at " + filePath);
+                    log.Info("Create meeting report at " + filePath);
 
-                    _reportService.GenerateTourReport(_tourListViewModel.SelectedTour, filePath);
+                    _reportService.GenerateMeetingReport(_meetingListViewModel.SelectedMeeting, filePath);
                 }
             }
             else
             {
-                MessageBox.Show("Please select a Tour to create a report");
+                MessageBox.Show("Please select a Meeting to create a report");
             }
 
         }
-        //Method for creating the summary report
-        private void GenerateSummaryReport(object obj)
-        {
-            string? filePath = ShowSaveFileDialog("Summary Report", "pdf");
-            if (filePath != null)
-            {
-                log.Info("Create summary report at " + filePath);
 
-                _reportService.GenerateSummaryReport(_tourListViewModel.TourList, filePath);
-            }
-        }
-
-        //Database is able to reset by clicking the reset button in Top-Bar by pressing options
         private void ResetDatabase(object obj)
         {
             log.Info("Database reset");
 
-            _tourService.EnsureDatabaseDeleted();
-            _tourService.EnsureDatabaseCreated();
-            _fileService.DeleteImageFolder();
-            _tourListViewModel.LoadTours();
-            _tourLogViewModel.LoadTourLogs();
+            _meetingService.EnsureDatabaseDeleted();
+            _meetingService.EnsureDatabaseCreated();
+            _meetingListViewModel.LoadMeetings();
+            _meetingNoteViewModel.LoadMeetingNotes();
         }
 
-        //About Dialog
         private void About(object obj)
         {
-            MessageBox.Show("Tour Planner made by Josua and Felix");
+            MessageBox.Show("Meeting Planner made by Josua Hämmerle");
         }
 
         public string? ShowSaveFileDialog(string defaultName, string ext)
@@ -160,12 +140,12 @@ namespace TourPlannerUI.ViewModel
 
         public void SortAlphabetical(object obj)
         {
-            _tourListViewModel.SortToursAlphabetical();
+            _meetingListViewModel.SortMeetingsAlphabetical();
         }
 
         public void SortId(object obj)
         {
-            _tourListViewModel.SortToursId();
+            _meetingListViewModel.SortMeetingsId();
         }
     }
 }

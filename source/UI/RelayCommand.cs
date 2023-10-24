@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace TourPlannerUI
+namespace MeetingPlannerUI
 {
     public class RelayCommand<T> : ICommand
     {

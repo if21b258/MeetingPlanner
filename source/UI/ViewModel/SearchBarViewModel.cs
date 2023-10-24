@@ -1,25 +1,24 @@
 ﻿using System.Windows.Input;
 using System;
-using TourPlannerBL.Logging;
-using TourPlannerBL.Service;
-using TourPlannerBL.Util;
+using MeetingPlannerBL.Logging;
+using MeetingPlannerBL.Service;
+using MeetingPlannerBL.Util;
 using System.Text.RegularExpressions;
-using TourPlannerModel;
+using MeetingPlannerModel;
 
-namespace TourPlannerUI.ViewModel
+namespace MeetingPlannerUI.ViewModel
 {
     public class SearchBarViewModel : BaseViewModel
     {
         private readonly ILoggerWrapper log = LoggerFactory.GetLogger();
 
-        private TourListViewModel _tourListViewModel;
-        private TourCalculations _tourCalculations = new TourCalculations();
+        private MeetingListViewModel _meetingListViewModel;
 
         public ICommand SearchCommand { get; set; }
 
-        public SearchBarViewModel(TourListViewModel tourListViewModel)
+        public SearchBarViewModel(MeetingListViewModel meetingListViewModel)
         {
-            _tourListViewModel = tourListViewModel;
+            _meetingListViewModel = meetingListViewModel;
         }
 
         private String _searchString = "";
@@ -40,37 +39,28 @@ namespace TourPlannerUI.ViewModel
         {
             var regex = new Regex(_searchString);
 
-            foreach (TourModel tour in _tourListViewModel.TourList)
+            foreach (MeetingModel meeting in _meetingListViewModel.MeetingList)
             {
-                tour.Visible = regex.IsMatch(GetSearchString(tour));
+                meeting.Visible = regex.IsMatch(GetSearchString(meeting));
             }
 
-            _tourListViewModel.OnVisibilityChanged();
+            _meetingListViewModel.OnVisibilityChanged();
         }
 
-        public string GetSearchString(TourModel tour)
+        public string GetSearchString(MeetingModel meeting)
         {
             string searchString = string.Concat(
-                tour.Name,
-                tour.Description,
-                tour.Origin,
-                tour.Destination,
-                tour.TransportType,
-                tour.Distance,
-                tour.EstimatedTime,
-                tour.Id,
-                _tourCalculations.GetPopularity(tour),
-                _tourCalculations.GetChildFriendliness(tour)
+                meeting.Title,
+                meeting.From,
+                meeting.To,
+                meeting.Agenda
                 );
 
-            foreach (TourLogModel tourLog in tour.Logs)
+            foreach (MeetingNoteModel meetingNote in meeting.MeetingNotes)
             {
                 searchString += string.Concat(
-                                        tourLog.Id,
-                                        tourLog.Date,
-                                        tourLog.Comment,
-                                        tourLog.Duration,
-                                        tourLog.Rating
+                                        meetingNote.Id,
+                                        meetingNote.Note
                                         );
             }
 

@@ -1,4 +1,4 @@
-﻿namespace TourPlannerBL.Logging
+﻿namespace MeetingPlannerBL.Logging
 {
     public static class LoggerFactory
     {

@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="source\**" />
+    <EmbeddedResource Remove="source\**" />
+    <None Remove="source\**" />
+    <Page Remove="source\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BL\MeetingPlannerBL.csproj" />
+    <ProjectReference Include="..\Model\MeetingPlannerModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<ProjectReference Include="..\BL\MeetingPlannerBL.csproj" />
+  </ItemGroup>
+
+</Project>

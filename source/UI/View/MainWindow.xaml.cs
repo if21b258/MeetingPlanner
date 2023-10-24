@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace TourPlannerUI.View
+namespace MeetingPlannerUI.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

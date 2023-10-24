@@ -1,46 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="TourPlannerModel.TourModel">
+  <Class Name="MeetingPlannerModel.MeetingModel">
     <Position X="12.75" Y="0.5" Width="1.5" />
     <Compartments>
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier />
   </Class>
-  <Class Name="TourPlannerUI.ViewModel.MainViewModel">
+  <Class Name="MeetingPlannerUI.ViewModel.MainViewModel">
     <Position X="0.75" Y="0.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAEIAAAQAAgACAAAAAAAIQAAAAAAAAQAAAA=</HashCode>
       <FileName>ViewModel\MainViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="TourPlannerUI.ViewModel.TourListViewModel">
+  <Class Name="MeetingPlannerUI.ViewModel.MeetingListViewModel">
     <Position X="2.75" Y="0.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AABAAAoACBAIAOCAAAAACAAAAAAAAAADUAAAEAA0AAA=</HashCode>
-      <FileName>ViewModel\TourListViewModel.cs</FileName>
+      <FileName>ViewModel\MeetingListViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="TourPlannerBL.Service.TourService">
+  <Class Name="MeetingPlannerBL.Service.MeetingService">
     <Position X="8.75" Y="0.5" Width="1.75" />
     <TypeIdentifier />
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="TourPlannerUI.ViewModel.AddTourViewModel">
+  <Class Name="MeetingPlannerUI.ViewModel.AddMeetingViewModel">
     <Position X="4.75" Y="0.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>QAEQIAQQQAEgACAEBABAGAQAAAAAAAAFAAAAAAgAAAA=</HashCode>
-      <FileName>ViewModel\AddTourViewModel.cs</FileName>
+      <FileName>ViewModel\AddMeetingViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="TourPlannerUI.ViewModel.EditTourViewModel">
+  <Class Name="MeetingPlannerUI.ViewModel.EditMeetingViewModel">
     <Position X="6.75" Y="0.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>QAEQIA4QQBEoECAEBAAAGASAAAAAAAAEAAAAAAgAAAA=</HashCode>
-      <FileName>ViewModel\EditTourViewModel.cs</FileName>
+      <FileName>ViewModel\EditMeetingViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="TourPlannerDAL.Repository.TourRepository">
+  <Class Name="MeetingPlannerDAL.Repository.MeetingRepository">
     <Position X="10.75" Y="0.5" Width="1.75" />
     <TypeIdentifier />
     <Lollipop Position="0.2" />
